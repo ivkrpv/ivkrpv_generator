@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: CONTACT
+metaImage: /images/face.jpg
+---
+<div class="container px-4 pb-4">
+  <h2 class="mb-3"><span class="lcl" data-lcl="contact">{{{ defaultLocale 'contact' }}}</span></h2>
+  <div class="media my-5 align-items-center">
+    <img class="d-flex mr-3 avatar" src="/images/face.jpg">
+    <div class="media-body">
+      <p class="lead">
+        <span class="lcl" data-lcl="contactDesc">{{{ defaultLocale 'contactDesc' }}}</span> — <a href="mailto:{{ config.email }}" target="_blank">{{ config.email }}</a>
+      </p>
+    </div>
+  </div>
+</div>

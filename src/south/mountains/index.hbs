@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: SOUTH - MOUNTAINS
+metaImage: /images/photography/south-mountains/47.jpg
+pageStyle:
+  - /styles/lightgallery.min.css
+---
+<div class="container-fluid px-4 pb-4">
+  <h2><span class="lcl" data-lcl="south">{{{ defaultLocale 'south' }}}</span> - <span class="lcl" data-lcl="southMountains">{{{ defaultLocale 'southMountains' }}}</span></h2>
+  <p class="lead text-uppercase">
+    <span class="lcl" data-lcl="southMountainsDesc">{{{ defaultLocale 'southMountainsDesc' }}}</span>
+  </p>
+  <div class="gallery d-flex flex-wrap">
+    {{#each images}}
+      <a class="flex-grow-1 mr-1 mb-1" href="{{this.url}}">
+        <img src="{{this.url}}" alt="" />
+      </a>
+    {{/each}}
+    <div class="tail mr-1 mb-1"></div>
+  </div>
+</div>

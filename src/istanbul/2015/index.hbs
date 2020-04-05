@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: ISTANBUL - MARCH 2015
+metaImage: /images/photography/ist-part1/25.jpg
+pageStyle:
+  - /styles/lightgallery.min.css
+---
+<div class="container-fluid px-4 pb-4">
+  <h2 class="lcl" data-lcl="istanbul">{{{ defaultLocale 'istanbul' }}}</h2>
+  <p class="lead text-uppercase">
+    <span class="lcl" data-lcl="ist2015Desc">{{{ defaultLocale 'ist2015Desc' }}}</span>
+  </p>
+  <div class="gallery d-flex flex-wrap">
+    {{#each images}}
+      <a class="flex-grow-1 mr-1 mb-1" href="{{this.url}}">
+        <img src="{{this.url}}" alt="" />
+      </a>
+    {{/each}}
+    <div class="tail mr-1 mb-1"></div>
+  </div>
+</div>

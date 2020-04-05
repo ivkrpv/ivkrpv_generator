@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: NYC - PART 11
+metaImage: /images/photography/nyc-part11/6.jpg
+pageStyle:
+  - /styles/lightgallery.min.css
+---
+<div class="container-fluid px-4 pb-4">
+  <h2>NYC - <span class="lcl" data-lcl="part">{{{ defaultLocale 'part' }}}</span> 11</h2>
+  <p class="lead text-uppercase lcl" data-lcl="nycPart11Desc">{{{ defaultLocale 'nycPart11Desc' }}}</p>
+  <div class="gallery d-flex flex-wrap">
+    {{#each images}}
+      <a class="flex-grow-1 mr-1 mb-1" href="{{this.url}}">
+        <img src="{{this.url}}" alt="" />
+      </a>
+    {{/each}}
+    <div class="tail mr-1 mb-1"></div>
+  </div>
+</div>
