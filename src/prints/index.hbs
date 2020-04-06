@@ -5,8 +5,8 @@ title: PRINTS
 metaImage: /images/prints.jpg
 ---
 <div class="container px-4 pb-4">
-  <h2><span class="lcl" data-lcl="prints">{{{ defaultLocale 'prints' }}}</span></h2>
-  <p id="printsTags" class="lead text-uppercase">
+  <h2 class="font-italic"><span class="lcl" data-lcl="prints">{{{ defaultLocale 'prints' }}}</span></h2>
+  <p id="printsTags" class="lead text-uppercase font-italic">
     {{#each config.prints}}
       <a href="#{{this.category}}" class="mr-2">#{{this.category}}</a>
     {{/each}}

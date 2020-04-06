@@ -53,7 +53,7 @@ $(function () {
   const gallery = $('.gallery');
 
   if (gallery.length) {
-    lightGallery(gallery.get(0), { selector: 'a', download: false });
+    lightGallery(gallery.get(0), { selector: 'a', download: false, hideBarsDelay: 2000 });
   }
 
   // Prints
@@ -92,14 +92,8 @@ $(function () {
   $('body').on('click', '.js-print-frame', function (e) {
     const $btn = $(e.currentTarget);
     const color = $btn.data('color'); // light or dark
-    const lightFrame = color === 'light';
-    const bodyTextColor = lightFrame ? 'white' : 'dark';
-    const navbarBg = lightFrame ? 'dark' : 'light';
 
-    $('body').removeClass('text-white text-dark').addClass('text-' + bodyTextColor);
-    $('.navbar').removeClass('navbar-light navbar-dark').addClass('navbar-' + navbarBg);
     $('.print-frame').removeClass('print-frame-light print-frame-dark').addClass('print-frame-' + color);
-    $('.likely').removeClass('likely-light likely-dark').addClass('likely-' + color);
 
     printOrder.frame = color;
   });
@@ -107,19 +101,27 @@ $(function () {
   $('body').on('click', '.js-print-bg', function (e) {
     const $btn = $(e.currentTarget);
     const color = $btn.data('color'); // any bootstrap color
+    const darkText = color === 'light' || color === 'warning';
+    const textColor = darkText ? 'dark' : 'white';
+    const navbarBg = darkText ? 'light' : 'dark';
+    const likelyColor = darkText ? 'light' : 'dark';
 
     $('body')
       .removeClass(function (index, className) {
         return (className.match(/(^|\s)bg-\S+/g) || []).join(' ');
       })
       .addClass('bg-' + color);
+
+    $('body').removeClass('text-white text-dark').addClass('text-' + textColor);
+    $('.navbar').removeClass('navbar-light navbar-dark').addClass('navbar-' + navbarBg);
+    $('.likely').removeClass('likely-light likely-dark').addClass('likely-' + likelyColor);
   });
 
   $('body').on('change', '.js-print-size input[type=radio][name=size]', function () {
     printOrder.size = $(this).val();
 
     $('.js-print-price').children().addClass('d-none');
-    $('.js-print-price .lcl' + printOrder.size).removeClass('d-none');
+    $(`.js-print-price [data-lcl=price${printOrder.size}]`).removeClass('d-none');
   });
 
   $('body').on('click', '.js-print-order', function () {

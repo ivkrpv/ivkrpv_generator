@@ -28,11 +28,11 @@ a:hover {
 }
 
 .logo {
-  letter-spacing: 2px;
-  transition: color 3s ease-out;
-  -moz-transition: color 3s ease-out;
-  -webkit-transition: color 3s ease-out;
-  -o-transition: color 3s ease-out;
+  letter-spacing: 3px;
+  transition: color 2s ease-out;
+  -moz-transition: color 2s ease-out;
+  -webkit-transition: color 2s ease-out;
+  -o-transition: color 2s ease-out;
 }
 
 .navbar-dark .logo {
@@ -232,7 +232,7 @@ a:hover {
 }
 
 .print-frame-thumb .print-image img {
-  max-height: 180px;
+  max-height: 170px;
 }
 
 .print-image .print-image-shadow {

@@ -35,7 +35,7 @@ theme: dark
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="navbar-nav ml-auto text-uppercase">
+        <ul class="navbar-nav ml-auto text-uppercase font-italic">
           {% set navPages = collections.all | eleventyNavigation %}
           {%- for navPage in navPages.reverse() %}
             <li class="nav-item {{ 'dropdown' if navPage.children.length else '' }} {{ 'active' if navPage | isActivePage(page) else '' }}">
