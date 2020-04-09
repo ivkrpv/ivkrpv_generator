@@ -1,6 +1,8 @@
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import 'lightgallery.js';
 import config from '../_data/config.json';
 import locale from '../_data/locale.json';
+import mapNYC from '../_data/map_nyc.json';
 
 $(function () {
   // Locale
@@ -55,6 +57,85 @@ $(function () {
   if (gallery.length) {
     lightGallery(gallery.get(0), { selector: 'a', download: false, hideBarsDelay: 2000 });
   }
+
+  // Maps
+  mapboxgl.accessToken = 'pk.eyJ1IjoiaXZrcnB2IiwiYSI6ImNqcmVraWxuZjBtNHc0M3A4a2hjOHcwdzUifQ.J4IpJ7iJycy-zuysl4ALCQ';
+
+  // NYC
+  const map = new mapboxgl.Map({
+    container: 'mapNYC',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [-74.006, 40.7128], // default nyc center
+    zoom: 2,
+  });
+
+  map.on('load', function () {
+    map.addSource('nyc', {
+      type: 'geojson',
+      data: mapNYC,
+    });
+
+    map.addLayer({
+      id: 'spots',
+      type: 'circle',
+      source: 'nyc',
+      paint: {
+        'circle-radius': 2,
+        'circle-color': '#c41639',
+        'circle-stroke-color': '#e7254d',
+        'circle-stroke-width': 4,
+      },
+      filter: ['==', '$type', 'Point'],
+    });
+
+    map.on('click', 'spots', function({ features: [feature], lngLat: { lng } }) {
+      const coordinates = feature.geometry.coordinates.slice();
+      const { name, description, images } = feature.properties;
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(lng - coordinates[0]) > 180) {
+        coordinates[0] += lng > coordinates[0] ? 360 : -360;
+      }
+
+      let html = `<h6 class="mr-3 font-weight-bold">${name}</h6>`;
+
+      if (images) {
+        const urls = JSON.parse(images);
+
+        if (urls && urls.length) {
+          html += `<div>${urls.map(u => `<img src="${u}" width="220" />`)}</div>`
+        }
+      }
+
+      new mapboxgl.Popup({ offset: 6 })
+        .setLngLat(coordinates)
+        .setHTML(html)
+        .addTo(map);
+    });
+
+    map.on('mouseenter', 'spots', function() {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'spots', function() {
+      map.getCanvas().style.cursor = '';
+    });
+
+    setTimeout(() => {
+      const bounds = new mapboxgl.LngLatBounds();
+
+      mapNYC.features.forEach(function(feature) {
+        bounds.extend(feature.geometry.coordinates);
+      });
+
+      map.fitBounds(bounds, {
+        padding: 32,
+        duration: 5000
+      });
+    }, 500);
+  });
 
   // Prints
   const prints$ = $('#prints');
@@ -145,8 +226,8 @@ $(function () {
 
       $.ajax({
         url: 'https://script.google.com/macros/s/AKfycbxC1Z2rtuymmvZt0J6si52IqNe_qlduBbplSxxXcDtnQvLrAW0/exec',
-        method: "GET",
-        dataType: "json",
+        method: 'GET',
+        dataType: 'json',
         data: printOrder,
         success: function () {
           toggleModalLoading(false);
