@@ -105,7 +105,7 @@ $(function () {
         const urls = JSON.parse(images);
 
         if (urls && urls.length) {
-          html += `<div>${urls.map(u => `<img src="${u}" width="220" />`)}</div>`
+          html += `<div class="popup-gallery"><div class="d-flex justify-content-center popup-gallery-images">${urls.map(u => `<img src="${u}" />`).join('')}</div><div class="d-flex justify-content-between mt-1"><i class="fas fa-arrow-left popup-gallery-prev"></i><i class="fas fa-arrow-right popup-gallery-next"></i></div></div>`
         }
       }
 
@@ -135,6 +135,18 @@ $(function () {
         duration: 5000
       });
     }, 500);
+  });
+
+  $('body').on('click', '.popup-gallery-prev', function (e) {
+    const $images = $(e.target).closest('.popup-gallery').find('.popup-gallery-images');
+
+    $images.prepend($images.children().last());
+  });
+
+  $('body').on('click', '.popup-gallery-next', function (e) {
+    const $images = $(e.target).closest('.popup-gallery').find('.popup-gallery-images');
+
+    $images.append($images.children().first());
   });
 
   // Prints

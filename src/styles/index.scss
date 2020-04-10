@@ -161,6 +161,21 @@ a:hover {
   }
 }
 
+// Map popup gallery
+
+.popup-gallery .popup-gallery-images img {
+  display: none;
+  height: 145px;
+}
+
+.popup-gallery .popup-gallery-images img:first-child {
+  display: block;
+}
+
+.popup-gallery-prev, .popup-gallery-next {
+  cursor: pointer;
+}
+
 // Articles
 
 .img-wrapper {

@@ -1010,7 +1010,7 @@
       "properties": {
         "name": "Manhattan from JFK",
         "description": "",
-        "images": ["/images/photography/nyc-part20/5.jpg"]
+        "images": ["/images/photography/nyc-part20/5.jpg", "/images/photography/nyc-part20/8.jpg", "/images/photography/nyc-part20/3.jpg"]
       },
       "geometry": { "type": "Point", "coordinates": [-73.7781391, 40.6413111] }
     },
