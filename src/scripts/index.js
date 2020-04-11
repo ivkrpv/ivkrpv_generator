@@ -90,7 +90,7 @@ $(function () {
 
     map.on('click', 'spots', function({ features: [feature], lngLat: { lng } }) {
       const coordinates = feature.geometry.coordinates.slice();
-      const { name, description, images } = feature.properties;
+      const { name, images } = feature.properties;
 
       // Ensure that if the map is zoomed out such that multiple
       // copies of the feature are visible, the popup appears
@@ -105,7 +105,14 @@ $(function () {
         const urls = JSON.parse(images);
 
         if (urls && urls.length) {
-          html += `<div class="popup-gallery"><div class="d-flex justify-content-center popup-gallery-images">${urls.map(u => `<img src="${u}" />`).join('')}</div><div class="d-flex justify-content-between mt-1"><i class="fas fa-arrow-left popup-gallery-prev"></i><i class="fas fa-arrow-right popup-gallery-next"></i></div></div>`
+          const buttons = `<div class="d-flex justify-content-between mt-1">
+          <i class="fas fa-arrow-left popup-gallery-prev"></i><i class="fas fa-arrow-right popup-gallery-next"></i>
+          </div>`;
+
+          html += `<div class="popup-gallery">
+          <div class="d-flex justify-content-center popup-gallery-images">${urls.map(u => `<img src="${u}" />`).join('')}</div>
+          ${urls.length > 1 ? buttons : ''}
+          </div>`
         }
       }
 
@@ -132,19 +139,40 @@ $(function () {
 
       map.fitBounds(bounds, {
         padding: 32,
-        duration: 5000
+        duration: 0//5000
       });
     }, 500);
   });
 
-  $('body').on('click', '.popup-gallery-prev', function (e) {
-    const $images = $(e.target).closest('.popup-gallery').find('.popup-gallery-images');
+  $('body').on('click', '.popup-gallery-images', function (e) {
+    e.stopPropagation();
+
+    const $images = $(this);
+
+    $images.on('onCloseAfter.lg', ({ target }) => {
+      const lg = window.lgData[target.getAttribute('lg-uid')];
+
+      if (lg) {
+        lg.destroy(true);
+      }
+    });
+
+    lightGallery($images.get(0), {
+      dynamic: true,
+      dynamicEl: $images.children().map((i, { src }) => ({ src })).get(),
+      download: false,
+      hideBarsDelay: 2000
+    });
+  });
+
+  $('body').on('click', '.popup-gallery-prev', function ({ target }) {
+    const $images = $(target).closest('.popup-gallery').children('.popup-gallery-images');
 
     $images.prepend($images.children().last());
   });
 
-  $('body').on('click', '.popup-gallery-next', function (e) {
-    const $images = $(e.target).closest('.popup-gallery').find('.popup-gallery-images');
+  $('body').on('click', '.popup-gallery-next', function ({ target }) {
+    const $images = $(target).closest('.popup-gallery').children('.popup-gallery-images');
 
     $images.append($images.children().first());
   });

@@ -163,9 +163,14 @@ a:hover {
 
 // Map popup gallery
 
+.popup-gallery .popup-gallery-images {
+  width: 218px;
+}
+
 .popup-gallery .popup-gallery-images img {
   display: none;
   height: 145px;
+  cursor: pointer;
 }
 
 .popup-gallery .popup-gallery-images img:first-child {
@@ -174,6 +179,10 @@ a:hover {
 
 .popup-gallery-prev, .popup-gallery-next {
   cursor: pointer;
+}
+
+.popup-gallery-prev:hover, .popup-gallery-next:hover {
+  opacity: 0.7;
 }
 
 // Articles
