@@ -163,6 +163,10 @@ a:hover {
 
 // Map popup gallery
 
+.mapboxgl-popup-close-button:focus {
+  outline: none;
+}
+
 .popup-gallery .popup-gallery-images {
   width: 218px;
 }

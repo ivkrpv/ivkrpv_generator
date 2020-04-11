@@ -2,6 +2,7 @@
   "name": "IV",
   "email": "ivkrpv@ya.ru",
   "defaultLocale": "ru",
+  "mapboxToken": "pk.eyJ1IjoiaXZrcnB2IiwiYSI6ImNqcmVraWxuZjBtNHc0M3A4a2hjOHcwdzUifQ.J4IpJ7iJycy-zuysl4ALCQ",
   "prints": [
     {
       "category": "moscow",
