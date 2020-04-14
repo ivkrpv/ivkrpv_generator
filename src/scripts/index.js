@@ -19,7 +19,6 @@ $(function () {
   });
 
   // Tooltips
-
   $('[data-toggle="tooltip"]').tooltip();
 
   // Save images protection
@@ -30,7 +29,6 @@ $(function () {
   }
 
   // Modules
-
   gallery();
   maps();
   prints();
