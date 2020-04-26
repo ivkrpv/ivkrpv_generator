@@ -56,7 +56,7 @@ export default () => {
     const darkText = color === 'light' || color === 'warning';
     const textColor = darkText ? 'dark' : 'white';
     const navbarBg = darkText ? 'light' : 'dark';
-    const likelyColor = darkText ? 'light' : 'dark';
+    const likelyColor = darkText ? 'dark' : 'light';
 
     $('body')
       .removeClass(function (index, className) {
