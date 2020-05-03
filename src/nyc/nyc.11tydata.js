@@ -1,7 +1,7 @@
 module.exports = {
   eleventyNavigation: {
     key: 'nyc',
-    title: '<i class="fa fa-city"></i>&nbsp;&nbsp;NYC',
+    title: '<i class="fas fa-city"></i>&nbsp;&nbsp;NYC',
     order: 4
   }
 }

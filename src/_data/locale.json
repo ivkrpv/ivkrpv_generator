@@ -12,7 +12,7 @@
     "south404Desc": "👻 Дикая природа и заброшенные города Абхазии",
     "southCoast": "ПОБЕРЕЖЬЕ",
     "southCoastDesc": "🌴 Улицы Адлера и Сочи",
-    "nycPart1Desc": "<i class='fa fa-plane'></i> Гренландия, Бушвик, Уильямсберг, Ист-Ривер, Чайна-таун",
+    "nycPart1Desc": "<i class='fas fa-plane'></i> Гренландия, Бушвик, Уильямсберг, Ист-Ривер, Чайна-таун",
     "nycPart2Desc": "Манхэттенский мост, виды из Дамбо и Бруклин-Хайтс, ВТЦ, станция 9 Стрит, остров Рузвельт, Мидтаун",
     "nycPart3Desc": "Утюг, Тюдор-Сити, Гранд Централ, Гамильтон-Хайтс, виды из Лонг-Айленд-Сити",
     "nycPart4Desc": "Саннисайд, Кладбище Голгофа, Астория, остров Рузвельт",
@@ -31,7 +31,7 @@
     "nycPart17Desc": "Кони-Айленд, Бруклинский мост, Мидтаун, Чайна-таун, виды из Бруклин-Хайтс",
     "nycPart18Desc": "Финансовый квартал, Ту-Бриджес",
     "nycPart19Desc": "Улицы от Гарлема до Мидтауна, виды из Лонг-Айленд-Сити, Метро G",
-    "nycPart20Desc": "Гарлем, Рокавей, Паром, Аэропорт, <i class='fa fa-plane'></i> Исландия",
+    "nycPart20Desc": "Гарлем, Рокавей, Паром, Аэропорт, <i class='fas fa-plane'></i> Исландия",
     "people": "ЛЮДИ",
     "travel": "ПУТЕШЕСТВИЯ",
     "street": "ГОРОДА",
@@ -48,7 +48,10 @@
     "price50x70": "3000₽",
     "price61x91": "5000₽",
     "vk": "ВКонтакте",
-    "share": "Поделиться"
+    "share": "Поделиться",
+    "westcoast": "Западное побережье",
+    "westcoastTitle": "Автопутешествие по Западному побережью США",
+    "westcoastDesc": "Путевой очерк"
   },
   "en": {
     "localeToggle": "РУС",
@@ -63,7 +66,7 @@
     "south404Desc": "👻 Wild nature and abandoned towns of Abkhazia",
     "southCoast": "COAST",
     "southCoastDesc": "🌴 Streets of Adler & Sochi",
-    "nycPart1Desc": "<i class='fa fa-plane'></i> Greenland, Bushwick, Williamsburg, East River, Chinatown",
+    "nycPart1Desc": "<i class='fas fa-plane'></i> Greenland, Bushwick, Williamsburg, East River, Chinatown",
     "nycPart2Desc": "Manhattan Bridge, views from Dumbo & Brooklyn Heights, WTC, 9th Street station, Roosevelt Island, Midtown",
     "nycPart3Desc": "Flatiron, Tudor City, Grand Central, Hamilton Heights, views from Long Island City",
     "nycPart4Desc": "Sunnyside, Calvary Cemetery, Astoria, Roosevelt Island",
@@ -82,7 +85,7 @@
     "nycPart17Desc": "Coney Island, Brooklyn Bridge, Midtown, Chinatown, views from Brooklyn Heights",
     "nycPart18Desc": "Financial District, Two Bridges",
     "nycPart19Desc": "Streets from Harlem to Midtown, views from Long Island City, Subway G",
-    "nycPart20Desc": "Harlem, Rockaway, NYC Ferry, JFK, <i class='fa fa-plane'></i> Iceland",
+    "nycPart20Desc": "Harlem, Rockaway, NYC Ferry, JFK, <i class='fas fa-plane'></i> Iceland",
     "people": "PEOPLE",
     "travel": "TRAVEL",
     "street": "STREET",
@@ -99,6 +102,9 @@
     "price50x70": "$50",
     "price61x91": "$80",
     "vk": "VK",
-    "share": "Share"
+    "share": "Share",
+    "westcoast": "West Coast",
+    "westcoastTitle": "USA West Coast road trip",
+    "westcoastDesc": "Travel book"
   }
 }

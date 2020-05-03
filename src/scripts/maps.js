@@ -98,4 +98,16 @@ export default () => {
       }, 500);
     });
   }
+
+  // West Coast map
+  const $mapWestCoast = $('.map-west-coast');
+
+  if ($mapWestCoast.length) {
+    const map = new mapboxgl.Map({
+      container: $mapWestCoast.get(0),
+      style: 'mapbox://styles/ivkrpv/ck9qq2b8l0hxb1irw9z8wq0ao',
+      center: [-118.2437, 34.0522], // default LA center
+      zoom: 9,
+    });
+  }
 }

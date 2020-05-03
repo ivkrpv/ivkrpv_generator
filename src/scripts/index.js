@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/js/all';
 import gallery from './gallery';
 import maps from './maps';
 import prints from './prints';
