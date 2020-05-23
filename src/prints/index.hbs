@@ -4,18 +4,21 @@ theme: light
 title: PRINTS
 metaImage: /images/prints.jpg
 ---
-<div class="container px-4 pb-4">
+<div class="container px-4">
   <h2 class="font-italic"><span class="lcl" data-lcl="prints">{{{ defaultLocale 'prints' }}}</span></h2>
   <p id="printsTags" class="lead text-uppercase font-italic">
     {{#each config.prints}}
       <a href="#{{this.category}}" class="mr-2">#{{this.category}}</a>
     {{/each}}
   </p>
-  <div id="prints" class="my-5 d-flex justify-content-center align-items-center flex-wrap">
+</div>
+<div class="container px-4 pb-4 d-flex flex-wrap justify-content-center">
+  <div id="prints" class="d-flex justify-content-center flex-wrap">
     {{#each config.prints}}
       <a name="{{this.category}}" class="print-tag m-4 lead text-uppercase">
         <div class="h-100 d-flex justify-content-center align-items-center font-weight-bold">
-          {{this.category}}
+          <span class="bg-dark text-white px-2">{{this.category}}</span>
+          <i class="fas fa-arrow-right fa-lg ml-2" aria-hidden="true"></i>
         </div>
       </a>
       {{#each this.images}}
@@ -30,49 +33,49 @@ metaImage: /images/prints.jpg
       {{/each}}
     {{/each}}
   </div>
-  <div class="fixed-bottom mb-5 flex-column align-items-center js-print-dashboard d-none">
-    <div class="d-flex rounded px-3 py-2 bg-dark-transparent text-light">
-      <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-secondary btn-sm text-light js-print-cancel">
-          <span class="lcl" data-lcl="back">{{{ defaultLocale 'back' }}}</span>
-        </button>
-      </div>
-      <div class="d-flex align-items-center ml-5">
-        <div class="lcl" data-lcl="background">{{{ defaultLocale 'background' }}}</div>
-        <button type="button" class="btn btn-light btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="light"></button>
-        <button type="button" class="btn btn-dark btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="dark"></button>
-        <button type="button" class="btn btn-danger btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="danger"></button>
-        <button type="button" class="btn btn-primary btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="primary"></button>
-        <button type="button" class="btn btn-warning btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="warning"></button>
-        <button type="button" class="btn btn-success btn-sm btn-color rounded-circle ml-2 js-print-bg" data-color="success"></button>
-      </div>
-      <div class="d-flex align-items-center ml-4">
-        <div class="lcl" data-lcl="frame">{{{ defaultLocale 'frame' }}}</div>
-        <button type="button" class="btn btn-light btn-sm btn-color rounded-circle ml-2 js-print-frame" data-color="light"></button>
-        <button type="button" class="btn btn-dark btn-sm btn-color rounded-circle ml-2 js-print-frame" data-color="dark"></button>
-      </div>
-      <div class="d-flex align-items-center ml-4">
-        <div class="lcl" data-lcl="size">{{{ defaultLocale 'size' }}}</div>
-        <div class="btn-group btn-group-sm btn-group-toggle ml-2 js-print-size" data-toggle="buttons">
-          <label class="btn btn-dark lcl" data-lcl="size50x70" data-lcl-attr="data-original-title" data-toggle="tooltip" data-placement="top" data-offset="0,10">
-            <input type="radio" name="size" autocomplete="off" value="50x70"> 50x70
-          </label>
-          <label class="btn btn-dark lcl active" data-lcl="size61x91" data-lcl-attr="data-original-title" data-toggle="tooltip" data-placement="top" data-offset="0,10">
-            <input type="radio" name="size" autocomplete="off" value="61x91" checked> 61x91
-          </label>
+  <div class="mt-4 d-none js-print-dashboard">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-4 d-flex align-items-center">
+            <div class="text-nowrap lcl" data-lcl="frame">{{{ defaultLocale 'frame' }}}</div>
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <button type="button" class="btn btn-light btn-sm btn-color rounded-circle border js-print-frame" data-color="light"></button>
+            <button type="button" class="btn btn-dark btn-sm btn-color rounded-circle ml-2 js-print-frame" data-color="dark"></button>
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex align-items-center ml-5 js-print-price">
-        💸&nbsp;
-        <span class="d-none lcl" data-lcl="price50x70">{{{ defaultLocale 'price50x70' }}}</span>
-        <span class="lcl" data-lcl="price61x91">{{{ defaultLocale 'price61x91' }}}</span>
-      </div>
+        <div class="row">
+          <div class="col-4 d-flex align-items-center">
+            <div class="text-nowrap lcl" data-lcl="size">{{{ defaultLocale 'size' }}}</div>
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <div class="btn-group btn-group-sm btn-group-toggle js-print-size" data-toggle="buttons">
+              <label class="btn btn-primary lcl" data-lcl="size50x70" data-lcl-attr="data-original-title" data-toggle="tooltip" data-placement="top" data-offset="0,10">
+                <input type="radio" name="size" autocomplete="off" value="50x70"> 50x70
+              </label>
+              <label class="btn btn-primary lcl active" data-lcl="size61x91" data-lcl-attr="data-original-title" data-toggle="tooltip" data-placement="top" data-offset="0,10">
+                <input type="radio" name="size" autocomplete="off" value="61x91" checked="checked"> 61x91
+              </label>
+            </div>
+          </div>
+        </div>
 
-      <div class="d-flex align-items-center ml-5">
-        <button type="button" class="btn btn-primary btn-sm text-light" data-toggle="modal" data-target="#newOrderModal">
-          <span class="lcl" data-lcl="next">{{{ defaultLocale 'next' }}}</span>
-        </button>
+        <div class="d-flex justify-content-center my-3 lead js-print-price">
+          💸&nbsp;
+          <span class="d-none lcl" data-lcl="price50x70">{{{ defaultLocale 'price50x70' }}}</span>
+          <span class="lcl" data-lcl="price61x91">{{{ defaultLocale 'price61x91' }}}</span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary btn-sm text-light js-print-cancel">
+            <span class="lcl" data-lcl="back">{{{ defaultLocale 'back' }}}</span>
+          </button>
+          <button type="button" class="btn btn-primary btn-sm text-light" data-toggle="modal" data-target="#newOrderModal">
+            <span class="lcl" data-lcl="next">{{{ defaultLocale 'next' }}}</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

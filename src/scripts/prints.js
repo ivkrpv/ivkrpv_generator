@@ -16,22 +16,25 @@ function toggleModalLoading(loading) {
 }
 
 export default () => {
-  const prints$ = $('#prints');
-  const printsTags$ = $('#printsTags');
+  const $prints = $('#prints');
+  const $printsTags = $('#printsTags');
 
   $('body').on('click', '.print-frame-thumb', function () {
-    printsTags$.hide();
+    $printsTags.hide();
+
+    $(this).closest('.container').toggleClass('container container-fluid');
     $(this).removeClass('print-frame-thumb').siblings().hide();
-    $('.js-print-dashboard').toggleClass('d-none d-flex');
+    $('.js-print-dashboard').toggleClass('d-none d-block');
 
     printOrder.url = $(this).find('img').prop('src');
   });
 
   $('body').on('click', '.js-print-cancel', function () {
-    printsTags$.show();
+    $(this).closest('.container-fluid').toggleClass('container container-fluid');
+    $printsTags.show();
     $('.print-frame').addClass('print-frame-thumb');
-    prints$.children().show();
-    $('.js-print-dashboard').toggleClass('d-none d-flex');
+    $prints.children().show();
+    $('.js-print-dashboard').toggleClass('d-none d-block');
 
     // clear print order url
     printOrder.url = null;
@@ -48,25 +51,6 @@ export default () => {
     $('.print-frame').removeClass('print-frame-light print-frame-dark').addClass('print-frame-' + color);
 
     printOrder.frame = color;
-  });
-
-  $('body').on('click', '.js-print-bg', function (e) {
-    const $btn = $(e.currentTarget);
-    const color = $btn.data('color'); // any bootstrap color
-    const darkText = color === 'light' || color === 'warning';
-    const textColor = darkText ? 'dark' : 'white';
-    const navbarBg = darkText ? 'light' : 'dark';
-    const likelyColor = darkText ? 'dark' : 'light';
-
-    $('body')
-      .removeClass(function (index, className) {
-        return (className.match(/(^|\s)bg-\S+/g) || []).join(' ');
-      })
-      .addClass('bg-' + color);
-
-    $('body').removeClass('text-white text-dark').addClass('text-' + textColor);
-    $('.navbar').removeClass('navbar-light navbar-dark').addClass('navbar-' + navbarBg);
-    $('.likely').removeClass('likely-light likely-dark').addClass('likely-' + likelyColor);
   });
 
   $('body').on('change', '.js-print-size input[type=radio][name=size]', function () {

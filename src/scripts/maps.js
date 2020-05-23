@@ -14,7 +14,10 @@ export default () => {
       style: 'mapbox://styles/mapbox/dark-v10',
       center: [-74.006, 40.7128], // default nyc center
       zoom: 2,
+      attributionControl: false,
     });
+
+    map.addControl(new mapboxgl.AttributionControl(), 'top-right');
 
     map.on('load', function () {
       const ZOOM_DURATION = 5000;
@@ -108,6 +111,10 @@ export default () => {
       style: 'mapbox://styles/ivkrpv/ck9qq2b8l0hxb1irw9z8wq0ao',
       center: [-118.2437, 34.0522], // default LA center
       zoom: 9,
+      attributionControl: false,
+      interactive: false
     });
+
+    map.addControl(new mapboxgl.AttributionControl(), 'top-right');
   }
 }
