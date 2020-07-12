@@ -188,13 +188,14 @@ a:hover {
   text-shadow: #000 2px 2px;
 }
 
-.map-title-wc {
+.map-content-wc {
   position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  text-shadow: #fff 2px 1px;
+  top: 1.5rem;
+  right: 1.5rem;
+  bottom: 3rem;
+  left: 40%;
+  z-index: 1000;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.1);
 }
 
 .mapboxgl-popup-close-button:focus {

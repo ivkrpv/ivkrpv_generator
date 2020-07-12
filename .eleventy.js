@@ -7,6 +7,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy('src/webfonts');
 
+  eleventyConfig.addPassthroughCopy({
+    'node_modules/mapbox-gl/dist/mapbox-gl.css': 'styles/mapbox-gl.css',
+  });
+
   // lightgallery
   eleventyConfig.addPassthroughCopy({
     'node_modules/lightgallery.js/dist/css/lightgallery.min.css': 'styles/lightgallery.min.css',
