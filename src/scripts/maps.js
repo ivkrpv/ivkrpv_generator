@@ -1,6 +1,7 @@
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import config from '../_data/config.json';
 import nycData from '../_data/map_nyc.json';
+import wcData from '../_data/map_wc.json';
 
 mapboxgl.accessToken = config.mapboxToken;
 
@@ -131,9 +132,18 @@ export default () => {
     const contentBounds = content.getBoundingClientRect();
 
     let activeChapterName = 'la';
-    const routeChapters = {
+    const route = {
       la: {
-        center: [-118.2437, 34.0522],
+        point: true,
+        at: 0,
+      },
+      firstRoadSCali: {
+        point: false,
+        span: [0, 100],
+      },
+      monterey: {
+        point: true,
+        at: 100,
       },
     };
 
@@ -148,22 +158,62 @@ export default () => {
       interactive: false,
     });
 
+    const allCoords = wcData.features[0].geometry.coordinates;
+
+    const LA = allCoords[route.la.at];
+
+    const geojson = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: [LA],
+          },
+        },
+      ],
+    };
+
     map.on('load', () => {
+      map.addSource('line', {
+        type: 'geojson',
+        data: geojson,
+      });
+
+      // add the line which will be modified in the animation
+      map.addLayer({
+        id: 'line-animation',
+        type: 'line',
+        source: 'line',
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round',
+        },
+        paint: {
+          'line-color': '#ed6498',
+          'line-width': 5,
+          'line-opacity': 0.8,
+        },
+      });
+
       // first load, show LA
       map.flyTo({
-        center: shiftMapCoords(map, contentBounds.width, routeChapters.la.center),
+        center: shiftMapCoords(map, contentBounds.width, LA),
         minZoom: 2,
         pitch: 15,
       });
 
       content.onscroll = function () {
-        for (const chapterName in routeChapters) {
-          if (isElementVisible(chapterName, contentBounds) && !drawed[chapterName]) {
-            const marker = new mapboxgl.Marker({ color: '#94b377' })
-              .setLngLat(routeChapters[chapterName].center)
-              .addTo(map);
+        for (const part in route) {
+          if (isElementVisible(part, contentBounds) && !drawed[part]) {
+            if (route[part].point) {
+              const marker = new mapboxgl.Marker({ color: '#94b377' })
+                .setLngLat(allCoords[route[part].at])
+                .addTo(map);
+            }
 
-            drawed[chapterName] = true;
+            drawed[part] = true;
 
             break;
           }

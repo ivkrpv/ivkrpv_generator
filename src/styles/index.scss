@@ -14,12 +14,13 @@ $main-color: #e7254d;
 }
 
 .font-serif {
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 // Common
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -44,11 +45,11 @@ a:hover {
 }
 
 .navbar-dark .logo {
-  color: rgba(255,255,255,.2);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 .navbar-light .logo {
-  color: rgba(0,0,0,.2);
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .logo:hover {
@@ -57,14 +58,14 @@ a:hover {
 
 .bottom-buttons {
   position: fixed;
-  bottom: .75rem;
+  bottom: 0.75rem;
   right: 1rem;
   z-index: 1030;
 }
 
 .lang-toggle {
   cursor: pointer;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .lang-toggle:hover {
@@ -113,11 +114,11 @@ a:hover {
   left: -50%;
   right: 0;
   top: 50%;
-  -moz-transform: translate(0,-50%);
-  -ms-transform: translate(0,-50%);
-  -o-transform: translate(0,-50%);
-  -webkit-transform: translate(0,-50%);
-  transform: translate(0,-50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
 }
 
 @media (min-width: 768px) {
@@ -137,7 +138,7 @@ a:hover {
 // Gallery
 
 .gallery {
-  margin-right: -.25rem;
+  margin-right: -0.25rem;
 }
 
 .gallery a {
@@ -145,7 +146,7 @@ a:hover {
 }
 
 .gallery a:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .gallery .tail {
@@ -176,26 +177,12 @@ a:hover {
 }
 
 // Maps
-.map-border-wc {
-  border-top: 2px dashed #343a40;
-}
-
 .map-title-nyc {
   position: absolute;
   top: 20px;
   left: 24px;
   z-index: 1;
   text-shadow: #000 2px 2px;
-}
-
-.map-content-wc {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  bottom: 3rem;
-  left: 40%;
-  z-index: 1000;
-  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.1);
 }
 
 .mapboxgl-popup-close-button:focus {
@@ -216,11 +203,13 @@ a:hover {
   display: block;
 }
 
-.popup-gallery-prev, .popup-gallery-next {
+.popup-gallery-prev,
+.popup-gallery-next {
   cursor: pointer;
 }
 
-.popup-gallery-prev:hover, .popup-gallery-next:hover {
+.popup-gallery-prev:hover,
+.popup-gallery-next:hover {
   opacity: 0.7;
 }
 
@@ -247,23 +236,23 @@ a:hover {
 .print-frame {
   border-width: 10px;
   border-style: solid;
-  -webkit-box-shadow: -4px 4px 8px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: -4px 4px 8px 0px rgba(0,0,0,0.2);
-  box-shadow: -4px 4px 8px 0px rgba(0,0,0,0.2);
+  -webkit-box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 .print-frame-thumb {
   border-width: 8px;
   cursor: pointer;
-  -webkit-transition: opacity .5s ease-in-out;
-  -moz-transition: opacity .5s ease-in-out;
-  -ms-transition: opacity .5s ease-in-out;
-  -o-transition: opacity .5s ease-in-out;
-  transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .print-frame-thumb:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .print-frame-dark {
@@ -277,9 +266,9 @@ a:hover {
 .print-mat {
   padding: 30px;
   background-color: #fff;
-  -webkit-box-shadow: inset -1px 1px 6px 1px rgba(0,0,0,.24);
-  -moz-box-shadow: inset -1px 1px 6px 1px rgba(0,0,0,.24);
-  box-shadow: inset -1px 1px 6px 1px rgba(0,0,0,.24);
+  -webkit-box-shadow: inset -1px 1px 6px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: inset -1px 1px 6px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: inset -1px 1px 6px 1px rgba(0, 0, 0, 0.24);
 }
 
 .print-frame-thumb .print-mat {
@@ -305,9 +294,9 @@ a:hover {
   height: 100%;
   top: 0;
   left: 0;
-  -webkit-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.2);
-  -moz-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.2);
-  box-shadow: inset 0 0 2px 0 rgba(0,0,0,.2);
+  -webkit-box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btn-color {
@@ -348,15 +337,24 @@ a:hover {
 
 // Bootstrap override
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 300;
 }
 
 .navbar {
   z-index: 1030;
 }
-
-
 
 @media (max-width: 992px) {
   .navbar-collapse {
@@ -368,11 +366,13 @@ a:hover {
   font-weight: 300;
 }
 
-.dropdown-item.disabled, .dropdown-item:disabled {
+.dropdown-item.disabled,
+.dropdown-item:disabled {
   color: #dcdcdc;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   background-color: $main-color;
 }
 
@@ -396,5 +396,5 @@ a:hover {
 .likely__widget_facebook,
 .likely__widget_vkontakte,
 .likely__widget_twitter {
-  fill: #343a40
+  fill: #343a40;
 }
