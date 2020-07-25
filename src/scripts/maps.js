@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import config from '../_data/config.json';
 import nycData from '../_data/map_nyc.json';
@@ -10,15 +11,6 @@ function shiftMapCoords(map, contentWidth, lngLat) {
   centerPoint.x += contentWidth / 2;
 
   return map.unproject(centerPoint);
-}
-
-function isElementVisible(id, { top, bottom }) {
-  const element = document.getElementById(id);
-  const bounds = element.getBoundingClientRect();
-
-  // console.log(bounds.top > top && bounds.bottom < bottom);
-
-  return bounds.top > top && bounds.bottom < bottom;
 }
 
 export default () => {
@@ -131,23 +123,35 @@ export default () => {
     const content = document.getElementById('map-overflow-content');
     const contentBounds = content.getBoundingClientRect();
 
-    let activeChapterName = 'la';
-    const route = {
-      la: {
-        point: true,
-        at: 0,
-      },
-      firstRoadSCali: {
-        point: false,
-        span: [0, 100],
-      },
-      monterey: {
-        point: true,
-        at: 100,
-      },
-    };
+    const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
+    // How to find a place in the route
+    // ROUTE_COORDS.map(([x, y], i) => ({ x, y, i })).filter(({ x, y }) => x === -121.88548 && y === 36.58442)
 
-    const drawed = {};
+    const route = [
+      {
+        id: 'la',
+        point: true,
+        pointIndex: 0,
+      },
+      {
+        id: 'firstRoadSCali',
+        point: false,
+        routeIndex: [0, 6220],
+      },
+      {
+        id: 'monterey',
+        point: true,
+        pointIndex: 6220,
+      },
+    ].map((p) => {
+      p.element = document.getElementById(p.id);
+
+      if (!p.point) {
+        const { offsetTop, offsetHeight } = p.element;
+      }
+
+      return p;
+    });
 
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
@@ -158,10 +162,6 @@ export default () => {
       interactive: false,
     });
 
-    const allCoords = wcData.features[0].geometry.coordinates;
-
-    const LA = allCoords[route.la.at];
-
     const geojson = {
       type: 'FeatureCollection',
       features: [
@@ -169,7 +169,7 @@ export default () => {
           type: 'Feature',
           geometry: {
             type: 'LineString',
-            coordinates: [LA],
+            coordinates: [],
           },
         },
       ],
@@ -199,26 +199,61 @@ export default () => {
 
       // first load, show LA
       map.flyTo({
-        center: shiftMapCoords(map, contentBounds.width, LA),
+        center: shiftMapCoords(map, contentBounds.width, ROUTE_COORDS[route[0].pointIndex]),
         minZoom: 2,
-        pitch: 15,
+        pitch: 45,
       });
 
-      content.onscroll = function () {
-        for (const part in route) {
-          if (isElementVisible(part, contentBounds) && !drawed[part]) {
-            if (route[part].point) {
-              const marker = new mapboxgl.Marker({ color: '#94b377' })
-                .setLngLat(allCoords[route[part].at])
-                .addTo(map);
-            }
+      content.onscroll = _.throttle((e) => {
+        for (let i = 0; i < route.length; i++) {
+          const part = route[i];
 
-            drawed[part] = true;
+          if (part.drawed) continue;
+
+          const { offsetHeight: contentHeight, scrollTop } = content;
+          const scrollBottom = scrollTop + contentHeight;
+          const { offsetTop: elementTop } = part.element;
+
+          if (elementTop < scrollBottom) {
+            if (part.point) {
+              const marker = new mapboxgl.Marker({ color: '#94b377' })
+                .setLngLat(ROUTE_COORDS[part.pointIndex])
+                .addTo(map);
+
+              part.drawed = true;
+            } else {
+              part.lastDrawedIndex = part.lastDrawedIndex ?? part.routeIndex[0];
+              const { offsetHeight: elementHeight } = part.element;
+
+              const pointsCount = part.routeIndex[1] - part.routeIndex[0] + 1;
+              const pixelsInOnePoint = elementHeight / pointsCount;
+              const visiblePointsCount = (scrollBottom - elementTop) / pixelsInOnePoint;
+
+              const routeSliceToDraw = ROUTE_COORDS.slice(part.lastDrawedIndex, visiblePointsCount);
+
+              // append new coordinates to the lineString
+              Array.prototype.push.apply(
+                geojson.features[0].geometry.coordinates,
+                routeSliceToDraw
+              );
+
+              // then update the map
+              map.getSource('line').setData(geojson);
+
+              const routeEnd = shiftMapCoords(map, contentBounds.width, _.last(routeSliceToDraw));
+              map.panTo(routeEnd, { essential: true });
+
+              part.lastDrawedIndex = visiblePointsCount - 1;
+
+              if (part.lastDrawedIndex >= part.routeIndex[1]) {
+                part.drawed = true;
+              }
+            }
 
             break;
           }
         }
-      };
+      }, 16);
     });
 
     map.addControl(new mapboxgl.AttributionControl(), 'top-right');
