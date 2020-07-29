@@ -6,13 +6,6 @@ import wcData from '../_data/map_wc.json';
 
 mapboxgl.accessToken = config.mapboxToken;
 
-function shiftMapCoords(map, contentWidth, lngLat) {
-  const centerPoint = map.project(lngLat);
-  centerPoint.x += contentWidth / 2;
-
-  return map.unproject(centerPoint);
-}
-
 export default () => {
   // NYC map
   const $mapNYC = $('.map-nyc');
@@ -121,7 +114,6 @@ export default () => {
 
   if ($mapWestCoast.length) {
     const content = document.getElementById('map-overflow-content');
-    const contentBounds = content.getBoundingClientRect();
 
     const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
     // How to find a place in the route
@@ -134,7 +126,7 @@ export default () => {
         pointIndex: 0,
       },
       {
-        id: 'firstRoadSCali',
+        id: 'toMonterey',
         point: false,
         routeIndex: [0, 6220],
       },
@@ -147,7 +139,11 @@ export default () => {
       p.element = document.getElementById(p.id);
 
       if (!p.point) {
-        const { offsetTop, offsetHeight } = p.element;
+        const { offsetHeight: elementHeight } = p.element;
+
+        const pointsCount = p.routeIndex[1] - p.routeIndex[0] + 1;
+
+        p.pixelsInRoutePoint = elementHeight / pointsCount;
       }
 
       return p;
@@ -156,55 +152,58 @@ export default () => {
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
       style: 'mapbox://styles/ivkrpv/ck9qq2b8l0hxb1irw9z8wq0ao',
-      center: [1.845552, 69.65314], // somewhere in the arctic ocean
+      center: [-30.2647735, 63.4942389], // somewhere in the ocean
       zoom: 9,
       attributionControl: false,
       interactive: false,
     });
 
-    const geojson = {
-      type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'LineString',
-            coordinates: [],
-          },
-        },
-      ],
-    };
-
     map.on('load', () => {
-      map.addSource('line', {
+      const routeGeojson = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: [],
+            },
+          },
+        ],
+      };
+
+      map.addSource('route', {
         type: 'geojson',
-        data: geojson,
+        data: routeGeojson,
       });
 
-      // add the line which will be modified in the animation
       map.addLayer({
-        id: 'line-animation',
+        id: 'route-animated',
         type: 'line',
-        source: 'line',
+        source: 'route',
         layout: {
           'line-cap': 'round',
           'line-join': 'round',
         },
         paint: {
-          'line-color': '#ed6498',
-          'line-width': 5,
-          'line-opacity': 0.8,
+          'line-color': '#e7254d',
+          'line-width': 6,
+          'line-opacity': 0.6,
         },
       });
 
       // first load, show LA
       map.flyTo({
-        center: shiftMapCoords(map, contentBounds.width, ROUTE_COORDS[route[0].pointIndex]),
+        center: ROUTE_COORDS[route[0].pointIndex],
         minZoom: 2,
         pitch: 45,
+        offset: [-(content.clientWidth / 2), 0],
+        essential: true,
       });
 
-      content.onscroll = _.throttle((e) => {
+      let lastDrawedIndex = 0;
+
+      content.onscroll = _.throttle(() => {
         for (let i = 0; i < route.length; i++) {
           const part = route[i];
 
@@ -214,6 +213,7 @@ export default () => {
           const scrollBottom = scrollTop + contentHeight;
           const { offsetTop: elementTop } = part.element;
 
+          // it's visible
           if (elementTop < scrollBottom) {
             if (part.point) {
               const marker = new mapboxgl.Marker({ color: '#94b377' })
@@ -222,31 +222,45 @@ export default () => {
 
               part.drawed = true;
             } else {
-              part.lastDrawedIndex = part.lastDrawedIndex ?? part.routeIndex[0];
-              const { offsetHeight: elementHeight } = part.element;
-
-              const pointsCount = part.routeIndex[1] - part.routeIndex[0] + 1;
-              const pixelsInOnePoint = elementHeight / pointsCount;
-              const visiblePointsCount = (scrollBottom - elementTop) / pixelsInOnePoint;
-
-              const routeSliceToDraw = ROUTE_COORDS.slice(part.lastDrawedIndex, visiblePointsCount);
-
-              // append new coordinates to the lineString
-              Array.prototype.push.apply(
-                geojson.features[0].geometry.coordinates,
-                routeSliceToDraw
+              const visibleRoutePointsCount = Math.floor(
+                (scrollBottom - elementTop) / part.pixelsInRoutePoint
               );
+              const lastVisibleIndex = visibleRoutePointsCount - 1;
 
-              // then update the map
-              map.getSource('line').setData(geojson);
+              const mapFlyOptions = {
+                offset: [-(content.clientWidth / 2), 0],
+                speed: 0.3,
+                essential: true,
+              };
 
-              const routeEnd = shiftMapCoords(map, contentBounds.width, _.last(routeSliceToDraw));
-              map.panTo(routeEnd, { essential: true });
+              if (lastVisibleIndex > lastDrawedIndex) {
+                const routeSliceToDraw = ROUTE_COORDS.slice(
+                  lastDrawedIndex,
+                  visibleRoutePointsCount
+                );
 
-              part.lastDrawedIndex = visiblePointsCount - 1;
+                Array.prototype.push.apply(
+                  routeGeojson.features[0].geometry.coordinates,
+                  routeSliceToDraw
+                );
 
-              if (part.lastDrawedIndex >= part.routeIndex[1]) {
-                part.drawed = true;
+                map.getSource('route').setData(routeGeojson);
+
+                map.flyTo({
+                  center: _.last(routeSliceToDraw),
+                  ...mapFlyOptions,
+                });
+
+                lastDrawedIndex = lastVisibleIndex;
+
+                if (lastDrawedIndex >= part.routeIndex[1]) {
+                  part.drawed = true;
+                }
+              } else {
+                map.flyTo({
+                  center: ROUTE_COORDS[lastVisibleIndex],
+                  ...mapFlyOptions,
+                });
               }
             }
 
