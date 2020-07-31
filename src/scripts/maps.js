@@ -119,6 +119,16 @@ export default () => {
     // How to find a place in the route
     // ROUTE_COORDS.map(([x, y], i) => ({ x, y, i })).filter(({ x, y }) => x === -121.88548 && y === 36.58442)
 
+    function addMapMarker(routePart, map) {
+      const marker = new mapboxgl.Marker({ color: '#7c86a4' })
+        .setLngLat(ROUTE_COORDS[routePart.pointIndex])
+        .addTo(map);
+
+      routePart.drawed = true;
+
+      return marker;
+    }
+
     const route = [
       {
         id: 'la',
@@ -128,12 +138,12 @@ export default () => {
       {
         id: 'toMonterey',
         point: false,
-        routeIndex: [0, 6220],
+        routeIndex: [0, 6422],
       },
       {
         id: 'monterey',
         point: true,
-        pointIndex: 6220,
+        pointIndex: 6422,
       },
     ].map((p) => {
       p.element = document.getElementById(p.id);
@@ -153,7 +163,7 @@ export default () => {
       container: $mapWestCoast.get(0),
       style: 'mapbox://styles/ivkrpv/ck9qq2b8l0hxb1irw9z8wq0ao',
       center: [-30.2647735, 63.4942389], // somewhere in the ocean
-      zoom: 9,
+      zoom: 10,
       attributionControl: false,
       interactive: false,
     });
@@ -186,9 +196,9 @@ export default () => {
           'line-join': 'round',
         },
         paint: {
-          'line-color': '#e7254d',
+          'line-color': '#ca7978',
           'line-width': 6,
-          'line-opacity': 0.6,
+          'line-opacity': 0.8,
         },
       });
 
@@ -201,13 +211,13 @@ export default () => {
         essential: true,
       });
 
+      addMapMarker(route[0], map);
+
       let lastDrawedIndex = 0;
 
       content.onscroll = _.throttle(() => {
         for (let i = 0; i < route.length; i++) {
           const part = route[i];
-
-          if (part.drawed) continue;
 
           const { offsetHeight: contentHeight, scrollTop } = content;
           const scrollBottom = scrollTop + contentHeight;
@@ -216,11 +226,9 @@ export default () => {
           // it's visible
           if (elementTop < scrollBottom) {
             if (part.point) {
-              const marker = new mapboxgl.Marker({ color: '#94b377' })
-                .setLngLat(ROUTE_COORDS[part.pointIndex])
-                .addTo(map);
+              if (part.drawed) continue;
 
-              part.drawed = true;
+              addMapMarker(part, map);
             } else {
               const visibleRoutePointsCount = Math.floor(
                 (scrollBottom - elementTop) / part.pixelsInRoutePoint
@@ -234,6 +242,8 @@ export default () => {
               };
 
               if (lastVisibleIndex > lastDrawedIndex) {
+                if (part.drawed) continue;
+
                 const routeSliceToDraw = ROUTE_COORDS.slice(
                   lastDrawedIndex,
                   visibleRoutePointsCount
