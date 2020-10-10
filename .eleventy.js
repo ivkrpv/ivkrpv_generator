@@ -3,7 +3,7 @@ const lazyImagesPlugin = require('eleventy-plugin-lazyimages');
 const config = require('./src/_data/config.json');
 const locale = require('./src/_data/locale.json');
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy('src/webfonts');
 
@@ -24,7 +24,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(lazyImagesPlugin, {
-    imgSelector: '.gallery img, #prints img',
+    imgSelector: '.gallery img, #prints img, .map-overflow-content img',
     preferNativeLazyLoad: false,
     transformImgPath: (imgPath) => {
       if (imgPath.startsWith('/') && !imgPath.startsWith('//')) {
@@ -35,15 +35,18 @@ module.exports = function(eleventyConfig) {
     },
   });
 
-  eleventyConfig.addNunjucksFilter('isActivePage', function(navPage, page) {
-    return navPage.url === page.url || (navPage.children.length && navPage.children.some(p => p.url === page.url));
+  eleventyConfig.addNunjucksFilter('isActivePage', function (navPage, page) {
+    return (
+      navPage.url === page.url ||
+      (navPage.children.length && navPage.children.some((p) => p.url === page.url))
+    );
   });
 
-  eleventyConfig.addNunjucksShortcode('defaultLocale', function(config, locale, key) {
+  eleventyConfig.addNunjucksShortcode('defaultLocale', function (config, locale, key) {
     return locale[config.defaultLocale][key];
   });
 
-  eleventyConfig.addHandlebarsShortcode('defaultLocale', function(key) {
+  eleventyConfig.addHandlebarsShortcode('defaultLocale', function (key) {
     return locale[config.defaultLocale][key];
   });
 
@@ -51,6 +54,6 @@ module.exports = function(eleventyConfig) {
     dir: { input: 'src', output: 'dist', data: '_data' },
     passthroughFileCopy: true,
     templateFormats: ['hbs', 'njk', 'md', 'css', 'html', 'yml'],
-    htmlTemplateEngine: 'njk'
-  }
-}
+    htmlTemplateEngine: 'njk',
+  };
+};
