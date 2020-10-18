@@ -211,8 +211,6 @@ export default () => {
         essential: true,
       });
 
-      addMapMarker(route[0], map);
-
       let lastDrawedIndex = 0;
 
       content.onscroll = _.throttle(() => {

@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: layouts/special.njk
 theme: light
 title: Along the West Coast
 metaImage: /images/photography/iphone-11pro/IMG_9787.JPEG
@@ -7,63 +7,70 @@ pageStyle:
   - /styles/mapbox-gl.css
   - /styles/maps.css
 ---
-<div class="full-screen font-serif map-border-wc">
-  <div id="map-overflow-content" class="map-overflow-content overflow-scroll rounded bg-light px-4">
-    <div class="text-center my-5">
-      <h2 class="text-uppercase"><span class="lcl" data-lcl="westcoastTitle">{{{ defaultLocale 'westcoastTitle' }}}</span></h2>
-      <p class="lead text-uppercase m-0">
-        <span class="lcl" data-lcl="westcoastDesc">{{{ defaultLocale 'westcoastDesc' }}}</span>
-      </p>
+<div class="full-screen map-border-wc">
+  <div id="map-overflow-content" class="map-overflow-content overflow-scroll bg-light">
+    <div class="h-100 d-flex flex-column justify-content-center align-items-center font-serif">
+      <div class="text-center text-uppercase">
+        <h2 class="font-weight-bold"><span class="lcl" data-lcl="westcoastTitle">{{{ defaultLocale 'westcoastTitle' }}}</span></h2>
+        <p class="lead m-0">
+          <span class="lcl" data-lcl="westcoastDesc">{{{ defaultLocale 'westcoastDesc' }}}</span>
+        </p>
+      </div>
     </div>
 
-    <blockquote class="blockquote text-center mb-5">
-      <p class="mb-0">“All he needed was a wheel in his hand and four on the road.”</p>
-      <footer class="blockquote-footer">Jack Kerouac, <cite>On the Road</cite></footer>
-    </blockquote>
-
     <div id="la">
-      <h3>Пролог</h3>
-      <p>13 часов в Эйрбасе звучат как испытание. Я решительно не знаю чем занять себя в салоне самолета Москва - Лос-Анджелес, больше напоминающий перелет какой-нибудь армянской делегации. Просмотрены все сохранённые ролики с Ютуба, “Однажды в Голливуде”, несколько плейлистов музыки и остаётся еще... 8 часов полета.</p>
+      <blockquote class="blockquote px-5 text-right font-serif">
+        <p class="mb-0">All he needed was a wheel in his hand and four on the road.</p>
+        <footer class="blockquote-footer">Jack Kerouac, <cite>On the Road</cite></footer>
+      </blockquote>
+      <h3 class="px-5 mt-5 mb-3 font-serif font-weight-bold">Пролог</h3>
+      <p class="px-5">13 часов в Эйрбасе звучат как испытание. Я решительно не знаю чем занять себя в салоне самолета Москва - Лос-Анджелес, больше напоминающий перелет какой-нибудь армянской делегации. Просмотрены все сохранённые ролики с Ютуба, “Однажды в Голливуде”, несколько плейлистов музыки и остаётся еще... 8 часов полета.</p>
       <div class="text-center mb-3">
-        <img src="/images/photography/westcoast/1.jpg" class="img-w-500">
+        <img src="/images/photography/westcoast/1.jpg" class="w-100 h-auto">
       </div>
-      <p>Но в конце концов наступает рассвет и в иллюминаторе начинают показываться снежные фьорды Гренландии. Мы над американским континентом и время уже начинает течь в обратную сторону!</p>
+      <p class="px-5">Но в конце концов наступает рассвет и в иллюминаторе начинают показываться снежные фьорды Гренландии. Мы над американским континентом и время уже начинает течь в обратную сторону!</p>
       <div class="text-center mb-3">
-        <img src="/images/photography/westcoast/2.jpg" class="img-w-300">
+        <img src="/images/photography/westcoast/2.jpg" class="img-w-500">
         <div class="mt-2 text-muted">Гренландия</div>
       </div>
-      <p>Пролетаем озеро Тахо, Йосемити, над бесконечными, залитыми солнцем, полями центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.</p>
+      <p class="px-5">Пролетаем озеро Тахо, Йосемити, над бесконечными, залитыми солнцем, полями центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.</p>
       <div class="text-center mb-3">
-        <img src="/images/photography/westcoast/3.jpeg" class="img-w-300">
-        <img src="/images/photography/westcoast/4.jpeg" class="img-w-300">
-        <img src="/images/photography/westcoast/5.jpeg" class="img-w-300">
-        <div class="mt-2 text-muted">Озеро Тахо и заход на посадку</div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <img src="/images/photography/westcoast/3.jpeg" class="img-w-300 mb-2 mr-2">
+          <img src="/images/photography/westcoast/4.jpeg" class="img-w-300 mb-2 mr-2">
+          <img src="/images/photography/westcoast/5.jpeg" class="img-w-300 mb-2">
+        </div>
+        <div class="text-muted">Озеро Тахо и заход на посадку</div>
       </div>
-      <p>Please, fasten your seat belts. Мы прибыли в “город Ангелов”.</p>
+      <p class="px-5">Please, fasten your seat belts. Мы прибыли в “город Ангелов”.</p>
       <div class="text-center mb-3">
-        <img src="/images/photography/westcoast/6.jpeg" class="img-w-500">
-        <div class="mt-2 text-muted">Центр ЛА под крылом самолета</div>
+        <img src="/images/photography/westcoast/6.jpeg" class="w-100 h-auto">
+        <div class="mt-2 text-muted">Центр ЛА над крылом самолета</div>
       </div>
 
-      <h3>Лос-Анджелес</h3>
-      <p>В сентябре 2019 года вышел очередной "новый" телефон от компании Apple, одинадцатый по счету. iPhone 11 Pro – верхняя модель, имеет сразу три камеры и именно про них будет этот материал.</p>
+      <h3 class="px-5 mt-5 mb-3 font-serif font-weight-bold">Лос-Анджелес</h3>
+      <p class="px-5">В сентябре 2019 года вышел очередной "новый" телефон от компании Apple, одинадцатый по счету. iPhone 11 Pro – верхняя модель, имеет сразу три камеры и именно про них будет этот материал.</p>
       <div class="text-center mb-3">
-        <img src="/images/photography/westcoast/7.jpeg" class="img-w-500">
-        <div class="mt-2 text-muted">Центр ЛА под крылом самолета</div>
+        <img src="/images/photography/westcoast/7.jpeg" class="w-100 h-auto">
+        <div class="mt-2 text-muted">Вид из двери мотеля</div>
       </div>
     </div>
 
     <div id="toMonterey">
-      <h3>California 1</h3>
-      <p>Думаю таких кратких технических данных будет достаточно и можно уже перейти к самим фотографиям и каким-то небольшим заметкам о съемке.</p>
+      <h3 class="px-5 mt-5 mb-3 font-serif font-weight-bold">California 1</h3>
+      <p class="px-5">Думаю таких кратких технических данных будет достаточно и можно уже перейти к самим фотографиям и каким-то небольшим заметкам о съемке.</p>
+      <div class="text-center mb-3">
+        <img src="/images/photography/westcoast/california1.png" class="img-w-300">
+        <div class="mt-2 text-muted">Дорожный знак-табличка 1 шоссе</div>
+      </div>
+      <p class="px-5">Думаю таких кратких технических данных будет достаточно и можно уже перейти к самим фотографиям и каким-то небольшим заметкам о съемке.</p>
     </div>
 
     <div id="monterey">
-      <h3 >Монтерей</h3>
-      <p>Думаю таких кратких технических данных будет достаточно и можно уже перейти к самим фотографиям и каким-то небольшим заметкам о съемке.</p>
+      {{!-- <h3 >Монтерей</h3> --}}
     </div>
 
-    <h4 class="text-uppercase text-center my-5">To Be Continued...</h4>
+    <h4 class="text-uppercase text-center my-5 font-serif">To Be Continued...</h4>
   </div>
 
   <div class="h-100 w-100 map-west-coast"></div>

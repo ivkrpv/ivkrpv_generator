@@ -9,12 +9,22 @@ $main-color: #e7254d;
   src: url('../webfonts/Lazer84.ttf');
 }
 
+@font-face {
+  font-family: 'Lora';
+  src: url('../webfonts/Lora-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Lora-Italic';
+  src: url('../webfonts/Lora-Italic-VariableFont_wght.ttf');
+}
+
 .font-retro {
   font-family: 'Lazer84';
 }
 
 .font-serif {
-  font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-family: Lora, Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 // Common
@@ -36,6 +46,15 @@ a:hover {
   color: darken($main-color, 20%);
 }
 
+.standalone-brand {
+  position: absolute;
+  top: 21px;
+  left: 24px;
+  z-index: 1;
+  font-size: 1.25rem;
+  text-decoration: none !important;
+}
+
 .logo {
   letter-spacing: 3px;
   transition: color 2s ease-out;
@@ -44,11 +63,13 @@ a:hover {
   -o-transition: color 2s ease-out;
 }
 
-.navbar-dark .logo {
+.navbar-dark .logo,
+.standalone-brand .logo {
   color: rgba(255, 255, 255, 0.2);
 }
 
-.navbar-light .logo {
+.navbar-light .logo,
+.standalone-brand .logo {
   color: rgba(0, 0, 0, 0.2);
 }
 
@@ -72,13 +93,18 @@ a:hover {
   opacity: 1;
 }
 
-.full-screen {
+.full-screen,
+.full-screen-menu {
   position: absolute;
   bottom: 0;
-  top: 72px;
+  top: 0;
   left: 0;
   right: 0;
   overflow: hidden;
+}
+
+.full-screen-menu {
+  top: 72px;
 }
 
 .overflow-hidden {
@@ -222,11 +248,13 @@ a:hover {
 
 .img-w-300 {
   width: 300px;
+  max-width: 100%;
   height: auto;
 }
 
 .img-w-500 {
   width: 500px;
+  max-width: 100%;
   height: auto;
 }
 
