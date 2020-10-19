@@ -233,9 +233,9 @@ export default () => {
               );
               const lastVisibleIndex = visibleRoutePointsCount - 1;
 
-              const mapFlyOptions = {
+              const mapAnimateOptions = {
                 offset: [-(content.clientWidth / 2), 0],
-                speed: 0.3,
+                duration: 2000,
                 essential: true,
               };
 
@@ -254,10 +254,7 @@ export default () => {
 
                 map.getSource('route').setData(routeGeojson);
 
-                map.flyTo({
-                  center: _.last(routeSliceToDraw),
-                  ...mapFlyOptions,
-                });
+                map.panTo(_.last(routeSliceToDraw), mapAnimateOptions);
 
                 lastDrawedIndex = lastVisibleIndex;
 
@@ -265,17 +262,14 @@ export default () => {
                   part.drawed = true;
                 }
               } else {
-                map.flyTo({
-                  center: ROUTE_COORDS[lastVisibleIndex],
-                  ...mapFlyOptions,
-                });
+                map.panTo(ROUTE_COORDS[lastVisibleIndex], mapAnimateOptions);
               }
             }
 
             break;
           }
         }
-      }, 16);
+      }, 10);
     });
 
     map.addControl(new mapboxgl.AttributionControl(), 'top-right');
