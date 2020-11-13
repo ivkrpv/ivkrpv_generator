@@ -24,7 +24,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(lazyImagesPlugin, {
-    imgSelector: '.gallery img, #prints img, .map-overflow-content img',
+    imgSelector: '.gallery img, #prints img, #map-wc-content img',
     preferNativeLazyLoad: false,
     transformImgPath: (imgPath) => {
       if (imgPath.startsWith('/') && !imgPath.startsWith('//')) {

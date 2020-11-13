@@ -4,14 +4,24 @@
     0 16px 32px rgba(0, 0, 0, 0.025), 0 32px 64px rgba(0, 0, 0, 0.025);
 }
 
-.map-overflow-content {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  bottom: 3rem;
-  left: 40%;
-  z-index: 1000;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05),
-    0 4px 8px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.05),
-    0 32px 64px rgba(0, 0, 0, 0.05);
+.bg-wc-splash {
+  background-image: url(/images/photography/westcoast/splash.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.wc-marker {
+  background-color: #ff6251;
+  border: 6px solid #d63e2d;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.wc-marker-text {
+  font-family: 'Lazer84';
+  color: #f73722;
+  font-size: 2rem;
+  letter-spacing: 3px;
 }

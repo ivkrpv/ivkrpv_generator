@@ -50,7 +50,7 @@
     "share": "Поделиться",
     "westcoast": "Западное побережье",
     "westcoastTitle": "Вдоль Западного побережья США",
-    "westcoastDesc": "Путевой очерк"
+    "westcoastSubtitle": "Ноябрь, 2019"
   },
   "en": {
     "localeToggle": "РУС",
@@ -103,6 +103,6 @@
     "share": "Share",
     "westcoast": "West Coast",
     "westcoastTitle": "Along the West Coast",
-    "westcoastDesc": "Travel book"
+    "westcoastSubtitle": "November, 2019"
   }
 }

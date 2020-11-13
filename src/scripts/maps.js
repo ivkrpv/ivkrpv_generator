@@ -6,6 +6,10 @@ import wcData from '../_data/map_wc.json';
 
 mapboxgl.accessToken = config.mapboxToken;
 
+const BRAND_COLOR = '#e7254d';
+const BRAND_DARK_COLOR = '#c41639';
+const WC_COLOR = '#ff6251';
+
 export default () => {
   // NYC map
   const $mapNYC = $('.map-nyc');
@@ -39,8 +43,8 @@ export default () => {
             duration: 1000,
             delay: ZOOM_DURATION / 2,
           },
-          'circle-color': '#c41639',
-          'circle-stroke-color': '#e7254d',
+          'circle-color': BRAND_DARK_COLOR,
+          'circle-stroke-color': BRAND_COLOR,
           'circle-stroke-width': 0,
           'circle-stroke-width-transition': {
             duration: 1000,
@@ -113,14 +117,29 @@ export default () => {
   const $mapWestCoast = $('.map-west-coast');
 
   if ($mapWestCoast.length) {
-    const content = document.getElementById('map-overflow-content');
+    const content = document.getElementById('map-wc-content');
 
+    const MAP_ZOOM = 8;
     const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
+
     // How to find a place in the route
-    // ROUTE_COORDS.map(([x, y], i) => ({ x, y, i })).filter(({ x, y }) => x === -121.88548 && y === 36.58442)
+    console.log(
+      `Index of coords: ${_.findIndex(
+        ROUTE_COORDS,
+        ([x, y]) => x === -120.83914 && y === 35.36717
+      )}`
+    );
 
     function addMapMarker(routePart, map) {
-      const marker = new mapboxgl.Marker({ color: '#7c86a4' })
+      const element = document.createElement('div');
+      element.className = `wc-marker${routePart.text ? '-text' : ''}`;
+      element.textContent = routePart.text;
+
+      const marker = new mapboxgl.Marker({
+        element,
+        offset: routePart.offset,
+        rotation: routePart.rotation,
+      })
         .setLngLat(ROUTE_COORDS[routePart.pointIndex])
         .addTo(map);
 
@@ -133,8 +152,24 @@ export default () => {
       {
         id: 'la',
         point: true,
+        text: 'Los Angeles',
+        offset: [0, -50],
+        rotation: -7,
         pointIndex: 0,
       },
+      {
+        id: 'start',
+        point: true,
+        pointIndex: 0,
+      },
+      // {
+      //   id: 'morrobay',
+      //   point: true,
+      //   text: 'Morro Bay',
+      //   offset: [0, -50],
+      //   rotation: -7,
+      //   pointIndex: 2865,
+      // },
       {
         id: 'toMonterey',
         point: false,
@@ -161,12 +196,14 @@ export default () => {
 
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
-      style: 'mapbox://styles/ivkrpv/ck9qq2b8l0hxb1irw9z8wq0ao',
-      center: [-30.2647735, 63.4942389], // somewhere in the ocean
-      zoom: 10,
+      style: 'mapbox://styles/mapbox/outdoors-v11',
+      center: ROUTE_COORDS[route[0].pointIndex], //[37.6173, 55.7558], // moscow
+      zoom: MAP_ZOOM,
       attributionControl: false,
       interactive: false,
     });
+
+    map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
 
     map.on('load', () => {
       const routeGeojson = {
@@ -196,20 +233,19 @@ export default () => {
           'line-join': 'round',
         },
         paint: {
-          'line-color': '#ca7978',
+          'line-color': WC_COLOR,
           'line-width': 6,
-          'line-opacity': 0.8,
+          'line-opacity': 1,
         },
       });
 
-      // first load, show LA
-      map.flyTo({
-        center: ROUTE_COORDS[route[0].pointIndex],
-        minZoom: 2,
-        pitch: 45,
-        offset: [-(content.clientWidth / 2), 0],
-        essential: true,
-      });
+      // a flight from Moscow to LA at start
+      // map.flyTo({
+      //   center: ROUTE_COORDS[route[0].pointIndex],
+      //   minZoom: 2,
+      //   essential: true,
+      //   speed: 0.2,
+      // });
 
       let lastDrawedIndex = 0;
 
@@ -234,7 +270,6 @@ export default () => {
               const lastVisibleIndex = visibleRoutePointsCount - 1;
 
               const mapAnimateOptions = {
-                offset: [-(content.clientWidth / 2), 0],
                 duration: 2000,
                 essential: true,
               };
@@ -254,7 +289,11 @@ export default () => {
 
                 map.getSource('route').setData(routeGeojson);
 
+                map.setZoom(MAP_ZOOM);
                 map.panTo(_.last(routeSliceToDraw), mapAnimateOptions);
+
+                // Uncomment to show current cursor position
+                console.log(`Current coords: ${_.last(routeSliceToDraw)}`);
 
                 lastDrawedIndex = lastVisibleIndex;
 
@@ -271,7 +310,5 @@ export default () => {
         }
       }, 10);
     });
-
-    map.addControl(new mapboxgl.AttributionControl(), 'top-right');
   }
 };

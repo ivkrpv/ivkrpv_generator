@@ -19,6 +19,21 @@ $main-color: #e7254d;
   src: url('../webfonts/Lora-Italic-VariableFont_wght.ttf');
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('../webfonts/Roboto-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../webfonts/Roboto-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto-Bolder';
+  src: url('../webfonts/Roboto-Medium.ttf');
+}
+
 .font-retro {
   font-family: 'Lazer84';
 }
@@ -35,7 +50,8 @@ body {
 }
 
 body {
-  font-weight: 300;
+  font-family: Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
 a {
@@ -431,6 +447,16 @@ h6 {
 
 .rounded {
   border-radius: 0.15rem !important;
+}
+
+.font-weight-bold {
+  font-family: 'Roboto-Bold';
+  font-weight: unset !important;
+}
+
+.font-weight-bolder {
+  font-family: 'Roboto-Bolder';
+  font-weight: unset !important;
 }
 
 // Likely override
