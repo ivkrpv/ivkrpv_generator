@@ -6,9 +6,10 @@ import wcData from '../_data/map_wc.json';
 
 mapboxgl.accessToken = config.mapboxToken;
 
-const BRAND_COLOR = '#e7254d';
-const BRAND_DARK_COLOR = '#c41639';
-const WC_COLOR = '#ff6251';
+const NY_MARKER_COLOR = '#e7254d';
+const NY_MARKER_STROKE_COLOR = '#c41639';
+const WC_ROUTE_COLOR = '#ff6251';
+const DEV_MODE = true;
 
 export default () => {
   // NYC map
@@ -43,8 +44,8 @@ export default () => {
             duration: 1000,
             delay: ZOOM_DURATION / 2,
           },
-          'circle-color': BRAND_DARK_COLOR,
-          'circle-stroke-color': BRAND_COLOR,
+          'circle-color': NY_MARKER_STROKE_COLOR,
+          'circle-stroke-color': NY_MARKER_COLOR,
           'circle-stroke-width': 0,
           'circle-stroke-width-transition': {
             duration: 1000,
@@ -122,71 +123,48 @@ export default () => {
     const MAP_ZOOM = 8;
     const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
 
-    // How to find a place in the route
-    console.log(
-      `Index of coords: ${_.findIndex(
-        ROUTE_COORDS,
-        ([x, y]) => x === -120.83914 && y === 35.36717
-      )}`
-    );
-
-    function addMapMarker(routePart, map) {
+    function addMarker(point, map) {
       const element = document.createElement('div');
-      element.className = `wc-marker${routePart.text ? '-text' : ''}`;
-      element.textContent = routePart.text;
+      element.className = `wc-marker${point.text ? '-text' : ''}`;
+      element.textContent = point.text;
 
       const marker = new mapboxgl.Marker({
         element,
-        offset: routePart.offset,
-        rotation: routePart.rotation,
+        offset: point.offset,
+        rotation: point.rotation,
       })
-        .setLngLat(ROUTE_COORDS[routePart.pointIndex])
+        .setLngLat(ROUTE_COORDS[point.index])
         .addTo(map);
 
-      routePart.drawed = true;
+      point.drawed = true;
 
       return marker;
     }
 
-    const route = [
+    const screenRouteParts = [
       {
         id: 'la',
         point: true,
+        index: 0,
         text: 'Los Angeles',
         offset: [0, -50],
         rotation: -7,
-        pointIndex: 0,
       },
       {
         id: 'start',
         point: true,
-        pointIndex: 0,
-      },
-      // {
-      //   id: 'morrobay',
-      //   point: true,
-      //   text: 'Morro Bay',
-      //   offset: [0, -50],
-      //   rotation: -7,
-      //   pointIndex: 2865,
-      // },
-      {
-        id: 'toMonterey',
-        point: false,
-        routeIndex: [0, 6422],
+        index: 0, // a bullet at start of the route
       },
       {
-        id: 'monterey',
-        point: true,
-        pointIndex: 6422,
+        id: 'LAtoMonterey',
+        index: [0, 6422],
       },
     ].map((p) => {
       p.element = document.getElementById(p.id);
 
       if (!p.point) {
         const { offsetHeight: elementHeight } = p.element;
-
-        const pointsCount = p.routeIndex[1] - p.routeIndex[0] + 1;
+        const pointsCount = p.index[1] - p.index[0] + 1;
 
         p.pixelsInRoutePoint = elementHeight / pointsCount;
       }
@@ -194,10 +172,34 @@ export default () => {
       return p;
     });
 
+    const routePoints = [
+      {
+        index: 2865,
+        text: 'Morro Bay',
+        offset: [120, -50],
+        rotation: -7,
+      },
+      {
+        index: 4634,
+        text: 'Big Sur',
+        offset: [40, -40],
+        rotation: 50,
+      },
+      {
+        index: 6422,
+        text: 'Monterey',
+        offset: [125, -25],
+        rotation: -7,
+      },
+      {
+        index: 6422, // a bullet at the end of the route
+      },
+    ];
+
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
-      style: 'mapbox://styles/mapbox/outdoors-v11',
-      center: ROUTE_COORDS[route[0].pointIndex], //[37.6173, 55.7558], // moscow
+      style: 'mapbox://styles/ivkrpv/ckhhbvbax0qz319o1otmb3kg0',
+      center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
       zoom: MAP_ZOOM,
       attributionControl: false,
       interactive: false,
@@ -233,26 +235,31 @@ export default () => {
           'line-join': 'round',
         },
         paint: {
-          'line-color': WC_COLOR,
+          'line-color': WC_ROUTE_COLOR,
           'line-width': 6,
           'line-opacity': 1,
         },
       });
 
       // a flight from Moscow to LA at start
-      // map.flyTo({
-      //   center: ROUTE_COORDS[route[0].pointIndex],
-      //   minZoom: 2,
-      //   essential: true,
-      //   speed: 0.2,
-      // });
+      if (!DEV_MODE) {
+        map.flyTo({
+          center: ROUTE_COORDS[0],
+          minZoom: 2,
+          essential: true,
+          speed: 0.2,
+        });
+      }
 
       let lastDrawedIndex = 0;
 
-      content.onscroll = _.throttle(() => {
-        for (let i = 0; i < route.length; i++) {
-          const part = route[i];
+      const routeAnimateOptions = {
+        duration: 2000,
+        essential: true,
+      };
 
+      content.onscroll = _.throttle(() => {
+        screenRouteParts.forEach((part) => {
           const { offsetHeight: contentHeight, scrollTop } = content;
           const scrollBottom = scrollTop + contentHeight;
           const { offsetTop: elementTop } = part.element;
@@ -260,54 +267,61 @@ export default () => {
           // it's visible
           if (elementTop < scrollBottom) {
             if (part.point) {
-              if (part.drawed) continue;
-
-              addMapMarker(part, map);
-            } else {
-              const visibleRoutePointsCount = Math.floor(
-                (scrollBottom - elementTop) / part.pixelsInRoutePoint
-              );
-              const lastVisibleIndex = visibleRoutePointsCount - 1;
-
-              const mapAnimateOptions = {
-                duration: 2000,
-                essential: true,
-              };
-
-              if (lastVisibleIndex > lastDrawedIndex) {
-                if (part.drawed) continue;
-
-                const routeSliceToDraw = ROUTE_COORDS.slice(
-                  lastDrawedIndex,
-                  visibleRoutePointsCount
-                );
-
-                Array.prototype.push.apply(
-                  routeGeojson.features[0].geometry.coordinates,
-                  routeSliceToDraw
-                );
-
-                map.getSource('route').setData(routeGeojson);
-
-                map.setZoom(MAP_ZOOM);
-                map.panTo(_.last(routeSliceToDraw), mapAnimateOptions);
-
-                // Uncomment to show current cursor position
-                console.log(`Current coords: ${_.last(routeSliceToDraw)}`);
-
-                lastDrawedIndex = lastVisibleIndex;
-
-                if (lastDrawedIndex >= part.routeIndex[1]) {
-                  part.drawed = true;
-                }
-              } else {
-                map.panTo(ROUTE_COORDS[lastVisibleIndex], mapAnimateOptions);
+              if (!part.drawed) {
+                addMarker(part, map);
               }
+
+              return;
             }
 
-            break;
+            const visibleRoutePointsCount = Math.floor(
+              (scrollBottom - elementTop) / part.pixelsInRoutePoint
+            );
+            const lastVisibleIndex = visibleRoutePointsCount - 1;
+
+            if (lastVisibleIndex > lastDrawedIndex) {
+              if (part.drawed) return;
+
+              const routeSliceToDraw = ROUTE_COORDS.slice(lastDrawedIndex, visibleRoutePointsCount);
+
+              Array.prototype.push.apply(
+                routeGeojson.features[0].geometry.coordinates,
+                routeSliceToDraw
+              );
+
+              map.getSource('route').setData(routeGeojson);
+
+              const endOfTheRoute = _.last(routeSliceToDraw);
+
+              map.setZoom(MAP_ZOOM);
+              map.panTo(endOfTheRoute, routeAnimateOptions);
+
+              routePoints.forEach((point) => {
+                if (point.drawed || point.index > lastVisibleIndex) return;
+
+                addMarker(point, map);
+              });
+
+              // DEBUG: show current cursor position
+              if (DEV_MODE) {
+                console.log(
+                  `Coords: ${endOfTheRoute}, index: ${_.findIndex(
+                    ROUTE_COORDS,
+                    ([x, y]) => x === endOfTheRoute[0] && y === endOfTheRoute[1]
+                  )}`
+                );
+              }
+
+              lastDrawedIndex = lastVisibleIndex;
+
+              if (lastDrawedIndex >= part.index[1]) {
+                part.drawed = true;
+              }
+            } else {
+              map.panTo(ROUTE_COORDS[lastVisibleIndex], routeAnimateOptions);
+            }
           }
-        }
+        });
       }, 10);
     });
   }
