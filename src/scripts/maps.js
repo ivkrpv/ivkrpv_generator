@@ -8,7 +8,7 @@ mapboxgl.accessToken = config.mapboxToken;
 
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
-const WC_ROUTE_COLOR = '#ff6251';
+const WC_ROUTE_COLOR = '#f42e25';
 const DEV_MODE = true;
 
 export default () => {
@@ -136,6 +136,8 @@ export default () => {
         .setLngLat(ROUTE_COORDS[point.index])
         .addTo(map);
 
+      marker.bullet = !point.text;
+
       point.drawed = true;
 
       return marker;
@@ -198,7 +200,7 @@ export default () => {
 
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
-      style: 'mapbox://styles/ivkrpv/ckhhbvbax0qz319o1otmb3kg0',
+      style: 'mapbox://styles/ivkrpv/ckhk9kj5x54mr19o5u7pp1pml',
       center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
       zoom: MAP_ZOOM,
       attributionControl: false,
@@ -241,6 +243,40 @@ export default () => {
         },
       });
 
+      const markers = [];
+      let overview = false;
+
+      // Whole route overview
+      map.on('click', () => {
+        const coordinates = routeGeojson.features[0].geometry.coordinates;
+
+        if (!coordinates.length) return;
+
+        if (overview) {
+          overview = false;
+
+          markers.forEach((m) => {
+            if (!m.bullet) m.addTo(map);
+          });
+
+          map.flyTo({ center: _.last(coordinates), zoom: MAP_ZOOM });
+        } else {
+          overview = true;
+
+          const bounds = new mapboxgl.LngLatBounds();
+
+          coordinates.forEach((c) => bounds.extend(c));
+
+          markers.forEach((m) => {
+            if (!m.bullet) m.remove();
+          });
+
+          map.fitBounds(bounds, {
+            padding: 100,
+          });
+        }
+      });
+
       // a flight from Moscow to LA at start
       if (!DEV_MODE) {
         map.flyTo({
@@ -253,12 +289,15 @@ export default () => {
 
       let lastDrawedIndex = 0;
 
-      const routeAnimateOptions = {
-        duration: 2000,
-        essential: true,
-      };
-
       content.onscroll = _.throttle(() => {
+        if (overview) {
+          overview = false;
+
+          markers.forEach((m) => {
+            if (!m.bullet) m.addTo(map);
+          });
+        }
+
         screenRouteParts.forEach((part) => {
           const { offsetHeight: contentHeight, scrollTop } = content;
           const scrollBottom = scrollTop + contentHeight;
@@ -268,7 +307,7 @@ export default () => {
           if (elementTop < scrollBottom) {
             if (part.point) {
               if (!part.drawed) {
-                addMarker(part, map);
+                markers.push(addMarker(part, map));
               }
 
               return;
@@ -293,13 +332,12 @@ export default () => {
 
               const endOfTheRoute = _.last(routeSliceToDraw);
 
-              map.setZoom(MAP_ZOOM);
-              map.panTo(endOfTheRoute, routeAnimateOptions);
+              map.flyTo({ center: endOfTheRoute, zoom: MAP_ZOOM, speed: 0.5, essential: true });
 
               routePoints.forEach((point) => {
                 if (point.drawed || point.index > lastVisibleIndex) return;
 
-                addMarker(point, map);
+                markers.push(addMarker(point, map));
               });
 
               // DEBUG: show current cursor position
@@ -318,7 +356,12 @@ export default () => {
                 part.drawed = true;
               }
             } else {
-              map.panTo(ROUTE_COORDS[lastVisibleIndex], routeAnimateOptions);
+              map.flyTo({
+                center: ROUTE_COORDS[lastVisibleIndex],
+                zoom: MAP_ZOOM,
+                speed: 0.5,
+                essential: true,
+              });
             }
           }
         });

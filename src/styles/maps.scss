@@ -1,7 +1,16 @@
+.mapboxgl-map,
+.mapboxgl-map .mapboxgl-canvas {
+  outline-color: transparent !important;
+}
+
 .navbar {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025), 0 2px 4px rgba(0, 0, 0, 0.025),
     0 4px 8px rgba(0, 0, 0, 0.025), 0 8px 16px rgba(0, 0, 0, 0.025),
     0 16px 32px rgba(0, 0, 0, 0.025), 0 32px 64px rgba(0, 0, 0, 0.025);
+}
+
+.map-west-coast {
+  cursor: pointer;
 }
 
 .bg-wc-splash {
@@ -12,18 +21,16 @@
 }
 
 .wc-marker {
-  background-color: #ff6251;
-  border: 6px solid #d63e2d;
+  background-color: #f42e25;
+  border: 6px solid darken($color: #f42e25, $amount: 13);
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  cursor: default;
 }
 
 .wc-marker-text {
   font-family: 'Lazer84';
-  color: #ff6251;
+  color: #f42e25;
   font-size: 2rem;
   letter-spacing: 3px;
-  cursor: default;
 }

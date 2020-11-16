@@ -25,13 +25,18 @@ $main-color: #e7254d;
 }
 
 @font-face {
-  font-family: 'Roboto-Bold';
-  src: url('../webfonts/Roboto-Bold.ttf');
+  font-family: 'Roboto-Regular';
+  src: url('../webfonts/Roboto-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Roboto-Bolder';
   src: url('../webfonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../webfonts/Roboto-Bold.ttf');
 }
 
 .font-retro {
@@ -449,13 +454,17 @@ h6 {
   border-radius: 0.15rem !important;
 }
 
-.font-weight-bold {
-  font-family: 'Roboto-Bold';
-  font-weight: unset !important;
+.font-weight-regular {
+  font-family: 'Roboto-Regular';
 }
 
 .font-weight-bolder {
   font-family: 'Roboto-Bolder';
+  font-weight: unset !important;
+}
+
+.font-weight-bold {
+  font-family: 'Roboto-Bold';
   font-weight: unset !important;
 }
 
