@@ -28,6 +28,15 @@
   border-radius: 50%;
 }
 
+.wc-route-head {
+  width: 16px;
+  height: 16px;
+  background-image: url(/images/routeHead2x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .wc-marker-text {
   font-family: 'Lazer84';
   color: #f42e25;

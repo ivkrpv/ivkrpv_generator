@@ -11,6 +11,15 @@ const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
 const DEV_MODE = true;
 
+function angle(cx, cy, ex, ey) {
+  var dy = ey - cy;
+  var dx = ex - cx;
+  var theta = Math.atan2(dy, dx); // range (-PI, PI]
+  theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+  //if (theta < 0) theta = 360 + theta; // range [0, 360)
+  return theta;
+}
+
 export default () => {
   // NYC map
   const $mapNYC = $('.map-nyc');
@@ -123,7 +132,7 @@ export default () => {
     const MAP_ZOOM = 8;
     const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
 
-    function addMarker(point, map) {
+    function addRouteMarker(point, map) {
       const element = document.createElement('div');
       element.className = `wc-marker${point.text ? '-text' : ''}`;
       element.textContent = point.text;
@@ -136,26 +145,26 @@ export default () => {
         .setLngLat(ROUTE_COORDS[point.index])
         .addTo(map);
 
-      marker.bullet = !point.text;
+      marker.important = point.important;
 
       point.drawed = true;
 
       return marker;
     }
 
-    const screenRouteParts = [
+    const scrollParts = [
       {
-        id: 'la',
-        point: true,
+        id: 'la-label',
         index: 0,
-        text: 'Los Angeles',
+        text: 'LA',
         offset: [0, -50],
         rotation: -7,
+        important: true,
       },
       {
-        id: 'start',
-        point: true,
-        index: 0, // a bullet at start of the route
+        id: 'la-point', // a bullet at start of the route
+        index: 0,
+        important: true,
       },
       {
         id: 'LAtoMonterey',
@@ -164,10 +173,11 @@ export default () => {
     ].map((p) => {
       p.element = document.getElementById(p.id);
 
-      if (!p.point) {
+      if (_.isArray(p.index)) {
         const { offsetHeight: elementHeight } = p.element;
         const pointsCount = p.index[1] - p.index[0] + 1;
 
+        p.route = true;
         p.pixelsInRoutePoint = elementHeight / pointsCount;
       }
 
@@ -192,9 +202,11 @@ export default () => {
         text: 'Monterey',
         offset: [125, -25],
         rotation: -7,
+        important: true,
       },
       {
-        index: 6422, // a bullet at the end of the route
+        index: 6422, // a bullet in Monterey
+        important: true,
       },
     ];
 
@@ -204,7 +216,7 @@ export default () => {
       center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
       zoom: MAP_ZOOM,
       attributionControl: false,
-      interactive: false,
+      interactive: DEV_MODE,
     });
 
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
@@ -243,6 +255,15 @@ export default () => {
         },
       });
 
+      const routeHeadEl = document.createElement('div');
+      routeHeadEl.className = 'wc-route-head';
+
+      const routeHeadMarker = new mapboxgl.Marker({
+        element: routeHeadEl,
+        // anchor: 'top-left',
+        // offset: [-3, -3],
+      });
+
       const markers = [];
       let overview = false;
 
@@ -256,7 +277,7 @@ export default () => {
           overview = false;
 
           markers.forEach((m) => {
-            if (!m.bullet) m.addTo(map);
+            if (!m.important) m.addTo(map);
           });
 
           map.flyTo({ center: _.last(coordinates), zoom: MAP_ZOOM });
@@ -268,7 +289,7 @@ export default () => {
           coordinates.forEach((c) => bounds.extend(c));
 
           markers.forEach((m) => {
-            if (!m.bullet) m.remove();
+            if (!m.important) m.remove();
           });
 
           map.fitBounds(bounds, {
@@ -294,20 +315,20 @@ export default () => {
           overview = false;
 
           markers.forEach((m) => {
-            if (!m.bullet) m.addTo(map);
+            if (!m.important) m.addTo(map);
           });
         }
 
-        screenRouteParts.forEach((part) => {
+        scrollParts.forEach((part) => {
           const { offsetHeight: contentHeight, scrollTop } = content;
           const scrollBottom = scrollTop + contentHeight;
           const { offsetTop: elementTop } = part.element;
 
           // it's visible
           if (elementTop < scrollBottom) {
-            if (part.point) {
+            if (!part.route) {
               if (!part.drawed) {
-                markers.push(addMarker(part, map));
+                markers.push(addRouteMarker(part, map));
               }
 
               return;
@@ -331,13 +352,28 @@ export default () => {
               map.getSource('route').setData(routeGeojson);
 
               const endOfTheRoute = _.last(routeSliceToDraw);
+              let prev =
+                ROUTE_COORDS[lastVisibleIndex - 40] ||
+                ROUTE_COORDS[lastVisibleIndex - 20] ||
+                ROUTE_COORDS[lastVisibleIndex - 10];
+
+              // show route arrow head
+              routeHeadMarker.setLngLat(endOfTheRoute);
+
+              if (prev) {
+                routeHeadMarker.setRotation(
+                  angle(prev[1], prev[0], endOfTheRoute[1], endOfTheRoute[0])
+                );
+              }
+
+              routeHeadMarker.addTo(map);
 
               map.flyTo({ center: endOfTheRoute, zoom: MAP_ZOOM, speed: 0.5, essential: true });
 
               routePoints.forEach((point) => {
                 if (point.drawed || point.index > lastVisibleIndex) return;
 
-                markers.push(addMarker(point, map));
+                markers.push(addRouteMarker(point, map));
               });
 
               // DEBUG: show current cursor position
@@ -354,6 +390,9 @@ export default () => {
 
               if (lastDrawedIndex >= part.index[1]) {
                 part.drawed = true;
+
+                // hide route arrow head
+                routeHeadMarker.remove();
               }
             } else {
               map.flyTo({
