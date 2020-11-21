@@ -9,8 +9,13 @@ mapboxgl.accessToken = config.mapboxToken;
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
-const DEV_MODE = true;
-const DEV_MODE_WHOLE_ROUTE = true;
+const DEV_MODE = false;
+const DEV_MODE_WHOLE_ROUTE = false;
+const VIEW_MODE = {
+  FOLLOW: 0,
+  PASSED: 1,
+  TOTAL: 2,
+};
 
 function angleBetweenPoints(cx, cy, ex, ey) {
   const dy = ey - cy;
@@ -173,32 +178,6 @@ export default () => {
         index: [0, 6422],
       },
       {
-        id: 'sf-label',
-        index: 9137,
-        text: 'San Francisco',
-        offset: [0, -50],
-        rotation: -7,
-        important: true,
-      },
-      {
-        id: 'sf-point',
-        index: 9137,
-        important: true,
-      },
-      {
-        id: 'portland-label',
-        index: 28098,
-        text: 'Portland',
-        offset: [0, -50],
-        rotation: -7,
-        important: true,
-      },
-      {
-        id: 'portland-point',
-        index: 28098,
-        important: true,
-      },
-      {
         id: 'seattle-label',
         index: 30000,
         text: 'Seattle',
@@ -357,7 +336,7 @@ export default () => {
       const routeHeadMarker = new mapboxgl.Marker({ element: routeHeadEl });
 
       const markers = [];
-      let overview = false;
+      let viewMode = VIEW_MODE.FOLLOW;
 
       // Whole route overview
       map.on('click', () => {
@@ -367,16 +346,8 @@ export default () => {
 
         if (!coordinates.length) return;
 
-        if (overview) {
-          overview = false;
-
-          markers.forEach((m) => {
-            if (!m.important) m.addTo(map);
-          });
-
-          map.flyTo({ center: _.last(coordinates), zoom: MAP_ZOOM });
-        } else {
-          overview = true;
+        if (viewMode === VIEW_MODE.FOLLOW) {
+          viewMode = VIEW_MODE.PASSED;
 
           const bounds = new mapboxgl.LngLatBounds();
 
@@ -386,9 +357,25 @@ export default () => {
             if (!m.important) m.remove();
           });
 
-          map.fitBounds(bounds, {
-            padding: 100,
+          map.fitBounds(bounds, { padding: 100 });
+        } else if (viewMode === VIEW_MODE.PASSED) {
+          viewMode = VIEW_MODE.TOTAL;
+
+          const bounds = new mapboxgl.LngLatBounds();
+
+          coordinates.forEach((c) => bounds.extend(c));
+
+          markers.filter((m) => m.important).forEach((m) => bounds.extend(m.getLngLat()));
+
+          map.fitBounds(bounds, { padding: 100 });
+        } else {
+          viewMode = VIEW_MODE.FOLLOW;
+
+          markers.forEach((m) => {
+            if (!m.important) m.addTo(map);
           });
+
+          map.flyTo({ center: _.last(coordinates), zoom: MAP_ZOOM });
         }
       });
 
@@ -398,15 +385,15 @@ export default () => {
           center: ROUTE_COORDS[0],
           minZoom: 2,
           essential: true,
-          speed: 0.2,
+          speed: 0.3,
         });
       }
 
       let lastDrawedIndex = 0;
 
       content.onscroll = _.throttle(() => {
-        if (overview) {
-          overview = false;
+        if (viewMode !== VIEW_MODE.FOLLOW) {
+          viewMode = VIEW_MODE.FOLLOW;
 
           markers.forEach((m) => {
             if (!m.important) m.addTo(map);
@@ -445,24 +432,29 @@ export default () => {
 
               map.getSource('route').setData(routeGeojson);
 
-              const endOfTheRoute = _.last(routeSliceToDraw);
-              let prev =
+              const lastPoint = _.last(routeSliceToDraw);
+              let secondLastPoint =
                 ROUTE_COORDS[lastVisibleIndex - 40] ||
                 ROUTE_COORDS[lastVisibleIndex - 20] ||
                 ROUTE_COORDS[lastVisibleIndex - 10];
 
               // show route arrow head
-              routeHeadMarker.setLngLat(endOfTheRoute);
+              routeHeadMarker.setLngLat(lastPoint);
 
-              if (prev) {
+              if (secondLastPoint) {
                 routeHeadMarker.setRotation(
-                  angleBetweenPoints(prev[1], prev[0], endOfTheRoute[1], endOfTheRoute[0])
+                  angleBetweenPoints(
+                    secondLastPoint[1],
+                    secondLastPoint[0],
+                    lastPoint[1],
+                    lastPoint[0]
+                  )
                 );
               }
 
               routeHeadMarker.addTo(map);
 
-              map.flyTo({ center: endOfTheRoute, zoom: MAP_ZOOM, speed: 0.5, essential: true });
+              map.flyTo({ center: lastPoint, zoom: MAP_ZOOM, speed: 0.5, essential: true });
 
               routePoints.forEach((point) => {
                 if (point.drawed || point.index > lastVisibleIndex) return;
