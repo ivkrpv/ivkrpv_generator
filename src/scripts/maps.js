@@ -10,13 +10,15 @@ const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
 const DEV_MODE = true;
+const DEV_MODE_WHOLE_ROUTE = true;
 
-function angle(cx, cy, ex, ey) {
-  var dy = ey - cy;
-  var dx = ex - cx;
-  var theta = Math.atan2(dy, dx); // range (-PI, PI]
-  theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-  //if (theta < 0) theta = 360 + theta; // range [0, 360)
+function angleBetweenPoints(cx, cy, ex, ey) {
+  const dy = ey - cy;
+  const dx = ex - cx;
+  let theta = Math.atan2(dy, dx);
+
+  theta *= 180 / Math.PI;
+
   return theta;
 }
 
@@ -162,13 +164,52 @@ export default () => {
         important: true,
       },
       {
-        id: 'la-point', // a bullet at start of the route
+        id: 'la-point',
         index: 0,
         important: true,
       },
       {
         id: 'LAtoMonterey',
         index: [0, 6422],
+      },
+      {
+        id: 'sf-label',
+        index: 9137,
+        text: 'San Francisco',
+        offset: [0, -50],
+        rotation: -7,
+        important: true,
+      },
+      {
+        id: 'sf-point',
+        index: 9137,
+        important: true,
+      },
+      {
+        id: 'portland-label',
+        index: 28098,
+        text: 'Portland',
+        offset: [0, -50],
+        rotation: -7,
+        important: true,
+      },
+      {
+        id: 'portland-point',
+        index: 28098,
+        important: true,
+      },
+      {
+        id: 'seattle-label',
+        index: 30000,
+        text: 'Seattle',
+        offset: [0, -50],
+        rotation: -7,
+        important: true,
+      },
+      {
+        id: 'seattle-point',
+        index: 30000,
+        important: true,
       },
     ].map((p) => {
       p.element = document.getElementById(p.id);
@@ -205,7 +246,8 @@ export default () => {
         important: true,
       },
       {
-        index: 6422, // a bullet in Monterey
+        // Monterey point
+        index: 6422,
         important: true,
       },
     ];
@@ -222,6 +264,60 @@ export default () => {
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
 
     map.on('load', () => {
+      if (DEV_MODE_WHOLE_ROUTE) {
+        map.addSource('route_points', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: ROUTE_COORDS.map((coordinates, index) => ({
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates,
+              },
+              properties: {
+                index,
+              },
+            })),
+          },
+        });
+
+        map.addLayer({
+          id: 'route_index',
+          type: 'circle',
+          source: 'route_points',
+          paint: {
+            'circle-radius': 4,
+            'circle-color': 'blue',
+          },
+        });
+
+        map.on('click', 'route_index', function ({ features: [feature], lngLat: { lng, lat } }) {
+          const coordinates = feature.geometry.coordinates.slice();
+
+          while (Math.abs(lng - coordinates[0]) > 180) {
+            coordinates[0] += lng > coordinates[0] ? 360 : -360;
+          }
+
+          const { index } = feature.properties;
+
+          let html = `<h6 class="mr-3 font-weight-bold">Info</h6>
+            <div>Lng: ${lng}</div>
+            <div>Lat: ${lat}</div>
+            <div>Index: ${index}</div>`;
+
+          new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+        });
+
+        map.on('mouseenter', 'route_index', function () {
+          map.getCanvas().style.cursor = 'crosshair';
+        });
+
+        map.on('mouseleave', 'route_index', function () {
+          map.getCanvas().style.cursor = '';
+        });
+      }
+
       const routeGeojson = {
         type: 'FeatureCollection',
         features: [
@@ -258,17 +354,15 @@ export default () => {
       const routeHeadEl = document.createElement('div');
       routeHeadEl.className = 'wc-route-head';
 
-      const routeHeadMarker = new mapboxgl.Marker({
-        element: routeHeadEl,
-        // anchor: 'top-left',
-        // offset: [-3, -3],
-      });
+      const routeHeadMarker = new mapboxgl.Marker({ element: routeHeadEl });
 
       const markers = [];
       let overview = false;
 
       // Whole route overview
       map.on('click', () => {
+        if (DEV_MODE_WHOLE_ROUTE) return;
+
         const coordinates = routeGeojson.features[0].geometry.coordinates;
 
         if (!coordinates.length) return;
@@ -362,7 +456,7 @@ export default () => {
 
               if (prev) {
                 routeHeadMarker.setRotation(
-                  angle(prev[1], prev[0], endOfTheRoute[1], endOfTheRoute[0])
+                  angleBetweenPoints(prev[1], prev[0], endOfTheRoute[1], endOfTheRoute[0])
                 );
               }
 
@@ -375,16 +469,6 @@ export default () => {
 
                 markers.push(addRouteMarker(point, map));
               });
-
-              // DEBUG: show current cursor position
-              if (DEV_MODE) {
-                console.log(
-                  `Coords: ${endOfTheRoute}, index: ${_.findIndex(
-                    ROUTE_COORDS,
-                    ([x, y]) => x === endOfTheRoute[0] && y === endOfTheRoute[1]
-                  )}`
-                );
-              }
 
               lastDrawedIndex = lastVisibleIndex;
 
