@@ -1,7 +1,7 @@
 import '@fortawesome/fontawesome-free/js/all';
 import gallery from './gallery';
 import maps from './maps';
-import prints from './prints';
+// import prints from './prints';
 import { loadLocalStorage, saveLocalStorage, getUrlParameter } from './utils';
 import config from '../_data/config.json';
 import locale from '../_data/locale.json';
@@ -32,7 +32,7 @@ $(function () {
   // Modules
   gallery();
   maps();
-  prints();
+  // prints();
 });
 
 function changeLocale() {

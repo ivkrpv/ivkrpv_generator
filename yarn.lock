@@ -5022,6 +5022,11 @@ jpeg-js@^0.3.4:
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.3.7.tgz#471a89d06011640592d314158608690172b1028d"
   integrity sha512-9IXdWudL61npZjvLuVe/ktHiA41iE8qFyLB+4VDTblEsWBzeg8WQTlktdUK4CdncUqtUgUg0bbOmTE2bKBKaBQ==
 
+jquery@>=1.7.0:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
+  integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
+
 js-base64@^2.1.8:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.3.tgz#7afdb9b57aa7717e15d370b66e8f36a9cb835dc3"
@@ -5245,6 +5250,13 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lg-zoom@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/lg-zoom/-/lg-zoom-1.3.0.tgz#52e466a487f8b53cd3fe6e853152a042e2fca6cd"
+  integrity sha512-+hZmeZ3DQslAA19tpKSA3kpiwrbB/weRC7b7GiCQEqDaEon1mp1RDQKHfx32gbbeQNGVhBFAiSvB3OHbimVmbg==
+  dependencies:
+    jquery ">=1.7.0"
+
 light-server@2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/light-server/-/light-server-2.6.4.tgz#13c4fb3a0f18d0b58ea6dfd7a866c69851c3ad17"
@@ -5266,9 +5278,9 @@ light-server@2.6.4:
     ws "^7.1.0"
 
 lightgallery.js@^1.1.3:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/lightgallery.js/-/lightgallery.js-1.2.0.tgz#060e1f6298022111d5786a27a7ad6cf6b5e70154"
-  integrity sha512-Zc3zytzCOb7das1Ru8JxE/McfCBPvoVnjuAGlXFaVks4FfyS4xTphzTunQU4Goc6LaPdf0hD5hQfWGyDwSsPKw==
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/lightgallery.js/-/lightgallery.js-1.4.0.tgz#f4b43b01b2acce43bd7e6d8dbcf1d5541cd2fb03"
+  integrity sha512-TK7auNMSz0sPjotq/VtKH/fe8GPkVRlmFf8F3zVsbFccLJL4r3U1VON+IggyE8Wy04QwbFQxTIIMqL7blibGSA==
 
 limiter@^1.0.5:
   version "1.1.5"

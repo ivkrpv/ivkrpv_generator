@@ -1,4 +1,5 @@
 import 'lightgallery.js';
+// import 'lg-zoom';
 import { shuffleArray } from './utils';
 
 export default () => {
@@ -12,16 +13,19 @@ export default () => {
 
     shuffleArray(images);
 
-    images.forEach(img => $slideshow.append(img));
+    images.forEach((img) => $slideshow.append(img));
 
     $slideshow.children().last().show();
 
     setInterval(function () {
       $slideshow.children().last().prev().show();
 
-      $slideshow.children().last().fadeOut(2000, function () {
-        $(this).prependTo($slideshow);
-      });
+      $slideshow
+        .children()
+        .last()
+        .fadeOut(2000, function () {
+          $(this).prependTo($slideshow);
+        });
     }, 5000);
   }
 
@@ -48,9 +52,12 @@ export default () => {
 
     lightGallery($images.get(0), {
       dynamic: true,
-      dynamicEl: $images.children().map((i, { src }) => ({ src })).get(),
+      dynamicEl: $images
+        .children()
+        .map((i, { src }) => ({ src }))
+        .get(),
       download: false,
-      hideBarsDelay: 2000
+      hideBarsDelay: 2000,
     });
   });
 
@@ -65,4 +72,30 @@ export default () => {
 
     $images.append($images.children().first());
   });
-}
+
+  // West Coast set gallaries
+  $('body').on('click', '.set-gallery-images img', function (e) {
+    e.stopPropagation();
+
+    const $images = $(this).parent();
+
+    $images.on('onCloseAfter.lg', ({ target }) => {
+      const lg = window.lgData[target.getAttribute('lg-uid')];
+
+      if (lg) {
+        lg.destroy(true);
+      }
+    });
+
+    lightGallery($images.get(0), {
+      dynamic: true,
+      dynamicEl: $images
+        .children()
+        .map((i, { src }) => ({ src }))
+        .get(),
+      index: $(this).index(),
+      download: false,
+      hideBarsDelay: 2000,
+    });
+  });
+};
