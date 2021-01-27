@@ -164,7 +164,7 @@ export default () => {
         id: 'la-label',
         index: 0,
         text: 'LA',
-        offset: [0, -50],
+        offset: [0, -30],
         rotation: -7,
         important: true,
       },
@@ -181,7 +181,7 @@ export default () => {
         id: 'seattle-label',
         index: 30000,
         text: 'Seattle',
-        offset: [0, -50],
+        offset: [80, 20],
         rotation: -7,
         important: true,
       },
@@ -346,6 +346,8 @@ export default () => {
 
         if (!coordinates.length) return;
 
+        const padding = window.innerWidth < 576 ? 24 : 48;
+
         if (viewMode === VIEW_MODE.FOLLOW) {
           viewMode = VIEW_MODE.PASSED;
 
@@ -357,7 +359,7 @@ export default () => {
             if (!m.important) m.remove();
           });
 
-          map.fitBounds(bounds, { padding: 100 });
+          map.fitBounds(bounds, { padding });
         } else if (viewMode === VIEW_MODE.PASSED) {
           viewMode = VIEW_MODE.TOTAL;
 
@@ -367,7 +369,7 @@ export default () => {
 
           markers.filter((m) => m.important).forEach((m) => bounds.extend(m.getLngLat()));
 
-          map.fitBounds(bounds, { padding: 100 });
+          map.fitBounds(bounds, { padding });
         } else {
           viewMode = VIEW_MODE.FOLLOW;
 
