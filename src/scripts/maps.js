@@ -222,7 +222,6 @@ export default () => {
         text: 'Monterey',
         offset: [125, -25],
         rotation: -7,
-        important: true,
       },
       {
         // Monterey point
