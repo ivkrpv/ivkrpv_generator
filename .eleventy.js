@@ -50,6 +50,8 @@ module.exports = function (eleventyConfig) {
     return locale[config.defaultLocale][key];
   });
 
+  eleventyConfig.addHandlebarsShortcode('arr', (...args) => args.slice(0, -1));
+
   return {
     dir: { input: 'src', output: 'dist', data: '_data' },
     passthroughFileCopy: true,

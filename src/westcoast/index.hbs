@@ -32,48 +32,35 @@ pageStyle:
       <p>Рейс Москва - Лос-Анджелес “Аэрофлота” – один из самых продолжительных в мире и самый длинный среди российский авиакомпаний. А я терпеть не могу долгие полеты на самолетах. Спать сидя в кресле на высоте десяти тысячи метров у меня не очень получается, поэтому я пробую убивать время ютубчиком и музыкой.</p>
     </div>
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/1.jpg" class="w-100 h-auto">
-    </div>
+    {{#> test }}
+      My <b>Content</b> test
+    {{/test}}
+
+    {{> image name="1.jpg" h=true}}
 
     <div class="w-75 m-auto px-4">
       <p>Наконец наступает рассвет, вместе с ним последняя и самая интересная часть полета. В иллюминаторе показываются снежные фьорды Гренландии. Fuck, yeah! Мы над американским континентом и время уже начинает течь в обратную сторону!</p>
     </div>
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/2.jpg" class="img-w-500">
-      <small class="d-block mt-2 text-muted">Гренландия</small>
-    </div>
+    {{> image name="2.jpg" descr="Гренландия" w=true}}
 
     <div class="w-75 m-auto px-4">
       <p>Еще можно рассматривать что-нибудь внизу на земле. И если поднести телефон к иллюминатору и в любом приложении карт (лучше использовать оффлайновые, например Maps.ME) попробовать определить местоположение, то спустя где-то минуту можно будет увидеть свое текущее положение, а заодно и все то, что находится под вами. Особенно выручает, когда хочешь узнать, например, что это за огромное озеро на границе пустыни и гор. Оказалось, что это озеро Тахо.</p>
     </div>
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/3.jpeg" class="img-w-500">
-      <small class="d-block mt-2 text-muted">Озеро Тахо</small>
-    </div>
+    {{> image name="3.jpeg" descr="Озеро Тахо" w=true}}
 
     <div class="w-75 m-auto px-4">
       <p>Спасибо заставке на macOS – Йосемити узнается даже с воздуха. Но вскоре за бортом исчезают все облака, внизу показываются бесконечные, залитые солнцем, поля центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.</p>
     </div>
 
-    <div class="text-center my-5">
-      <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-        <img src="/images/photography/westcoast/4.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/5.jpeg" class="img-w-300 mb-2 mx-1">
-      </div>
-      <small class="d-block text-muted">Заход на посадку</small>
-    </div>
+    {{> gallery names=(arr "4.jpeg" "5.jpeg") descr="Заход на посадку"}}
 
     <div class="w-75 m-auto px-4">
       <p>Please, fasten your seat belts. Мы прибыли в “город Ангелов”. Это отправная точка нашего путешествия на машине вдоль всего Западного побережья США с юга на север до Сиэтла и обратно. Несколько месяцев мы с братом вынашивали эту идею и готовили маршрут и вот, наконец, мы подошли к старту.</p>
     </div>
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/6.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Центр ЛА над крылом самолета</small>
-    </div>
+    {{> image name="6.jpeg" descr="Центр ЛА над крылом самолета" h=true}}
 
     {{!-- Show the start point of the jorney --}}
     <div id="la-label"></div>
