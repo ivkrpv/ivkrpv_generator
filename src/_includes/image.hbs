@@ -1,4 +1,4 @@
 <div class="text-center my-5">
-  <img src="/images/photography/westcoast/{{name}}" class="{{#h}}w-100 h-auto{{/h}}{{#w}}img-w-500{{/w}}">
-  {{#descr}}<small class="d-block mt-2 text-muted">{{.}}</small>{{/descr}}
+  <img src="/images/photography/westcoast/{{name}}" class="{{#if h}}w-100 h-auto{{/if}}{{#if v}}img-w-{{#if width}}{{width}}{{/if}}{{#unless width}}500{{/unless}}{{/if}}">
+  {{#if descr}}<small class="d-block mt-2 text-muted">{{descr}}</small>{{/if}}
 </div>

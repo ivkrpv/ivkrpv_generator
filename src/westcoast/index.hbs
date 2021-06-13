@@ -21,7 +21,9 @@ pageStyle:
       </div>
     </div>
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
+    {{/text}}
+    {{#> text}}
       <blockquote class="blockquote mt-5 text-right">
         <p class="mb-2">All he needed was a wheel in his hand and four on the road.</p>
         <footer class="blockquote-footer">Jack Kerouac, <cite>On the Road</cite></footer>
@@ -30,365 +32,247 @@ pageStyle:
       <h3 class="mt-5 mb-4 font-weight-bolder">Пролог</h3>
       <p>13 часов в Эйрбасе…</p>
       <p>Рейс Москва - Лос-Анджелес “Аэрофлота” – один из самых продолжительных в мире и самый длинный среди российский авиакомпаний. А я терпеть не могу долгие полеты на самолетах. Спать сидя в кресле на высоте десяти тысячи метров у меня не очень получается, поэтому я пробую убивать время ютубчиком и музыкой.</p>
-    </div>
-
-    {{#> test }}
-      My <b>Content</b> test
-    {{/test}}
+    {{/text}}
 
     {{> image name="1.jpg" h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Наконец наступает рассвет, вместе с ним последняя и самая интересная часть полета. В иллюминаторе показываются снежные фьорды Гренландии. Fuck, yeah! Мы над американским континентом и время уже начинает течь в обратную сторону!</p>
-    </div>
+    {{/text}}
 
-    {{> image name="2.jpg" descr="Гренландия" w=true}}
+    {{> image name="2.jpg" descr="Гренландия" v=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Еще можно рассматривать что-нибудь внизу на земле. И если поднести телефон к иллюминатору и в любом приложении карт (лучше использовать оффлайновые, например Maps.ME) попробовать определить местоположение, то спустя где-то минуту можно будет увидеть свое текущее положение, а заодно и все то, что находится под вами. Особенно выручает, когда хочешь узнать, например, что это за огромное озеро на границе пустыни и гор. Оказалось, что это озеро Тахо.</p>
-    </div>
+    {{/text}}
 
-    {{> image name="3.jpeg" descr="Озеро Тахо" w=true}}
+    {{> image name="3.jpeg" descr="Озеро Тахо" v=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Спасибо заставке на macOS – Йосемити узнается даже с воздуха. Но вскоре за бортом исчезают все облака, внизу показываются бесконечные, залитые солнцем, поля центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.</p>
-    </div>
+    {{/text}}
 
     {{> gallery names=(arr "4.jpeg" "5.jpeg") descr="Заход на посадку"}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Please, fasten your seat belts. Мы прибыли в “город Ангелов”. Это отправная точка нашего путешествия на машине вдоль всего Западного побережья США с юга на север до Сиэтла и обратно. Несколько месяцев мы с братом вынашивали эту идею и готовили маршрут и вот, наконец, мы подошли к старту.</p>
-    </div>
+    {{/text}}
 
     {{> image name="6.jpeg" descr="Центр ЛА над крылом самолета" h=true}}
 
     {{!-- Show the start point of the jorney --}}
     <div id="la-label"></div>
     <div id="la-point"></div>
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <h3 class="mt-5 mb-4 font-weight-bolder">Лос-Анджелес</h3>
 
       <p>По прилету на регистрации нас ждала огромная длинная очередь, вилявшая змейкой по всему огромному залу и которой, казалось, не было границ. Но в конце концов, после единственного вопроса про цель визита, уставший пограничник поставил штампики в паспорта <s>и сказал заветное “Welcome to the United States!”</s>. Потом довольно долго искали нужный автобус до парковки с прокатными машинами (аэропорт ЛА большой и не очень современный) и стояли минут 40 в пробке.</p>
-    </div>
+    {{/text}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Аренда авто устроена следующим образом - ты платишь за класс авто и выбираешь любую из целого ряда машин, стоящих на парковке. Потом просто садишься в понравившуюся и уезжаешь. Наш выбор Chevrolet Equinox - среднеразмерный такой кроссовер, почти ничем и не выделяется, но это был единственный авто с Apple Car Play, а хорошая навигация в дороге это must have.</p>
-    </div>
+    {{/text}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Из аэропорта мы поехали в отель в «город» Torrance. Город специально написал в кавычках, т.к. по своей сути это лишь один из районов Los Angeles metropolitan area (Большой ЛА, если по нашему). По крайней мере границ между настоящим ЛА и вот такими вот окружающими его городами-районами вы не увидите.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/8.jpg" class="img-w-500">
-    </div>
+    {{> image name="8.jpg" v=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Привет джет-лаг. После суток без сна выключаешься почти сразу, но вечером решили выползти из отеля и сходить к океану. Помню только, что было тепло, красивый закат, неоновые вывески и чувство, что ты находишься внутри GTA 5.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/7.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Вид из двери мотеля</small>
-    </div>
+    {{> image name="7.jpeg" descr="Вид из двери мотеля" h=true}}
 
-    <div class="text-center my-5">
-      <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-        <img src="/images/photography/westcoast/9.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/10.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/12.jpeg" class="img-w-300 mb-2 mx-1">
-      </div>
-      <small class="d-block text-muted">GTA 5</small>
-    </div>
+    {{> gallery names=(arr "9.jpeg" "10.jpeg" "12.jpeg") descr="GTA 5"}}
 
-    <div class="text-center my-5">
-      <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-        <img src="/images/photography/westcoast/13.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/14.jpeg" class="img-w-300 mb-2 mx-1">
-      </div>
-    </div>
+    {{> gallery names=(arr "13.jpeg" "14.jpeg")}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>В ЛА мы всего на полтора дня. Ничто для такого огромного города, но он и не является целью нашего путешествия. Когда-нибудь в следующий раз.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/16.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Torrance</small>
-    </div>
+    {{> image name="16.jpeg" descr="Torrance" h=true}}
 
-    <div class="text-center my-5">
-      <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-        <img src="/images/photography/westcoast/15.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/17.jpeg" class="img-w-300 mb-2 mx-1">
-      </div>
-      <small class="d-block text-muted">5 утра. Так рано могу встать только когда джет-лаг :)</small>
-    </div>
+    {{> gallery names=(arr "15.jpeg" "17.jpeg") descr="5 утра. Так рано могу встать только когда джет-лаг :)"}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Доехали до знаменитого пляжа Santa Monica с его фриками, бомжами, рыбаками и серферами.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-        <img src="/images/photography/westcoast/18.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/20.jpeg" class="img-w-300 mb-2 mx-1">
-        <img src="/images/photography/westcoast/19.jpeg" class="img-w-300 mb-2 mx-1">
-      </div>
-      <small class="d-block text-muted">Серферы и рыбаки</small>
-    </div>
+    {{> gallery names=(arr "18.jpeg" "20.jpeg" "19.jpeg") descr="Серферы и рыбаки"}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/21.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="21.jpeg" h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Передвигаясь по ЛА понимаешь насколько он огромный в плане расстояний. Вроде смотришь на карту - недалеко, можно и пешком пройтись, на деле оказывается - 30-40 минут на машине.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/22.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Сарайка спасателей</small>
-    </div>
+    {{> image name="22.jpeg" descr="Сарайка спасателей" h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Вечером решили слазить на холмы у Griffith Observatory. Такой мини треккинг, не зря же я взял с собой треккинговые кроссовки. Холмы не очень крутые, но идеально походят для треккинга внутри города, тем более с местных троп открываются просто открыточные виды на центр ЛА и легендарные буквы HOLLYWOOD. На вершине холма было несколько лавочек и немного людей, поднявшихся сюда, как и мы позалипать на закат.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/23.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">HOLLYWOOD</small>
-    </div>
+    {{> image name="23.jpeg" descr="HOLLYWOOD" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/24.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">На вершине холма</small>
-    </div>
+    {{> image name="24.jpeg" descr="На вершине холма" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/25.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="25.jpeg" h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Центр Лос-Анджелеса уходящий в дымку, сумерки, шум города вдалеке и редко пролетающие вертолеты.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/26.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="26.jpeg" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/27.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Griffith Observatory и город</small>
-    </div>
+    {{> image name="27.jpeg" descr="Griffith Observatory и город" h=true}}
 
-    <div class="text-center my-5">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/-J272DqxCQw" frameborder="0"></iframe>
-      </div>
-    </div>
+    {{> video name="-J272DqxCQw"}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Спускались уже в темноте, освещая тропу фонариками айфонов, даже хотели срезать путь, но дойдя до обрыва (или он просто таким казался ночью) решили вернуться без приключений. На парковке около машины заметили суету - дрались две собаки, но подойдя ближе поняли, что это какие-то странные собаки. Дрались два койота!</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/28.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="28.jpeg" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/29.jpeg" class="img-w-500">
-      <small class="d-block mt-2 text-muted">Где-то там внизу наша машина</small>
-    </div>
+    {{> image name="29.jpeg" descr="Где-то там внизу наша машина" v=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Обратно в Торренс решили вернуться через Downtown. Но из окна автомобиля и уже ночью рассмотреть что-то особо и не удалось.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/31.jpeg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Ночной Downtown</small>
-    </div>
+    {{> image name="31.jpeg" descr="Ночной Downtown" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/30.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="30.jpeg" h=true}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/32.jpeg" class="w-100 h-auto">
-    </div>
+    {{> image name="32.jpeg" h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>С городом ангелов пора прощаться и отправляться в дорогу, в следующий раз мы вернемся сюда только в самом конце путешествия и уже только в аэропорт. Но хотел бы рассказать про еще один момент - дороги Лос-Анджелеса. На самом деле почти весь город представляет собой бесконечные жилые одноэтажные кварталы, растянувшиеся на десятки километров. И передвигаться бы по нему было бы практически невозможно если бы не фривеи (а не хайвеи, т.к. Highway - это просто любая дорога, а Freeway - это скоростной highway с определенными стандартами), пронизывающие город во всех направлениях - Metropolitan Los Angeles Freeway System и которые начали строить еще в 1950х.  Впервые оказавшись на фривее кажется, что все двигаются с очень большой скоростью, а особенно это ощущается на мерджингах (merging - слияние) двух дорог, т.к. никто не сбавляет скорость, да это и не нужно - фривеи соединяются под плавным углом и ограничение на “повороте” такое же как и на прямом участке. Но к этому очень быстро привыкаешь и понимаешь, что вся дорожная система очень продумана.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/la1947freeways.jpg" class="w-100 h-auto">
-      <small class="d-block mt-2 text-muted">Мастер план фривеев Большого Лос-Анджелеса, 1947 г.</small>
-    </div>
+    {{> image name="la1947freeways.jpg" descr="Мастер план фривеев Большого Лос-Анджелеса, 1947 г." h=true}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>В общем дороги в США круты, а точнее их система дорог или автомагистралей. В дорожной системе Соединенных Штатов выделяют 4 основных типов дорог. Каждая автомагистраль любого типа имеет свой номер и свой дорожных знаках с уникальным дизайном, что позволяет легко и быстро идентифицировать дорогу.</p>
-    </div>
+    {{/text}}
 
-    <div class="w-75 m-auto px-4">
-      <p>
-        <ol>
-          <li class="mb-2">
-            <div>Интерстэйты или межштатные автомагистрали – костяк автомобильной дорожной сети США. Автомагистрали, по которым передвигаются миллионы людей в стране. Спроектированы и построены по особым стандартам для наиболее эффективного и безопасного высокоскоростного передвижения. Финансируются государством, а содержание и ремонт осуществляют власти штата, по которому пролегает участок дороги. Имеют глобальную нумерацию внутри страны, а на дороге обозначаются обычно номером на сине-красном щите.</div>
-            <div class="text-center mt-2">
-              <img src="/images/photography/westcoast/ushighways1.png" class="img-w-100 mb-2">
+    {{#> text}}
+      <ol>
+        <li class="mb-2">
+          <div>Интерстэйты или межштатные автомагистрали – костяк автомобильной дорожной сети США. Автомагистрали, по которым передвигаются миллионы людей в стране. Спроектированы и построены по особым стандартам для наиболее эффективного и безопасного высокоскоростного передвижения. Финансируются государством, а содержание и ремонт осуществляют власти штата, по которому пролегает участок дороги. Имеют глобальную нумерацию внутри страны, а на дороге обозначаются обычно номером на сине-красном щите.</div>
+          <div class="text-center mt-2">
+            <img src="/images/photography/westcoast/ushighways1.png" class="img-w-100 mb-2">
+          </div>
+        </li>
+        <li class="mb-2">
+          <div>Автомагистрали США – более старая система автомагистралей государственного значения, однако после появления интерстэйтов, роль дорог данного типа снизилась до поездок средней дальности, преимущественно внутри одного штата. Могут быть построены как по высоким стандартам безопасности, так и быть обычной 2-х полосной дорогой без разделителя. Ремонт и содержание таких дорог распределяется между властями штата и местными властями. Нумерация похожа на межштатную, а обозначается они номером на белом щите.</div>
+          <div class="text-center mt-2">
+            <img src="/images/photography/westcoast/ushighways2.png" class="img-w-100 mb-2">
+          </div>
+        </li>
+        <li class="mb-2">
+          <div>Автомагистрали штата – как видно из названия, это дороги внутри одного штата. Так же строятся по различным стандартам и их качество заметно различается. Управляют такими дорогами полностью власти штата. Имеют собственную внутри-штатную нумерацию и самые клевые значки (у каждого штата свой дизайн).</div>
+          <div class="text-center mt-2">
+            <div class="d-flex flex-wrap justify-content-center align-items-start">
+              <img src="/images/photography/westcoast/ushighways31.png" class="img-w-100 mb-2 mx-1">
+              <img src="/images/photography/westcoast/ushighways32.png" class="img-w-100 mb-2 mx-1">
             </div>
-          </li>
-          <li class="mb-2">
-            <div>Автомагистрали США – более старая система автомагистралей государственного значения, однако после появления интерстэйтов, роль дорог данного типа снизилась до поездок средней дальности, преимущественно внутри одного штата. Могут быть построены как по высоким стандартам безопасности, так и быть обычной 2-х полосной дорогой без разделителя. Ремонт и содержание таких дорог распределяется между властями штата и местными властями. Нумерация похожа на межштатную, а обозначается они номером на белом щите.</div>
-            <div class="text-center mt-2">
-              <img src="/images/photography/westcoast/ushighways2.png" class="img-w-100 mb-2">
+          </div>
+        </li>
+        <li>
+          <div>Автомагистрали округа – дороги местного значения в некоторых штатах. Могут быть как крупными дорогами, так и грунтовыми, ведущими в отдалённые районы. Обеспечение таких дорог полностью лежит на органах местной власти. Знаки, как и у предыдущего типа дорог, так же имеют свой дизайн и нумерацию.</div>
+          <div class="text-center mt-2">
+            <div class="d-flex flex-wrap justify-content-center align-items-start">
+              <img src="/images/photography/westcoast/ushighways41.png" class="img-w-100 mb-2 mx-1">
+              <img src="/images/photography/westcoast/ushighways42.png" class="img-w-100 mb-2 mx-1">
             </div>
-          </li>
-          <li class="mb-2">
-            <div>Автомагистрали штата – как видно из названия, это дороги внутри одного штата. Так же строятся по различным стандартам и их качество заметно различается. Управляют такими дорогами полностью власти штата. Имеют собственную внутри-штатную нумерацию и самые клевые значки (у каждого штата свой дизайн).</div>
-            <div class="text-center mt-2">
-              <div class="d-flex flex-wrap justify-content-center align-items-start">
-                <img src="/images/photography/westcoast/ushighways31.png" class="img-w-100 mb-2 mx-1">
-                <img src="/images/photography/westcoast/ushighways32.png" class="img-w-100 mb-2 mx-1">
-              </div>
-            </div>
-          </li>
-          <li>
-            <div>Автомагистрали округа – дороги местного значения в некоторых штатах. Могут быть как крупными дорогами, так и грунтовыми, ведущими в отдалённые районы. Обеспечение таких дорог полностью лежит на органах местной власти. Знаки, как и у предыдущего типа дорог, так же имеют свой дизайн и нумерацию.</div>
-            <div class="text-center mt-2">
-              <div class="d-flex flex-wrap justify-content-center align-items-start">
-                <img src="/images/photography/westcoast/ushighways41.png" class="img-w-100 mb-2 mx-1">
-                <img src="/images/photography/westcoast/ushighways42.png" class="img-w-100 mb-2 mx-1">
-              </div>
-            </div>
-          </li>
-        </ol>
-      </p>
-    </div>
+          </div>
+        </li>
+      </ol>
+    {{/text}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>На самом деле в некоторых штатах есть и другие типы дорог, но их не так много и по большей части это дороги местного значения. Ну а нас ждала дорога под номером 1…</p>
-    </div>
+    {{/text}}
 
     {{!-- Show the end point of the jorney --}}
     <div id="seattle-label"></div>
     <div id="seattle-point"></div>
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <h3 class="mt-5 mb-4 font-weight-bolder">California 1</h3>
       <p>California State Route 1, SR1 или Pacific Coast Highway - одна из самых красивых дорог США, проходящая вдоль большей части побережья Калифорнии, рядом с одной из самых живописных береговых линий в мире.</p>
-    </div>
+    {{/text}}
 
-    <div class="text-center my-5">
-      <img src="/images/photography/westcoast/california1.png" class="img-w-300">
-      <small class="d-block mt-2 text-muted">Дорожный знак-табличка 1 шоссе</small>
-    </div>
+    {{> image name="california1.png" descr="Дорожный знак-табличка 1 шоссе" v=true width=300}}
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <p>Длина дороги 1056 км и начинается она около Dana Point (небольшой городок к юго-востоку от ЛА). Идет практически всегда вдоль берега, огибая многочисленные заливы, поднимаясь вверх в горы и спускаясь обратно вниз к воде. Проходит через два крупных мегаполиса - Лос-Анджелес и Сан-Франциско, иногда на своем пути совпадает со 101 шоссе, а заканчивается в поселении Leggett (где живет всего 122 человека) на севере Калифорнии. Строилась дорога не сразу, а постепенно кусками с 1934 года и была скорее набором разных дорог вплоть до 1964 года, когда ей был присвоен номер SR 1.</p>
-    </div>
+    {{/text}}
 
     <div id="LAtoMonterey">
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>После небольшой справки продолжаем. Мы не стали делать петлю до Dana Point, а просто проехали пару километров от отеля до океана и выехали на 1 шоссе там. Дальше нам предстояло проехать 1000 км по одной дороге.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/GqsbSZUOSd0" frameborder="0"></iframe>
-        </div>
-      </div>
+      {{> video name="GqsbSZUOSd0"}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Из Лос-Анджелеса выехали рано утром, чтобы избежать пробок, но так или иначе постоять все равно пришлось. Улицы мегаполиса, пригороды, небольшие городки спутники и коттеджные поселки - чтобы выехать из цивилизации потребуется проехать не один десяток миль. Но вот домики и парковки стали попадаться уже значительно реже, осталась только дорога, песчаные горы с одной стороны, океан с другой и редкие машины с серфами вдоль обочин. Начинала проступать атмосфера роад-трипа.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/33.jpeg" class="w-100 h-auto">
-        <small class="d-block mt-2 text-muted">Сразу после ЛА</small>
-      </div>
+      {{> image name="33.jpeg" descr="Сразу после ЛА" h=true}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Дальше дорога от побережья сворачивает вглубь. Начинаются холмы и огромные фермерские поля с работающими на них мексиканцами. Иногда, проезжая очередную ферму, в машине появлялся резкий запах конопли. Точную причину мы так и не установили, но т.к. в Калифорнии легализовано производство и потребление каннабиса, то вероятно это были “те самые” фермы.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/34.jpeg" class="w-100 h-auto">
-        <small class="d-block mt-2 text-muted">All-way stop перекресток</small>
-      </div>
+      {{> image name="34.jpeg" descr="All-way stop перекресток" h=true}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Некоторые города по стилю очень напоминают мексиканские, ну или испанские. Не удивительно, ведь до 1850 года Калифорния не была в составе США, а контролировалась Мексикой и Испанией.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
-          <img src="/images/photography/westcoast/36.jpeg" class="img-w-300 mb-2 mx-1">
-          <img src="/images/photography/westcoast/35.jpeg" class="img-w-300 mb-2 mx-1">
-        </div>
-      </div>
+      {{> gallery names=(arr "36.jpeg" "35.jpeg")}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/37.jpeg" class="w-100 h-auto">
-      </div>
+      {{> image name="37.jpeg" h=true}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Делаем первую остановку в городке Morro Bay. Заезжаем в Taco Bell, а затем к океану в бухту, где находится главная местная достопримечательность - скала Morro Rock.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/38.jpeg" class="img-w-500">
-      </div>
+      {{> image name="38.jpeg" v=true}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/39.jpeg" class="w-100 h-auto">
-        <small class="d-block mt-2 text-muted">Пляж Morro Bay</small>
-      </div>
+      {{> image name="39.jpeg" descr="Пляж Morro Bay" h=true}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/40.jpeg" class="w-100 h-auto">
-        <small class="d-block mt-2 text-muted">Немного урбана</small>
-      </div>
+      {{> image name="40.jpeg" descr="Немного урбана" h=true}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/41.jpeg" class="w-100 h-auto">
-      </div>
+      {{> image name="41.jpeg" h=true}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Дальше дорога проходит через знаменитый Big Sur (не операционная система). Биг-Сур - это почти не заселенная дикая местность, где горы резко обрываются у побережья. Здесь очень красиво, почти нет населенных пунктов и заправок, и как следствие очень дорогой бензин. Поэтому заправляться лучше заранее. Дорогая здесь сильно петляет, превращаясь в серпантин. Появляются специальные обочины для медленных автомобилей - turnouts, на которых можно пропустить остальных вперед.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/42.jpg" class="w-100 h-auto">
-      </div>
+      {{> image name="42.jpg" h=true}}
 
-      <div class="text-center my-5">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/2Rs_BgB5Mds" frameborder="0"></iframe>
-        </div>
-        <small class="d-block text-muted">Морские слоны</small>
-      </div>
+      {{> video name="2Rs_BgB5Mds" descr="Морские слоны"}}
 
-      <div class="w-75 m-auto px-4">
+      {{#> text}}
         <p>Нам не повезло с погодой и все побережье было окутано густым туманом, поэтому о том что здесь очень красиво пришлось просто поверить.</p>
-      </div>
+      {{/text}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/43.jpeg" class="w-100 h-auto">
-        <small class="d-block mt-2 text-muted">Bixby Creek Bridge</small>
-      </div>
+      {{> image name="43.jpeg" descr="Bixby Creek Bridge" h=true}}
 
-      <div class="text-center my-5">
-        <img src="/images/photography/westcoast/44.jpeg" class="img-w-500">
-      </div>
+      {{> image name="44.jpeg" v=true}}
     </div>
 
-    <div class="w-75 m-auto px-4">
+    {{#> text}}
       <h3 class="mt-5 mb-4 font-weight-bolder">Монтерей</h3>
 
       <p>Когда уже начало темнеть мы приехали в Монтерей. То что в городе есть на что посмотреть, я узнал значительно позже. Тогда же мы просто взяли 6-pack местной IPA и отправились отмечать первый день дороги.</p>
-    </div>
+    {{/text}}
 
     <h4 class="text-uppercase text-center my-5 py-5">To Be Continued...</h4>
   </div>
