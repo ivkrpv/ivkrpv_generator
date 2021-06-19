@@ -9,8 +9,8 @@ mapboxgl.accessToken = config.mapboxToken;
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
-const DEV_MODE = false;
-const DEV_MODE_WHOLE_ROUTE = false;
+const DEV_MODE = true;
+const DEV_MODE_WHOLE_ROUTE = true;
 const VIEW_MODE = {
   FOLLOW: 0,
   PASSED: 1,
@@ -159,7 +159,13 @@ export default () => {
       return marker;
     }
 
-    const scrollParts = [
+    // Here is a list of features added during scroll event
+    const onScrollFeatures = [
+      {
+        id: 'la-point',
+        index: 0,
+        important: true,
+      },
       {
         id: 'la-label',
         index: 0,
@@ -169,13 +175,9 @@ export default () => {
         important: true,
       },
       {
-        id: 'la-point',
-        index: 0,
+        id: 'seattle-point',
+        index: 30000,
         important: true,
-      },
-      {
-        id: 'LAtoMonterey',
-        index: [0, 6422],
       },
       {
         id: 'seattle-label',
@@ -186,25 +188,29 @@ export default () => {
         important: true,
       },
       {
-        id: 'seattle-point',
-        index: 30000,
-        important: true,
+        id: 'la-monterey-route',
+        index: [0, 6422],
       },
-    ].map((p) => {
-      p.element = document.getElementById(p.id);
+      {
+        id: 'monterey-santa-rosa-route',
+        index: [6423, 15029],
+      },
+    ].map((f) => {
+      f.element = document.getElementById(f.id);
 
-      if (_.isArray(p.index)) {
-        const { offsetHeight: elementHeight } = p.element;
-        const pointsCount = p.index[1] - p.index[0] + 1;
+      if (_.isArray(f.index)) {
+        const { offsetHeight: elementHeight } = f.element;
+        const pointsCount = f.index[1] - f.index[0] + 1;
 
-        p.route = true;
-        p.pixelsInRoutePoint = elementHeight / pointsCount;
+        f.route = true;
+        f.pixelsInRoutePoint = elementHeight / pointsCount;
       }
 
-      return p;
+      return f;
     });
 
-    const routePoints = [
+    // List of features added during route drawing
+    const routeFeatures = [
       {
         index: 2865,
         text: 'Morro Bay',
@@ -401,30 +407,32 @@ export default () => {
           });
         }
 
-        scrollParts.forEach((part) => {
+        onScrollFeatures.forEach((feature) => {
           const { offsetHeight: contentHeight, scrollTop } = content;
           const scrollBottom = scrollTop + contentHeight;
-          const { offsetTop: elementTop } = part.element;
+          const { offsetTop: elementTop, offsetHeight: elementHeight } = feature.element;
+          const elementBottom = elementTop + elementHeight;
 
           // it's visible
-          if (elementTop < scrollBottom) {
-            if (!part.route) {
-              if (!part.drawed) {
-                markers.push(addRouteMarker(part, map));
+          if (elementTop < scrollBottom && elementBottom > scrollTop) {
+            // if it's not a route just add it to the map (it's a marker or a label)
+            if (!feature.route) {
+              if (!feature.drawed) {
+                markers.push(addRouteMarker(feature, map));
               }
 
               return;
             }
 
             const visibleRoutePointsCount = Math.floor(
-              (scrollBottom - elementTop) / part.pixelsInRoutePoint
+              (scrollBottom - elementTop) / feature.pixelsInRoutePoint
             );
-            const lastVisibleIndex = visibleRoutePointsCount - 1;
+            const lastVisibleIndex = feature.index[0] + visibleRoutePointsCount - 1;
 
             if (lastVisibleIndex > lastDrawedIndex) {
-              if (part.drawed) return;
+              if (feature.drawed) return;
 
-              const routeSliceToDraw = ROUTE_COORDS.slice(lastDrawedIndex, visibleRoutePointsCount);
+              const routeSliceToDraw = ROUTE_COORDS.slice(lastDrawedIndex, lastVisibleIndex + 1);
 
               Array.prototype.push.apply(
                 routeGeojson.features[0].geometry.coordinates,
@@ -457,21 +465,21 @@ export default () => {
 
               map.flyTo({ center: lastPoint, zoom: MAP_ZOOM, speed: 0.5, essential: true });
 
-              routePoints.forEach((point) => {
-                if (point.drawed || point.index > lastVisibleIndex) return;
+              routeFeatures.forEach((feature) => {
+                if (feature.drawed || feature.index > lastVisibleIndex) return;
 
-                markers.push(addRouteMarker(point, map));
+                markers.push(addRouteMarker(feature, map));
               });
 
               lastDrawedIndex = lastVisibleIndex;
 
-              if (lastDrawedIndex >= part.index[1]) {
-                part.drawed = true;
+              if (lastDrawedIndex >= feature.index[1]) {
+                feature.drawed = true;
 
                 // hide route arrow head
                 routeHeadMarker.remove();
               }
-            } else {
+            } else if (lastVisibleIndex < lastDrawedIndex) {
               map.flyTo({
                 center: ROUTE_COORDS[lastVisibleIndex],
                 zoom: MAP_ZOOM,
