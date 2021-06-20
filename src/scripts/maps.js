@@ -10,7 +10,7 @@ const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
 const DEV_MODE = true;
-const DEV_MODE_WHOLE_ROUTE = true;
+const DEV_MODE_WHOLE_ROUTE = false;
 const VIEW_MODE = {
   FOLLOW: 0,
   PASSED: 1,
@@ -230,8 +230,29 @@ export default () => {
         rotation: -7,
       },
       {
-        // Monterey point
-        index: 6422,
+        index: 9137,
+        text: 'SF 🌉',
+        offset: [40, -50],
+        rotation: -7,
+      },
+      {
+        index: 9137,
+        important: true,
+      },
+      {
+        index: 13524,
+        text: 'Point Reyes',
+        offset: [-130, 10],
+        rotation: -7,
+      },
+      {
+        index: 15029,
+        text: 'Santa Rosa',
+        offset: [60, -50],
+        rotation: -7,
+      },
+      {
+        index: 15029,
         important: true,
       },
     ];
