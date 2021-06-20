@@ -14,15 +14,18 @@ pageStyle:
   </div>
 
   <div id="map-wc-content" class="col-sm-8 h-100 overflow-scroll shadow">
-    <div class="h-100 d-flex flex-column justify-content-center align-items-center bg-wc-splash">
+    <div class="h-100 d-flex flex-column justify-content-between align-items-center bg-wc-splash">
+      <div></div>
       <div class="text-center text-uppercase">
         <h1 class="font-weight-regular"><span class="lcl" data-lcl="westcoastTitle">{{{ defaultLocale 'westcoastTitle' }}}</span></h1>
         <div><span class="lcl" data-lcl="westcoastSubtitle">{{{ defaultLocale 'westcoastSubtitle' }}}</span></div>
       </div>
+      <div class="mb-4 text-center text-white">
+        <div>Продолжить читать&nbsp;&nbsp;<i class="fas fa-chevron-right" data-fa-transform="down-1"></i></div>
+        <div><a href="#monterey">от Монтерея</a></div>
+      </div>
     </div>
 
-    {{#> text}}
-    {{/text}}
     {{#> text}}
       <blockquote class="blockquote mt-5 text-right">
         <p class="mb-2">All he needed was a wheel in his hand and four on the road.</p>
@@ -269,7 +272,7 @@ pageStyle:
     </div>
 
     {{#> text}}
-      {{> subHeader name="Монтерей"}}
+      {{> subHeader anchor="monterey" name="Монтерей"}}
 
       <p>Когда уже начало темнеть мы приехали в Монтерей. То что в городе есть на что посмотреть, я узнал значительно позже. Тогда же мы просто взяли 6-pack местной IPA и отправились отмечать первый день дороги.</p>
     {{/text}}
