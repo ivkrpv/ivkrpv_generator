@@ -434,17 +434,17 @@ export default () => {
           const { offsetTop: elementTop, offsetHeight: elementHeight } = feature.element;
           const elementBottom = elementTop + elementHeight;
 
-          // it's visible
-          if (elementTop < scrollBottom && elementBottom > scrollTop) {
-            // if it's not a route just add it to the map (it's a marker or a label)
-            if (!feature.route) {
-              if (!feature.drawed) {
-                markers.push(addRouteMarker(feature, map));
-              }
-
-              return;
+          // if it's not a route just add it to the map (it's a marker or a label)
+          if (!feature.route && elementTop < scrollBottom) {
+            if (!feature.drawed) {
+              markers.push(addRouteMarker(feature, map));
             }
 
+            return;
+          }
+
+          // it's visible
+          if (elementTop < scrollBottom && elementBottom > scrollTop) {
             const visibleRoutePointsCount = Math.floor(
               (scrollBottom - elementTop) / feature.pixelsInRoutePoint
             );
