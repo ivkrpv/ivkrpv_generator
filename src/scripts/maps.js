@@ -192,8 +192,12 @@ export default () => {
         index: [0, 6422],
       },
       {
-        id: 'monterey-santa-rosa-route',
-        index: [6423, 15029],
+        id: 'monterey-sf-route',
+        index: [6423, 9137],
+      },
+      {
+        id: 'sf-santa-rosa-route',
+        index: [9138, 15029],
       },
     ].map((f) => {
       f.element = document.getElementById(f.id);
