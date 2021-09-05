@@ -9,7 +9,7 @@ mapboxgl.accessToken = config.mapboxToken;
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
-const DEV_MODE = true;
+const DEV_MODE = false;
 const DEV_MODE_WHOLE_ROUTE = false;
 const VIEW_MODE = {
   FOLLOW: 0,
@@ -238,6 +238,7 @@ export default () => {
         text: 'SF 🌉',
         offset: [40, -50],
         rotation: -7,
+        important: true,
       },
       {
         index: 9137,
