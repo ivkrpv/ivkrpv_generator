@@ -199,6 +199,10 @@ export default () => {
         id: 'sf-santa-rosa-route',
         index: [9138, 15029],
       },
+      {
+        id: 'santa-rosa-oregon-route',
+        index: [15030, 25380],
+      },
     ].map((f) => {
       f.element = document.getElementById(f.id);
 
@@ -257,7 +261,25 @@ export default () => {
         rotation: -7,
       },
       {
-        index: 15029,
+        index: 16523,
+        text: 'Fort Ross',
+        offset: [-130, 10],
+        rotation: -7,
+      },
+      {
+        index: 20840,
+        text: 'Leggett',
+        offset: [80, 30],
+        rotation: -7,
+      },
+      {
+        index: 25380,
+        text: 'Coos Bay',
+        offset: [-130, 10],
+        rotation: -7,
+      },
+      {
+        index: 25380,
         important: true,
       },
     ];
@@ -418,7 +440,7 @@ export default () => {
           center: ROUTE_COORDS[0],
           minZoom: 2,
           essential: true,
-          speed: 0.3,
+          speed: 0.7,
         });
       }
 

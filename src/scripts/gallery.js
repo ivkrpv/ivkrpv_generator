@@ -73,29 +73,39 @@ export default () => {
     $images.append($images.children().first());
   });
 
+  function index(el) {
+    if (!el) return -1;
+    var i = 0;
+    while ((el = el.previousElementSibling)) {
+      i++;
+    }
+    return i;
+  }
+
   // West Coast set gallaries
-  $('body').on('click', '.set-gallery-images img', function (e) {
-    e.stopPropagation();
+  const galleryImages = document.querySelectorAll('.set-gallery-images img');
 
-    const $images = $(this).parent();
+  galleryImages.forEach((img) => {
+    img.addEventListener('click', function (e) {
+      e.stopPropagation();
 
-    $images.on('onCloseAfter.lg', ({ target }) => {
-      const lg = window.lgData[target.getAttribute('lg-uid')];
+      const gallery = this.parentNode;
 
-      if (lg) {
-        lg.destroy(true);
-      }
-    });
+      gallery.addEventListener('onCloseAfter', ({ target }) => {
+        const lg = window.lgData[target.getAttribute('lg-uid')];
 
-    lightGallery($images.get(0), {
-      dynamic: true,
-      dynamicEl: $images
-        .children()
-        .map((i, { src }) => ({ src }))
-        .get(),
-      index: $(this).index(),
-      download: false,
-      hideBarsDelay: 2000,
+        if (lg) {
+          lg.destroy(true);
+        }
+      });
+
+      lightGallery(gallery, {
+        dynamic: true,
+        dynamicEl: [...gallery.children].map(({ src }) => ({ src })),
+        index: index(this),
+        download: false,
+        hideBarsDelay: 2000,
+      });
     });
   });
 };
