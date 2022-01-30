@@ -275,8 +275,9 @@ export default () => {
       {
         index: 25380,
         text: 'Coos Bay',
-        offset: [-130, 10],
+        offset: [100, 10],
         rotation: -7,
+        important: true,
       },
       {
         index: 25380,
