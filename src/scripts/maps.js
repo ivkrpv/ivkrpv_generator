@@ -9,13 +9,141 @@ mapboxgl.accessToken = config.mapboxToken;
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
-const DEV_MODE = false;
-const DEV_MODE_WHOLE_ROUTE = false;
+const DEV_MODE = true;
+const DEV_MODE_WHOLE_ROUTE = true;
 const VIEW_MODE = {
   FOLLOW: 0,
   PASSED: 1,
   TOTAL: 2,
 };
+
+// Here is a list of features added during scroll event
+const onScrollFeatures = [
+  {
+    id: 'la-point',
+    index: 0,
+    important: true,
+  },
+  {
+    id: 'la-label',
+    index: 0,
+    text: 'LA',
+    offset: [0, -30],
+    rotation: -7,
+    important: true,
+  },
+  {
+    id: 'seattle-point',
+    index: 30000,
+    important: true,
+  },
+  {
+    id: 'seattle-label',
+    index: 30000,
+    text: 'Seattle',
+    offset: [110, 20],
+    rotation: -7,
+    important: true,
+  },
+  {
+    id: 'la-monterey-route',
+    index: [0, 6422],
+  },
+  {
+    id: 'monterey-sf-route',
+    index: [6423, 9137],
+  },
+  {
+    id: 'sf-santa-rosa-route',
+    index: [9138, 15029],
+  },
+  {
+    id: 'santa-rosa-oregon-route',
+    index: [15030, 25380],
+  },
+  {
+    id: 'coos-bay-portland-route',
+    index: [25381, 28073],
+  },
+  {
+    id: 'portland-seattle-route',
+    index: [28074, 30000],
+  },
+];
+
+// List of features added during route drawing
+const routeFeatures = [
+  {
+    index: 2865,
+    text: 'Morro Bay',
+    offset: [120, -50],
+    rotation: -7,
+  },
+  {
+    index: 4634,
+    text: 'Big Sur',
+    offset: [40, -40],
+    rotation: 50,
+  },
+  {
+    index: 6422,
+    text: 'Monterey',
+    offset: [125, -25],
+    rotation: -7,
+  },
+  {
+    index: 9137,
+    text: 'SF 🌉',
+    offset: [40, -50],
+    rotation: -7,
+    important: true,
+  },
+  {
+    index: 9137,
+    important: true,
+  },
+  {
+    index: 13524,
+    text: 'Point Reyes',
+    offset: [-130, 10],
+    rotation: -7,
+  },
+  {
+    index: 15029,
+    text: 'Santa Rosa',
+    offset: [60, -50],
+    rotation: -7,
+  },
+  {
+    index: 16523,
+    text: 'Fort Ross',
+    offset: [-130, 10],
+    rotation: -7,
+  },
+  {
+    index: 20840,
+    text: 'Leggett',
+    offset: [80, 30],
+    rotation: -7,
+  },
+  {
+    index: 25380,
+    text: 'Coos Bay',
+    offset: [110, 10],
+    rotation: -7,
+  },
+  {
+    index: 28073,
+    text: 'Portland',
+    offset: [110, 20],
+    rotation: -7,
+    important: true,
+  },
+  {
+    index: 28073,
+    important: true,
+  },
+];
 
 function angleBetweenPoints(cx, cy, ex, ey) {
   const dy = ey - cy;
@@ -159,51 +287,7 @@ export default () => {
       return marker;
     }
 
-    // Here is a list of features added during scroll event
-    const onScrollFeatures = [
-      {
-        id: 'la-point',
-        index: 0,
-        important: true,
-      },
-      {
-        id: 'la-label',
-        index: 0,
-        text: 'LA',
-        offset: [0, -30],
-        rotation: -7,
-        important: true,
-      },
-      {
-        id: 'seattle-point',
-        index: 30000,
-        important: true,
-      },
-      {
-        id: 'seattle-label',
-        index: 30000,
-        text: 'Seattle',
-        offset: [80, 20],
-        rotation: -7,
-        important: true,
-      },
-      {
-        id: 'la-monterey-route',
-        index: [0, 6422],
-      },
-      {
-        id: 'monterey-sf-route',
-        index: [6423, 9137],
-      },
-      {
-        id: 'sf-santa-rosa-route',
-        index: [9138, 15029],
-      },
-      {
-        id: 'santa-rosa-oregon-route',
-        index: [15030, 25380],
-      },
-    ].map((f) => {
+    onScrollFeatures.map((f) => {
       f.element = document.getElementById(f.id);
 
       if (_.isArray(f.index)) {
@@ -216,74 +300,6 @@ export default () => {
 
       return f;
     });
-
-    // List of features added during route drawing
-    const routeFeatures = [
-      {
-        index: 2865,
-        text: 'Morro Bay',
-        offset: [120, -50],
-        rotation: -7,
-      },
-      {
-        index: 4634,
-        text: 'Big Sur',
-        offset: [40, -40],
-        rotation: 50,
-      },
-      {
-        index: 6422,
-        text: 'Monterey',
-        offset: [125, -25],
-        rotation: -7,
-      },
-      {
-        index: 9137,
-        text: 'SF 🌉',
-        offset: [40, -50],
-        rotation: -7,
-        important: true,
-      },
-      {
-        index: 9137,
-        important: true,
-      },
-      {
-        index: 13524,
-        text: 'Point Reyes',
-        offset: [-130, 10],
-        rotation: -7,
-      },
-      {
-        index: 15029,
-        text: 'Santa Rosa',
-        offset: [60, -50],
-        rotation: -7,
-      },
-      {
-        index: 16523,
-        text: 'Fort Ross',
-        offset: [-130, 10],
-        rotation: -7,
-      },
-      {
-        index: 20840,
-        text: 'Leggett',
-        offset: [80, 30],
-        rotation: -7,
-      },
-      {
-        index: 25380,
-        text: 'Coos Bay',
-        offset: [100, 10],
-        rotation: -7,
-        important: true,
-      },
-      {
-        index: 25380,
-        important: true,
-      },
-    ];
 
     const map = new mapboxgl.Map({
       container: $mapWestCoast.get(0),
