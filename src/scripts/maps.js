@@ -133,11 +133,23 @@ const routeFeatures = [
     rotation: -7,
   },
   {
+    index: 26586,
+    text: "Thor's Well",
+    offset: [-130, 0],
+    rotation: -7,
+  },
+  {
     index: 28073,
     text: 'Portland',
     offset: [110, 20],
     rotation: -7,
     important: true,
+  },
+  {
+    index: 28335,
+    text: 'Multnomah Falls',
+    offset: [40, -60],
+    rotation: -7,
   },
   {
     index: 28073,
