@@ -9,8 +9,8 @@ mapboxgl.accessToken = config.mapboxToken;
 const NY_MARKER_COLOR = '#e7254d';
 const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
-const DEV_MODE = true;
-const DEV_MODE_WHOLE_ROUTE = true;
+const DEV_MODE = false;
+const DEV_MODE_WHOLE_ROUTE = false;
 const VIEW_MODE = {
   FOLLOW: 0,
   PASSED: 1,
@@ -146,14 +146,14 @@ const routeFeatures = [
     important: true,
   },
   {
+    index: 28073,
+    important: true,
+  },
+  {
     index: 28335,
     text: 'Multnomah Falls',
     offset: [40, -60],
     rotation: -7,
-  },
-  {
-    index: 28073,
-    important: true,
   },
 ];
 
