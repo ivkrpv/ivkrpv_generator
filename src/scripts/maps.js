@@ -475,6 +475,11 @@ export default () => {
 
       let lastDrawedIndex = 0;
 
+      const flyTo = _.throttle(
+        (center, zoom) => map.flyTo({ center, zoom, speed: 0.5, essential: true }),
+        250
+      );
+
       content.onscroll = _.throttle(() => {
         if (viewMode !== VIEW_MODE.FOLLOW) {
           viewMode = VIEW_MODE.FOLLOW;
@@ -540,7 +545,7 @@ export default () => {
 
               routeHeadMarker.addTo(map);
 
-              map.flyTo({ center: lastPoint, zoom: MAP_ZOOM, speed: 0.5, essential: true });
+              flyTo(lastPoint, MAP_ZOOM);
 
               routeFeatures.forEach((feature) => {
                 if (feature.drawed || feature.index > lastVisibleIndex) return;
@@ -557,12 +562,7 @@ export default () => {
                 routeHeadMarker.remove();
               }
             } else if (lastVisibleIndex < lastDrawedIndex) {
-              map.flyTo({
-                center: ROUTE_COORDS[lastVisibleIndex],
-                zoom: MAP_ZOOM,
-                speed: 0.5,
-                essential: true,
-              });
+              flyTo(ROUTE_COORDS[lastVisibleIndex], MAP_ZOOM);
             }
           }
         });
