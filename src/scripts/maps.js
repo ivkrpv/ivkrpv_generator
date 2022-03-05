@@ -27,7 +27,7 @@ const onScrollFeatures = [
   {
     id: 'la-label',
     index: 0,
-    text: 'LA',
+    text: 'LA 🌇',
     offset: [0, -30],
     rotation: -7,
     important: true,
@@ -40,8 +40,8 @@ const onScrollFeatures = [
   {
     id: 'seattle-label',
     index: 30000,
-    text: 'Seattle',
-    offset: [110, 20],
+    text: 'Seattle 🌃',
+    offset: [130, 0],
     rotation: -7,
     important: true,
   },
@@ -69,6 +69,30 @@ const onScrollFeatures = [
     id: 'portland-seattle-route',
     index: [28074, 30000],
   },
+  {
+    id: 'return-astoria-route',
+    index: [30001, 34304],
+  },
+  {
+    id: 'return-cannon-beach-route',
+    index: [34305, 34928],
+  },
+  {
+    id: 'return-california-route',
+    index: [34929, 40608],
+  },
+  {
+    id: 'return-sacramento-route',
+    index: [40609, 45034],
+  },
+  {
+    id: 'return-sequoia-route',
+    index: [45035, 53336],
+  },
+  {
+    id: 'return-la-route',
+    index: [53337, 59999],
+  },
 ];
 
 // List of features added during route drawing
@@ -81,7 +105,7 @@ const routeFeatures = [
   },
   {
     index: 4634,
-    text: 'Big Sur',
+    text: 'Big Sur 🌊',
     offset: [40, -40],
     rotation: 50,
   },
@@ -140,8 +164,8 @@ const routeFeatures = [
   },
   {
     index: 28073,
-    text: 'Portland',
-    offset: [110, 20],
+    text: 'Portland 🦌',
+    offset: [120, 20],
     rotation: -7,
     important: true,
   },
@@ -154,6 +178,42 @@ const routeFeatures = [
     text: 'Multnomah Falls',
     offset: [40, -60],
     rotation: -7,
+  },
+  {
+    index: 34304,
+    text: 'Astoria',
+    offset: [100, -30],
+    rotation: -7,
+  },
+  {
+    index: 34927,
+    text: 'Cannon Beach',
+    offset: [-40, 40],
+    rotation: -7,
+  },
+  {
+    index: 41728,
+    text: 'Mount Shasta 🗻',
+    offset: [30, -30],
+    rotation: 60,
+  },
+  {
+    index: 43422,
+    text: 'Shasta Dam',
+    offset: [-130, 0],
+    rotation: -7,
+  },
+  {
+    index: 44962,
+    text: 'Sacramento',
+    offset: [30, -20],
+    rotation: 60,
+  },
+  {
+    index: 50000,
+    text: 'Sequoia Park 🌲',
+    offset: [0, -60],
+    rotation: -40,
   },
 ];
 
@@ -475,10 +535,7 @@ export default () => {
 
       let lastDrawedIndex = 0;
 
-      const flyTo = _.throttle(
-        (center, zoom) => map.flyTo({ center, zoom, speed: 0.5, essential: true }),
-        250
-      );
+      const easeTo = _.throttle((center, zoom) => map.easeTo({ center, zoom }), 250);
 
       content.onscroll = _.throttle(() => {
         if (viewMode !== VIEW_MODE.FOLLOW) {
@@ -545,7 +602,7 @@ export default () => {
 
               routeHeadMarker.addTo(map);
 
-              flyTo(lastPoint, MAP_ZOOM);
+              easeTo(lastPoint, MAP_ZOOM);
 
               routeFeatures.forEach((feature) => {
                 if (feature.drawed || feature.index > lastVisibleIndex) return;
@@ -562,7 +619,7 @@ export default () => {
                 routeHeadMarker.remove();
               }
             } else if (lastVisibleIndex < lastDrawedIndex) {
-              flyTo(ROUTE_COORDS[lastVisibleIndex], MAP_ZOOM);
+              easeTo(ROUTE_COORDS[lastVisibleIndex], MAP_ZOOM);
             }
           }
         });
