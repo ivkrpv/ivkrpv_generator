@@ -12,6 +12,7 @@ function getDescendantProp(obj, desc) {
 }
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPassthroughCopy({ 'src/favicon': '/' });
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy('src/webfonts');
 

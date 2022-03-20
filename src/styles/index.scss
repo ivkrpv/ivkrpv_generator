@@ -5,8 +5,8 @@ $main-color: #e7254d;
 // Fonts
 
 @font-face {
-  font-family: 'Lazer84';
-  src: url('../webfonts/Lazer84.ttf');
+  font-family: 'PermanentMarker';
+  src: url('../webfonts/PermanentMarker-Regular.ttf');
 }
 
 @font-face {
@@ -40,7 +40,7 @@ $main-color: #e7254d;
 }
 
 .font-retro {
-  font-family: 'Lazer84';
+  font-family: 'PermanentMarker';
 }
 
 .font-serif {
@@ -77,7 +77,6 @@ a:hover {
 }
 
 .logo {
-  letter-spacing: 3px;
   transition: color 2s ease-out;
   -moz-transition: color 2s ease-out;
   -webkit-transition: color 2s ease-out;
