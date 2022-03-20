@@ -1,6 +1,6 @@
 {
   "ru": {
-    "localeToggle": "ENG",
+    "localeToggle": "РУС",
     "part": "ЧАСТЬ",
     "map": "КАРТА",
     "istanbul": "СТАМБУЛ",
@@ -53,7 +53,7 @@
     "westcoastSubtitle": "Ноябрь, 2019"
   },
   "en": {
-    "localeToggle": "РУС",
+    "localeToggle": "ENG",
     "part": "PART",
     "map": "MAP",
     "istanbul": "ISTANBUL",

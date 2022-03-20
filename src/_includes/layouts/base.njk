@@ -16,7 +16,6 @@ theme: dark
     <title>{{ config.name }} — {{ title }}</title>
     <link href="/styles/bootstrap-override.css" rel="stylesheet">
     <link href="/styles/bootstrap.min.css" rel="stylesheet">
-    <link href="/styles/likely.css" rel="stylesheet">
     <link href="/styles/index.css" rel="stylesheet">
     {% for style in pageStyle %}
       <link href="{{ style }}" rel="stylesheet">
@@ -87,19 +86,13 @@ theme: dark
     {{ content | safe }}
 
     <div class="bottom-buttons d-flex">
-      <div class="likely likely-small {{ 'likely-dark' if theme === 'light' else 'likely-light' }}">
-        <div class="facebook mb-0 mt-1 lcl" data-lcl="share" data-lcl-attr="title"></div>
-        <div class="vkontakte mb-0 mt-1 lcl" data-lcl="share" data-lcl-attr="title" data-title="{{ config.name }} — {{ title }}"></div>
-        <div class="twitter mb-0 mt-1 lcl" data-lcl="share" data-lcl-attr="title" data-title="{{ config.name }} — {{ title }}"></div>
-      </div>
-      <div class="lang-toggle ml-3 js-locale">
+      <div class="lang-toggle js-locale">
         <i class="fas fa-globe" aria-hidden="true"></i> <span class="lcl" data-lcl="localeToggle">{% defaultLocale config, locale, 'localeToggle' %}</span>
       </div>
     </div>
 
     <script src="/scripts/jquery-3.1.1.min.js"></script>
     <script src="/scripts/bootstrap.bundle.min.js"></script>
-    <script src="/scripts/likely.js"></script>
     <script src="/scripts/index.js"></script>
     {% for script in pageScript %}
       <script src="{{ script }}"></script>

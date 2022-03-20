@@ -4,7 +4,7 @@ function supportsLocalStorage() {
   } catch (e) {
     return false;
   }
-};
+}
 
 export function loadLocalStorage(key, fallbackValue) {
   if (supportsLocalStorage()) {
@@ -14,28 +14,28 @@ export function loadLocalStorage(key, fallbackValue) {
   }
 
   return fallbackValue;
-};
+}
 
 export function saveLocalStorage(key, value) {
   if (supportsLocalStorage()) {
     window.localStorage.setItem(key, value);
   }
-};
+}
 
 export function getUrlParameter(param) {
   var pageURL = decodeURIComponent(window.location.search.substring(1)),
-      urlVariables = pageURL.split('&'),
-      parameterName,
-      i;
+    urlVariables = pageURL.split('&'),
+    parameterName,
+    i;
 
   for (i = 0; i < urlVariables.length; i++) {
-      parameterName = urlVariables[i].split('=');
+    parameterName = urlVariables[i].split('=');
 
-      if (parameterName[0] === param) {
-          return parameterName[1] === undefined ? true : parameterName[1];
-      }
+    if (parameterName[0] === param) {
+      return parameterName[1] === undefined ? true : parameterName[1];
+    }
   }
-};
+}
 
 export function shuffleArray(array) {
   let currentIndex = array.length;
@@ -55,4 +55,14 @@ export function shuffleArray(array) {
   }
 
   return array;
+}
+
+export function documentReady(fn) {
+  // see if DOM is already available
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    // call on next available tick
+    setTimeout(fn, 1);
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
 }

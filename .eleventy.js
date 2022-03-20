@@ -20,7 +20,6 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy('src/scripts/jquery-3.1.1.min.js');
   eleventyConfig.addPassthroughCopy('src/scripts/bootstrap.bundle.min.js');
-  eleventyConfig.addPassthroughCopy('src/scripts/likely.js');
 
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(lazyImagesPlugin, {
