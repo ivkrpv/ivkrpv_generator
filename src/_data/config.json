@@ -1,7 +1,7 @@
 {
   "name": "IV",
-  "email": "ivkrpv@ya.ru",
-  "defaultLocale": "ru",
+  "email": "ivkrpv@icloud.com",
+  "defaultLocale": "en",
   "mapboxToken": "pk.eyJ1IjoiaXZrcnB2IiwiYSI6ImNqcmVraWxuZjBtNHc0M3A4a2hjOHcwdzUifQ.J4IpJ7iJycy-zuysl4ALCQ",
   "prints": [
     {
@@ -149,12 +149,7 @@
     },
     {
       "category": "prague",
-      "images": [
-        "/prints/1.jpg",
-        "/street/23.jpg",
-        "/street/22.jpg",
-        "/prints/2.jpg"
-      ]
+      "images": ["/prints/1.jpg", "/street/23.jpg", "/street/22.jpg", "/prints/2.jpg"]
     }
   ]
 }

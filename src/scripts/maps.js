@@ -361,13 +361,10 @@ export default () => {
 
     onScrollFeatures.map((f) => {
       f.element = document.getElementById(f.id);
+      f.route = _.isArray(f.index);
 
-      if (_.isArray(f.index)) {
-        const { offsetHeight: elementHeight } = f.element;
-        const pointsCount = f.index[1] - f.index[0] + 1;
-
-        f.route = true;
-        f.pixelsInRoutePoint = elementHeight / pointsCount;
+      if (f.route) {
+        f.pointsCount = f.index[1] - f.index[0] + 1;
       }
 
       return f;
@@ -563,8 +560,10 @@ export default () => {
 
           // it's visible
           if (elementTop < scrollBottom && elementBottom > scrollTop) {
+            const pixelsInRoutePoint = elementHeight / feature.pointsCount;
+
             const visibleRoutePointsCount = Math.floor(
-              (scrollBottom - elementTop) / feature.pixelsInRoutePoint
+              (scrollBottom - elementTop) / pixelsInRoutePoint
             );
             const lastVisibleIndex = feature.index[0] + visibleRoutePointsCount - 1;
 

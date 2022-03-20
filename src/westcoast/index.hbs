@@ -17,11 +17,11 @@ pageStyle:
     <div class="h-100 d-flex flex-column justify-content-between align-items-center bg-wc-splash">
       <div></div>
       <div class="text-center text-uppercase">
-        <h1 class="font-weight-regular"><span class="lcl" data-lcl="westcoastTitle">{{{ defaultLocale 'westcoastTitle' }}}</span></h1>
-        <div><span class="lcl" data-lcl="westcoastSubtitle">{{{ defaultLocale 'westcoastSubtitle' }}}</span></div>
+        <h1 class="font-weight-regular">{{{ locale 'wc.title' }}}</h1>
+        <div>{{{ locale 'wc.subtitle' }}}</div>
       </div>
       <div class="mb-4 text-center text-white">
-        <div>Продолжить читать:</div>
+        <div>{{{ locale 'wc.continue' }}}</div>
         <div>
           <a href="#monterey">Monterey, CA</a>
           <span class="mx-2">|</span>
@@ -44,36 +44,36 @@ pageStyle:
         <footer class="blockquote-footer">Jack Kerouac, <cite>On the Road</cite></footer>
       </blockquote>
 
-      {{> subHeader name="Пролог"}}
-      <p>13 часов в Эйрбасе…</p>
-      <p>Рейс Москва - Лос-Анджелес “Аэрофлота” – один из самых продолжительных в мире и самый длинный среди российских авиакомпаний. А я терпеть не могу долгие полеты на самолетах. Спать сидя в кресле на высоте десяти тысячи метров у меня не очень получается, поэтому я пробую убивать время ютубчиком и музыкой.</p>
+      {{> subHeader name=(locale 'wc.chapters.0.title') }}
+      <p>{{{ locale 'wc.chapters.0.text.0' }}}</p>
+      <p>{{{ locale 'wc.chapters.0.text.1' }}}</p>
     {{/text}}
 
     {{> image name="1.jpg" h=true}}
 
     {{#> text}}
-      <p>Наконец наступает рассвет, вместе с ним последняя и самая интересная часть полета. В иллюминаторе показываются снежные фьорды Гренландии. Fuck, yeah! Мы над американским континентом и время уже начинает течь в обратную сторону!</p>
+      <p>{{{ locale 'wc.chapters.0.text.2' }}}</p>
     {{/text}}
 
-    {{> image name="2.jpg" descr="Гренландия" v=true}}
+    {{> image name="2.jpg" descr=(locale 'wc.chapters.0.descr.0') v=true}}
 
     {{#> text}}
-      <p>Еще можно рассматривать что-нибудь внизу на земле. И если поднести телефон к иллюминатору и в любом приложении карт (лучше использовать офлайновые, например Maps.ME) попробовать определить местоположение, то спустя где-то минуту можно будет увидеть свое текущее положение, а заодно и все то, что находится под вами. Особенно выручает, когда хочешь узнать, например, что это за огромное озеро на границе пустыни и гор. Оказалось, что это озеро Тахо.</p>
+      <p>{{{ locale 'wc.chapters.0.text.3' }}}</p>
     {{/text}}
 
-    {{> image name="3.jpeg" descr="Озеро Тахо" v=true}}
+    {{> image name="3.jpeg" descr=(locale 'wc.chapters.0.descr.1') v=true}}
 
     {{#> text}}
-      <p>Спасибо заставке на macOS – Йосемити узнается даже с воздуха. Но вскоре за бортом исчезают все облака, внизу показываются бесконечные, залитые солнцем, поля центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.</p>
+      <p>{{{ locale 'wc.chapters.0.text.4' }}}</p>
     {{/text}}
 
     {{> gallery names=(arr "4.jpeg" "5.jpeg")}}
 
     {{#> text}}
-      <p>Please, fasten your seat belts. Мы прибыли в “город Ангелов”. Это отправная точка нашего путешествия на машине вдоль всего Западного побережья США с юга на север до Сиэтла и обратно. Несколько месяцев мы с братом вынашивали эту идею и готовили маршрут и вот, наконец, мы подошли к старту.</p>
+      <p>{{{ locale 'wc.chapters.0.text.5' }}}</p>
     {{/text}}
 
-    {{> image name="6.jpeg" descr="Центр ЛА" h=true}}
+    {{> image name="6.jpeg" descr=(locale 'wc.chapters.0.descr.2') h=true}}
 
     {{!-- Show the start point of the jorney --}}
     <div id="la-point"></div>

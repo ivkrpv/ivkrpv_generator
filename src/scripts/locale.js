@@ -1,4 +1,4 @@
-import { loadLocalStorage, saveLocalStorage, documentReady } from './utils';
+import { loadLocalStorage, saveLocalStorage, getDescendantProp, documentReady } from './utils';
 import config from '../_data/config.json';
 import locale from '../_data/locale.json';
 
@@ -42,7 +42,7 @@ function translatePage() {
     document.querySelectorAll('.lcl').forEach((el) => {
       const key = el.dataset.lcl;
       const attr = el.dataset.lclAttr;
-      const text = strings[key];
+      const text = getDescendantProp(strings, key);
 
       if (text) {
         if (attr) {

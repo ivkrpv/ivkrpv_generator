@@ -57,6 +57,14 @@ export function shuffleArray(array) {
   return array;
 }
 
+export function getDescendantProp(obj, desc) {
+  const arr = desc.split('.');
+
+  while (arr.length && (obj = obj[arr.shift()]));
+
+  return obj;
+}
+
 export function documentReady(fn) {
   // see if DOM is already available
   if (document.readyState === 'complete' || document.readyState === 'interactive') {

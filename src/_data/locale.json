@@ -46,11 +46,26 @@
     "size61x91": "Размер рамы — 61x91 см, размер фотографии в паспарту — 50x70 см.",
     "price50x70": "3000₽",
     "price61x91": "5000₽",
-    "vk": "ВКонтакте",
-    "share": "Поделиться",
-    "westcoast": "Западное побережье",
-    "westcoastTitle": "Вдоль Западного побережья США",
-    "westcoastSubtitle": "Ноябрь, 2019"
+    "wc": {
+      "menu": "Западное побережье",
+      "title": "Вдоль Западного побережья США",
+      "subtitle": "Ноябрь, 2019",
+      "continue": "Продолжить читать:",
+      "chapters": [
+        {
+          "title": "Пролог",
+          "text": [
+            "13 часов в Эйрбасе…",
+            "Рейс Москва - Лос-Анджелес “Аэрофлота” – один из самых продолжительных в мире и самый длинный среди российских авиакомпаний. А я терпеть не могу долгие полеты на самолетах. Спать сидя в кресле на высоте десяти тысячи метров у меня не очень получается, поэтому я пробую убивать время ютубчиком и музыкой.",
+            "Наконец наступает рассвет, вместе с ним последняя и самая интересная часть полета. В иллюминаторе показываются снежные фьорды Гренландии. Fuck, yeah! Мы над американским континентом и время уже начинает течь в обратную сторону!",
+            "Еще можно рассматривать что-нибудь внизу на земле. И если поднести телефон к иллюминатору и в любом приложении карт (лучше использовать офлайновые, например Maps.ME) попробовать определить местоположение, то спустя где-то минуту можно будет увидеть свое текущее положение, а заодно и все то, что находится под вами. Особенно выручает, когда хочешь узнать, например, что это за огромное озеро на границе пустыни и гор. Оказалось, что это озеро Тахо.",
+            "Спасибо заставке на macOS – Йосемити узнается даже с воздуха. Но вскоре за бортом исчезают все облака, внизу показываются бесконечные, залитые солнцем, поля центральной Калифорнии и вот уже наш самолет делает крюк над огромным полотном маленьких домиков, пронизанным длинными извилистыми нитками хайвеев.",
+            "Please, fasten your seat belts. Мы прибыли в “Город Ангелов”. Это отправная точка нашего путешествия на машине вдоль всего Западного побережья США с юга на север до Сиэтла и обратно. Несколько месяцев мы с братом вынашивали эту идею и готовили маршрут и вот, наконец, мы подошли к старту."
+          ],
+          "descr": ["Гренландия", "Озеро Тахо", "Центр ЛА"]
+        }
+      ]
+    }
   },
   "en": {
     "localeToggle": "ENG",
@@ -99,10 +114,25 @@
     "size61x91": "Frame size — 61x91 cm, picture with mat size — 50x70 cm.",
     "price50x70": "$50",
     "price61x91": "$80",
-    "vk": "VK",
-    "share": "Share",
-    "westcoast": "West Coast",
-    "westcoastTitle": "Along the West Coast",
-    "westcoastSubtitle": "November, 2019"
+    "wc": {
+      "menu": "West Coast",
+      "title": "Along the West Coast",
+      "subtitle": "November, 2019",
+      "continue": "Continue reading:",
+      "chapters": [
+        {
+          "title": "Prologue",
+          "text": [
+            "Thirteen hours in an Airbus...",
+            "Aeroflot's flight Moscow - Los Angeles is one of the longest in the world and the longest among Russian airlines. And I hate long flights. Sleeping in a chair at ten thousand meters is not very good for me, so I try to kill the time with YouTube and music.",
+            "Finally the sunrise, and with it the last and most interesting part of the flight. The snowy fjords of Greenland show up in the window. Fuck, yeah! We are over the American continent and time is already starting to flow backwards!",
+            "You can also see something on the ground below. And if you hold your phone up to the window and use a map app (preferably offline ones like Maps.ME) to find your position, after about a minute you can see your current position and everything below you. Especially helpful when you want to know, for example, what is that huge lake on the border of the desert and mountains. It turned out to be Lake Tahoe.",
+            "Thanks to the screensaver on macOS, Yosemite is recognizable even from the air. Then all clouds disappear and we see the endless sun-drenched fields of central California below, here our plane hooks over a huge expanse of small houses pierced with long, curvy highways.",
+            "Please, fasten your seat belts. We have arrived in the City of Angels. It is the starting point of our road trip along the entire U.S. West Coast from south to north to Seattle and back. For several months me and my brother have thought out the idea and prepared the route, and now we are finally ready to go."
+          ],
+          "descr": ["Greenland", "Lake Tahoe", "LA Downtown"]
+        }
+      ]
+    }
   }
 }

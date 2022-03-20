@@ -3,6 +3,14 @@ const lazyImagesPlugin = require('eleventy-plugin-lazyimages');
 const config = require('./src/_data/config.json');
 const locale = require('./src/_data/locale.json');
 
+function getDescendantProp(obj, desc) {
+  const arr = desc.split('.');
+
+  while (arr.length && (obj = obj[arr.shift()]));
+
+  return obj;
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/images');
   eleventyConfig.addPassthroughCopy('src/webfonts');
@@ -42,11 +50,18 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addNunjucksShortcode('defaultLocale', function (config, locale, key) {
-    return locale[config.defaultLocale][key];
+    return getDescendantProp(locale[config.defaultLocale], key);
   });
 
   eleventyConfig.addHandlebarsShortcode('defaultLocale', function (key) {
-    return locale[config.defaultLocale][key];
+    return getDescendantProp(locale[config.defaultLocale], key);
+  });
+
+  // new function that also wraps the text
+  eleventyConfig.addHandlebarsShortcode('locale', function (key) {
+    const text = getDescendantProp(locale[config.defaultLocale], key);
+
+    return `<span class="lcl" data-lcl="${key}">${text}</span>`;
   });
 
   eleventyConfig.addHandlebarsShortcode('arr', (...args) => args.slice(0, -1));
