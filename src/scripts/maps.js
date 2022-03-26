@@ -11,11 +11,6 @@ const NY_MARKER_STROKE_COLOR = '#c41639';
 const WC_ROUTE_COLOR = '#f42e25';
 const DEV_MODE = false;
 const DEV_MODE_WHOLE_ROUTE = false;
-const VIEW_MODE = {
-  FOLLOW: 0,
-  PASSED: 1,
-  TOTAL: 2,
-};
 
 // Here is a list of features added during scroll event
 const onScrollFeatures = [
@@ -28,7 +23,7 @@ const onScrollFeatures = [
     id: 'la-label',
     index: 0,
     text: 'LA 🌇',
-    offset: [0, -30],
+    offset: [0, -40],
     rotation: -7,
     important: true,
   },
@@ -41,7 +36,7 @@ const onScrollFeatures = [
     id: 'seattle-label',
     index: 30000,
     text: 'Seattle 🌃',
-    offset: [130, 0],
+    offset: [100, 0],
     rotation: -7,
     important: true,
   },
@@ -100,19 +95,19 @@ const routeFeatures = [
   {
     index: 2865,
     text: 'Morro Bay',
-    offset: [120, -50],
+    offset: [100, -50],
     rotation: -7,
   },
   {
     index: 4634,
     text: 'Big Sur 🌊',
-    offset: [40, -40],
+    offset: [30, -40],
     rotation: 50,
   },
   {
     index: 6422,
     text: 'Monterey',
-    offset: [125, -25],
+    offset: [115, -25],
     rotation: -7,
   },
   {
@@ -129,43 +124,43 @@ const routeFeatures = [
   {
     index: 13524,
     text: 'Point Reyes',
-    offset: [-130, 10],
+    offset: [-120, 10],
     rotation: -7,
   },
   {
     index: 15029,
     text: 'Santa Rosa',
-    offset: [60, -50],
+    offset: [50, -40],
     rotation: -7,
   },
   {
     index: 16523,
     text: 'Fort Ross',
-    offset: [-130, 10],
+    offset: [-120, 10],
     rotation: -7,
   },
   {
     index: 20840,
     text: 'Leggett',
-    offset: [80, 30],
+    offset: [60, 20],
     rotation: -7,
   },
   {
     index: 25380,
     text: 'Coos Bay',
-    offset: [110, 10],
+    offset: [100, 10],
     rotation: -7,
   },
   {
     index: 26586,
     text: "Thor's Well",
-    offset: [-130, 0],
+    offset: [-120, 0],
     rotation: -7,
   },
   {
     index: 28073,
     text: 'Portland 🦌',
-    offset: [120, 20],
+    offset: [110, 20],
     rotation: -7,
     important: true,
   },
@@ -176,13 +171,13 @@ const routeFeatures = [
   {
     index: 28335,
     text: 'Multnomah Falls',
-    offset: [40, -60],
+    offset: [40, -70],
     rotation: -7,
   },
   {
     index: 34304,
     text: 'Astoria',
-    offset: [100, -30],
+    offset: [85, -30],
     rotation: -7,
   },
   {
@@ -200,7 +195,7 @@ const routeFeatures = [
   {
     index: 43422,
     text: 'Shasta Dam',
-    offset: [-130, 0],
+    offset: [-120, 0],
     rotation: -7,
   },
   {
@@ -331,10 +326,10 @@ export default () => {
   }
 
   // West Coast map
-  const $mapWestCoast = $('.map-west-coast');
+  const $mapWestCoast = $('.wc-map-container');
 
   if ($mapWestCoast.length) {
-    const content = document.getElementById('map-wc-content');
+    const content = document.getElementById('wc-content');
 
     const MAP_ZOOM = 8;
     const ROUTE_COORDS = wcData.features[0].geometry.coordinates;
@@ -475,7 +470,7 @@ export default () => {
       const routeHeadMarker = new mapboxgl.Marker({ element: routeHeadEl });
 
       const markers = [];
-      let viewMode = VIEW_MODE.FOLLOW;
+      let overviewMode = false;
 
       // Whole route overview
       map.on('click', () => {
@@ -487,36 +482,27 @@ export default () => {
 
         const padding = window.innerWidth < 576 ? 24 : 48;
 
-        if (viewMode === VIEW_MODE.FOLLOW) {
-          viewMode = VIEW_MODE.PASSED;
-
-          const bounds = new mapboxgl.LngLatBounds();
-
-          coordinates.forEach((c) => bounds.extend(c));
-
-          markers.forEach((m) => {
-            if (!m.important) m.remove();
-          });
-
-          map.fitBounds(bounds, { padding });
-        } else if (viewMode === VIEW_MODE.PASSED) {
-          viewMode = VIEW_MODE.TOTAL;
-
-          const bounds = new mapboxgl.LngLatBounds();
-
-          coordinates.forEach((c) => bounds.extend(c));
-
-          markers.filter((m) => m.important).forEach((m) => bounds.extend(m.getLngLat()));
-
-          map.fitBounds(bounds, { padding });
-        } else {
-          viewMode = VIEW_MODE.FOLLOW;
+        if (overviewMode) {
+          overviewMode = false;
 
           markers.forEach((m) => {
             if (!m.important) m.addTo(map);
           });
 
           map.flyTo({ center: _.last(coordinates), zoom: MAP_ZOOM });
+        } else {
+          overviewMode = true;
+
+          markers.forEach((m) => {
+            if (!m.important) m.remove();
+          });
+
+          const bounds = new mapboxgl.LngLatBounds();
+
+          coordinates.forEach((c) => bounds.extend(c));
+          markers.filter((m) => m.important).forEach((m) => bounds.extend(m.getLngLat()));
+
+          map.fitBounds(bounds, { padding });
         }
       });
 
@@ -535,8 +521,8 @@ export default () => {
       const easeTo = _.throttle((center, zoom) => map.easeTo({ center, zoom }), 250);
 
       content.onscroll = _.throttle(() => {
-        if (viewMode !== VIEW_MODE.FOLLOW) {
-          viewMode = VIEW_MODE.FOLLOW;
+        if (overviewMode) {
+          overviewMode = false;
 
           markers.forEach((m) => {
             if (!m.important) m.addTo(map);
