@@ -74,3 +74,13 @@ export function documentReady(fn) {
     document.addEventListener('DOMContentLoaded', fn);
   }
 }
+
+export function angleBetweenPoints(cx, cy, ex, ey) {
+  const dy = ey - cy;
+  const dx = ex - cx;
+  let theta = Math.atan2(dy, dx);
+
+  theta *= 180 / Math.PI;
+
+  return theta;
+}

@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-free/js/all';
 import gallery from './gallery';
-import maps from './maps';
+import './maps';
 import './locale';
 
 import { getUrlParameter } from './utils';
@@ -18,6 +18,5 @@ $(function () {
 
   // Old modules
   gallery();
-  maps();
   // prints();
 });
