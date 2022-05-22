@@ -367,7 +367,7 @@ function initWestCoastMap() {
 
   const map = new mapboxgl.Map({
     container: mapEl,
-    style: 'mapbox://styles/ivkrpv/ckhk9kj5x54mr19o5u7pp1pml',
+    style: 'mapbox://styles/ivkrpv/ckhk9kj5x54mr19o5u7pp1pml', // mapbox://styles/ivkrpv/cl3h40ut5001i15vx6w8afjv9
     center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
     zoom: MAP_ZOOM,
     attributionControl: false,
