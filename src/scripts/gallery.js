@@ -1,9 +1,23 @@
 import 'lightgallery.js';
-// import 'lg-zoom';
-import { shuffleArray } from './utils';
+import { shuffleArray, documentReady } from './utils';
 
-export default () => {
-  // Slideshow (home page)
+documentReady(function () {
+  initSlideshow(); // home page
+  initGallery(); // classic
+  initPopupGallery(); // nyc map
+  initGalleryImages(); // west coast page
+});
+
+function getElIndex(el) {
+  if (!el) return -1;
+  var i = 0;
+  while ((el = el.previousElementSibling)) {
+    i++;
+  }
+  return i;
+}
+
+function initSlideshow() {
   const $slideshow = $('.slideshow');
 
   if ($slideshow.length) {
@@ -28,15 +42,17 @@ export default () => {
         });
     }, 5000);
   }
+}
 
-  // Classic gallery
+function initGallery() {
   const gallery = $('.gallery');
 
   if (gallery.length) {
     lightGallery(gallery.get(0), { selector: 'a', download: false, hideBarsDelay: 2000 });
   }
+}
 
-  // Map popup dynamic gallery
+function initPopupGallery() {
   $('body').on('click', '.popup-gallery-images', function (e) {
     e.stopPropagation();
 
@@ -72,17 +88,9 @@ export default () => {
 
     $images.append($images.children().first());
   });
+}
 
-  function index(el) {
-    if (!el) return -1;
-    var i = 0;
-    while ((el = el.previousElementSibling)) {
-      i++;
-    }
-    return i;
-  }
-
-  // West Coast set gallaries
+function initGalleryImages() {
   const galleryImages = document.querySelectorAll('.set-gallery-images img');
 
   galleryImages.forEach((img) => {
@@ -102,10 +110,10 @@ export default () => {
       lightGallery(gallery, {
         dynamic: true,
         dynamicEl: [...gallery.children].map(({ src }) => ({ src })),
-        index: index(this),
+        index: getElIndex(this),
         download: false,
         hideBarsDelay: 2000,
       });
     });
   });
-};
+}

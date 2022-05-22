@@ -1,12 +1,12 @@
 import '@fortawesome/fontawesome-free/js/all';
-import gallery from './gallery';
+import './gallery';
 import './maps';
 import './locale';
 
-import { getUrlParameter } from './utils';
+import { getUrlParameter, documentReady } from './utils';
 
-$(function () {
-  // Tooltips
+documentReady(function () {
+  // Init Bootstrap ooltips
   $('[data-toggle="tooltip"]').tooltip();
 
   // Save images protection
@@ -15,8 +15,4 @@ $(function () {
       return false;
     });
   }
-
-  // Old modules
-  gallery();
-  // prints();
 });
