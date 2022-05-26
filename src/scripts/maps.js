@@ -125,6 +125,9 @@ function initWestCoastMap() {
   const DEV_MODE = false;
   const DEV_MODE_WHOLE_ROUTE = false;
 
+  const MAP_STYLE_LIGHT = 'mapbox://styles/ivkrpv/ckhk9kj5x54mr19o5u7pp1pml';
+  const MAP_STYLE_DARK = 'mapbox://styles/ivkrpv/cl3h40ut5001i15vx6w8afjv9';
+
   // Here is a list of features added during scroll event
   const SCROLL_FEATURES = [
     {
@@ -325,7 +328,7 @@ function initWestCoastMap() {
     },
   ];
 
-  const mapEl = document.querySelector('.wc-map-container');
+  const mapEl = document.getElementById('wc-map-container');
 
   if (!mapEl) return;
 
@@ -365,13 +368,25 @@ function initWestCoastMap() {
     return f;
   });
 
+  const darkMedia = window.matchMedia('(prefers-color-scheme: dark)');
+
   const map = new mapboxgl.Map({
     container: mapEl,
-    style: 'mapbox://styles/ivkrpv/ckhk9kj5x54mr19o5u7pp1pml', // mapbox://styles/ivkrpv/cl3h40ut5001i15vx6w8afjv9
+    style: darkMedia.matches ? MAP_STYLE_DARK : MAP_STYLE_LIGHT,
     center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
     zoom: MAP_ZOOM,
     attributionControl: false,
     interactive: DEV_MODE,
+  });
+
+  darkMedia.addEventListener('change', function (e) {
+    const dark = e.matches;
+
+    if (dark) {
+      map.setStyle(MAP_STYLE_DARK);
+    } else {
+      map.setStyle(MAP_STYLE_LIGHT);
+    }
   });
 
   map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');

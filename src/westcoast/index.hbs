@@ -8,13 +8,13 @@ pageStyle:
   - /styles/maps.css
   - /styles/lightgallery.min.css
 ---
-<div class="full-screen row no-gutters">
-  <div class="wc-map col-md-4">
-    <div class="wc-map-container h-100 w-100"></div>
+<div class="h-full flex flex-col md:flex-row">
+  <div class="h-1/3 w-full md:h-full md:w-1/3">
+    <div id="wc-map-container" class="h-full w-full"></div>
   </div>
 
-  <div id="wc-content" class="wc-content col-md-8 overflow-scroll shadow">
-    <div class="wc-splash h-100 d-flex flex-column justify-content-between align-items-center">
+  <div id="wc-content" class="h-2/3 w-full md:h-full md:w-2/3 overflow-scroll shadow-xl">
+    <div class="wc-splash h-full flex flex-col justify-between items-center">
       <div></div>
       <div class="text-center text-uppercase">
         <h1 class="font-weight-regular">{{{ locale 'wc.title' }}}</h1>

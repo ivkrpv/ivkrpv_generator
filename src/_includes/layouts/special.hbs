@@ -13,8 +13,6 @@
     <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
     <link rel='manifest' href='/site.webmanifest' />
     <title>{{config.name}} — {{title}}</title>
-    <link href='/styles/bootstrap-override.css' rel='stylesheet' />
-    <link href='/styles/bootstrap.min.css' rel='stylesheet' />
     <link href='/styles/index.css' rel='stylesheet' />
     <link href='/styles/main.css' rel='stylesheet' />
     {{#each pageStyle}}
@@ -22,7 +20,7 @@
     {{/each}}
   </head>
 
-  <body class='bg-light text-dark'>
+  <body class='bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50'>
     <!-- Yandex.Metrika counter -->
     <script type='text/javascript'>
       (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter42981244 = new
@@ -46,7 +44,7 @@
 
     {{{content}}}
 
-    <div class='bottom-buttons d-flex'>
+    <div class='bottom-buttons flex'>
       <div class='lang-toggle js-locale'>
         <i class='fas fa-globe' aria-hidden='true'></i>
         {{{locale 'localeToggle'}}}

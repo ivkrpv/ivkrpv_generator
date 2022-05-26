@@ -3,24 +3,6 @@
   outline-color: transparent !important;
 }
 
-.navbar {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025), 0 2px 4px rgba(0, 0, 0, 0.025),
-    0 4px 8px rgba(0, 0, 0, 0.025), 0 8px 16px rgba(0, 0, 0, 0.025),
-    0 16px 32px rgba(0, 0, 0, 0.025), 0 32px 64px rgba(0, 0, 0, 0.025);
-}
-
-.wc-map {
-  height: 33.333333%;
-}
-
-.wc-content {
-  height: 66.666667%;
-}
-
-.wc-map-container {
-  cursor: pointer;
-}
-
 .wc-splash {
   background-image: url(/images/photography/westcoast/splash.jpg);
   background-size: cover;
