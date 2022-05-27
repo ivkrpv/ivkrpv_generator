@@ -10,17 +10,7 @@ $main-color: #e7254d;
 }
 
 @font-face {
-  font-family: 'Lora';
-  src: url('../webfonts/Lora-VariableFont_wght.ttf');
-}
-
-@font-face {
-  font-family: 'Lora-Italic';
-  src: url('../webfonts/Lora-Italic-VariableFont_wght.ttf');
-}
-
-@font-face {
-  font-family: 'Roboto';
+  font-family: 'Roboto-Light';
   src: url('../webfonts/Roboto-Light.ttf');
 }
 
@@ -43,10 +33,6 @@ $main-color: #e7254d;
   font-family: 'PermanentMarker';
 }
 
-.font-serif {
-  font-family: Lora, Georgia, Cambria, 'Times New Roman', Times, serif;
-}
-
 // Common
 
 html,
@@ -55,7 +41,7 @@ body {
 }
 
 body {
-  font-family: Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  font-family: "Roboto-Light", sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
 }
 
@@ -460,15 +446,6 @@ h6 {
 
 .rounded {
   border-radius: 0.15rem !important;
-}
-
-.font-weight-regular {
-  font-family: 'Roboto-Regular';
-}
-
-.font-weight-bolder {
-  font-family: 'Roboto-Bolder';
-  font-weight: unset !important;
 }
 
 .font-weight-bold {
