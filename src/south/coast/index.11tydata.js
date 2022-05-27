@@ -6,7 +6,7 @@ module.exports = {
   images: () => imageGallery.getAllImagesInFolder('south-coast').reverse(),
   eleventyNavigation: {
     key: 'south_coast',
-    title: `<span class="lcl" data-lcl="southCoast">${locale[config.defaultLocale].southCoast}</span>`,
+    title: `<span class="js-lcl" data-lcl="southCoast">${locale[config.defaultLocale].southCoast}</span>`,
     parent: 'south',
     order: 3
   }

@@ -266,27 +266,6 @@ a:hover {
   cursor: pointer;
 }
 
-.set-gallery-images img {
-  cursor: pointer;
-}
-
-// Articles
-
-.img-wrapper {
-  text-align: center;
-  margin: 3rem 0;
-}
-
-$img-sizes: 100px, 200px, 300px, 400px, 500px;
-
-@each $size in $img-sizes {
-  .img-w-#{$size} {
-    width: $size;
-    max-width: 100%;
-    height: auto;
-  }
-}
-
 // Contact
 
 .avatar {

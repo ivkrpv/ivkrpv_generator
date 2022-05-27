@@ -1,8 +1,8 @@
-<div class="text-center my-5">
-  <div class="d-flex flex-wrap justify-content-center align-items-start set-gallery-images">
+<div class="my-12">
+  <div class="flex flex-wrap justify-center items-start js-quick-gallery">
     {{#each names}}
-      <img src="/images/photography/westcoast/{{.}}" class="img-w-300px mb-2 mx-1">
+      <img src="/images/photography/westcoast/{{.}}" class="w-[300px] max-w-full h-auto mb-2 mx-1 cursor-pointer">
     {{/each}}
   </div>
-  {{#if descr}}<small class="d-block text-muted">{{{descr}}}</small>{{/if}}
+  {{#if descr}}<div class="text-xs text-center text-zinc-500">{{{descr}}}</div>{{/if}}
 </div>

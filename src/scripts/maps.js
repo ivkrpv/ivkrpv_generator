@@ -20,7 +20,7 @@ function initNYCMap() {
   const MARKER_COLOR = '#e7254d';
   const MARKER_STROKE = '#c41639';
 
-  const mapEl = document.querySelector('.map-nyc');
+  const mapEl = document.getElementById('nyc-map-container');
 
   if (!mapEl) return;
 

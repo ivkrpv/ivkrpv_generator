@@ -5,7 +5,7 @@ documentReady(function () {
   initSlideshow(); // home page
   initGallery(); // classic
   initPopupGallery(); // nyc map
-  initGalleryImages(); // west coast page
+  initQuickGallery(); // west coast page
 });
 
 function getElIndex(el) {
@@ -90,8 +90,8 @@ function initPopupGallery() {
   });
 }
 
-function initGalleryImages() {
-  const galleryImages = document.querySelectorAll('.set-gallery-images img');
+function initQuickGallery() {
+  const galleryImages = document.querySelectorAll('.js-quick-gallery img');
 
   galleryImages.forEach((img) => {
     img.addEventListener('click', function (e) {

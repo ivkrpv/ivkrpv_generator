@@ -6,8 +6,8 @@ pageStyle:
   - /styles/lightgallery.min.css
 ---
 <div class="container-fluid px-4 pb-4">
-  <h2 class="font-italic">NYC - <span class="lcl" data-lcl="part">{{{ defaultLocale 'part' }}}</span> 19</h2>
-  <p class="lead text-uppercase font-italic lcl" data-lcl="nycPart19Desc">{{{ defaultLocale 'nycPart19Desc' }}}</p>
+  <h2 class="font-italic">NYC - <span class="js-lcl" data-lcl="part">{{{ defaultLocale 'part' }}}</span> 19</h2>
+  <p class="lead text-uppercase font-italic js-lcl" data-lcl="nycPart19Desc">{{{ defaultLocale 'nycPart19Desc' }}}</p>
   <div class="gallery d-flex flex-wrap">
     {{#each images}}
       <a class="flex-grow-1 mr-1 mb-1" href="{{this.url}}">

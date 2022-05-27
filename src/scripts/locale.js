@@ -39,7 +39,7 @@ function translatePage() {
   const strings = locale[currentLocale];
 
   if (strings) {
-    document.querySelectorAll('.lcl').forEach((el) => {
+    document.querySelectorAll('.js-lcl').forEach((el) => {
       const key = el.dataset.lcl;
       const attr = el.dataset.lclAttr;
       const text = getDescendantProp(strings, key);

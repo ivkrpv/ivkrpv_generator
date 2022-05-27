@@ -6,7 +6,7 @@ module.exports = {
   images: () => imageGallery.getAllImagesInFolder('nyc-part14').reverse(),
   eleventyNavigation: {
     key: 'nyc_14',
-    title: `<span class="lcl" data-lcl="part">${locale[config.defaultLocale].part}</span> 14`,
+    title: `<span class="js-lcl" data-lcl="part">${locale[config.defaultLocale].part}</span> 14`,
     parent: 'nyc',
     order: 14
   }

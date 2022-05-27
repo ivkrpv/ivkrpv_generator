@@ -4,7 +4,7 @@ const locale = require('../_data/locale.json');
 // module.exports = {
 //   eleventyNavigation: {
 //     key: 'prints',
-//     title: `<span class="lcl" data-lcl="prints">${locale[config.defaultLocale].prints}</span>`,
+//     title: `<span class="js-lcl" data-lcl="prints">${locale[config.defaultLocale].prints}</span>`,
 //     order: 2
 //   }
 // }

@@ -62,7 +62,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addHandlebarsShortcode('locale', function (key) {
     const text = getDescendantProp(locale[config.defaultLocale], key);
 
-    return `<span class="lcl" data-lcl="${key}">${text}</span>`;
+    return `<span class="js-lcl" data-lcl="${key}">${text}</span>`;
   });
 
   eleventyConfig.addHandlebarsShortcode('arr', (...args) => args.slice(0, -1));
