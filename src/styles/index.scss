@@ -53,15 +53,6 @@ a:hover {
   color: darken($main-color, 20%);
 }
 
-.standalone-brand {
-  position: absolute;
-  top: 21px;
-  left: 24px;
-  z-index: 1;
-  font-size: 1.25rem;
-  text-decoration: none !important;
-}
-
 .logo {
   transition: color 2s ease-out;
   -moz-transition: color 2s ease-out;
@@ -69,13 +60,11 @@ a:hover {
   -o-transition: color 2s ease-out;
 }
 
-.navbar-dark .logo,
-.standalone-brand .logo {
+.navbar-dark .logo {
   color: rgba(255, 255, 255, 0.2);
 }
 
-.navbar-light .logo,
-.standalone-brand .logo {
+.navbar-light .logo {
   color: rgba(0, 0, 0, 0.2);
 }
 
@@ -91,7 +80,6 @@ a:hover {
 }
 
 .lang-toggle {
-  filter: drop-shadow(1px -1px 0px white);
   cursor: pointer;
   opacity: 0.6;
 }
@@ -386,21 +374,6 @@ a:hover {
 }
 
 // Bootstrap override
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 300;
-}
 
 .navbar {
   z-index: 1030;

@@ -3,32 +3,16 @@
   outline-color: transparent !important;
 }
 
-.wc-splash {
-  background-image: url(/images/photography/westcoast/splash.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
 .wc-marker {
-  width: 20px;
-  height: 20px;
-  background-color: #f42e25;
-  border: 6px solid darken($color: #f42e25, $amount: 13);
-  border-radius: 50%;
+  @apply bg-red-500 dark:bg-red-600 w-5 h-5 border-[6px] border-red-700 rounded-full;
 }
 
 .wc-route-head {
-  width: 16px;
-  height: 16px;
-  background-color: darken($color: #f42e25, $amount: 13);
-  border: 4px solid #f42e25;
-  border-radius: 50%;
+  @apply bg-red-700 w-4 h-4 border-4 border-red-500 dark:border-red-600 rounded-full;
 }
 
 .wc-marker-text {
-  font-family: 'PermanentMarker';
-  color: #f42e25;
-  text-shadow: 2px 2px 0px #99110a;
-  font-size: 2rem;
+  @apply text-red-500 dark:text-red-600 font-family-retro text-[2rem];
+
+  text-shadow: 2px 2px 0px theme('colors.red.800');
 }

@@ -6,6 +6,7 @@ module.exports = {
       'family-regular': ['Roboto-Regular', 'sans-serif'],
       'family-bolder': ['Roboto-Bolder', 'sans-serif'],
       'family-bold': ['Roboto-Bold', 'sans-serif'],
+      'family-retro': ['PermanentMarker', 'sans-serif'],
     },
     extend: {},
   },

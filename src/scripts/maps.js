@@ -121,7 +121,8 @@ function initNYCMap() {
 }
 
 function initWestCoastMap() {
-  const ROUTE_COLOR = '#f42e25';
+  const ROUTE_COLOR_LIGHT = '#ef4444'; // red-500
+  const ROUTE_COLOR_DARK = '#dc2626'; // red-600
   const DEV_MODE = false;
   const DEV_MODE_WHOLE_ROUTE = false;
 
@@ -473,7 +474,7 @@ function initWestCoastMap() {
         'line-join': 'round',
       },
       paint: {
-        'line-color': ROUTE_COLOR,
+        'line-color': darkMedia.matches ? ROUTE_COLOR_DARK : ROUTE_COLOR_LIGHT,
         'line-width': 6,
         'line-opacity': 1,
       },

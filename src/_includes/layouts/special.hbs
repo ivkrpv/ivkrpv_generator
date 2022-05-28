@@ -28,14 +28,14 @@
       gtag('js', new Date()); gtag('config', 'G-2Z9W2X70C5');
     </script>
 
-    <a class='standalone-brand' href='/'>
-      <span class='logo font-retro'>{{config.name}}</span>
+    <a class='absolute left-5 top-5 text-xl z-10' href='/'>
+      <span class='logo font-family-retro text-black text-opacity-20'>{{config.name}}</span>
     </a>
 
     {{{content}}}
 
-    <div class='bottom-buttons flex'>
-      <div class='lang-toggle js-locale'>
+    <div class='flex fixed bottom-4 right-4 z-10'>
+      <div class='bg-zinc-50 dark:bg-zinc-900 rounded-xl opacity-50 hover:opacity-80 cursor-pointer px-2 py-1 js-locale'>
         <i class='fas fa-globe' aria-hidden='true'></i>
         {{{locale 'localeToggle'}}}
       </div>
