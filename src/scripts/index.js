@@ -2,6 +2,7 @@ import '@fortawesome/fontawesome-free/js/all';
 import './gallery';
 import './maps';
 import './locale';
+import './theme';
 
 import { getUrlParameter, documentReady } from './utils';
 

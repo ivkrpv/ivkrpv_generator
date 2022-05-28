@@ -48,3 +48,9 @@
     @apply text-red-700;
   }
 }
+
+@layer components {
+  .btn-toggle {
+    @apply bg-zinc-50 dark:bg-zinc-900 rounded-xl opacity-50 hover:opacity-80 cursor-pointer px-2 py-1 flex justify-center items-center;
+  }
+}

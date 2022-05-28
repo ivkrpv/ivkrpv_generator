@@ -1,6 +1,6 @@
 {
   "ru": {
-    "localeToggle": "РУС",
+    "localeToggle": "РУ",
     "part": "ЧАСТЬ",
     "map": "КАРТА",
     "istanbul": "СТАМБУЛ",
@@ -363,7 +363,7 @@
     }
   },
   "en": {
-    "localeToggle": "ENG",
+    "localeToggle": "EN",
     "part": "PART",
     "map": "MAP",
     "istanbul": "ISTANBUL",

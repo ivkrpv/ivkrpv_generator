@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{hbs,js}'],
+  darkMode: 'class',
   theme: {
     fontFamily: {
       'family-light': ['Roboto-Light', 'sans-serif'],

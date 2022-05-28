@@ -4,6 +4,7 @@ import config from '../_data/config.json';
 import nycData from '../_data/map_nyc.json';
 import wcData from '../_data/map_wc.json';
 import { angleBetweenPoints, documentReady } from './utils';
+import { isDarkTheme, EVENT_NAME } from './theme';
 
 mapboxgl.accessToken = config.mapboxToken;
 
@@ -369,28 +370,22 @@ function initWestCoastMap() {
     return f;
   });
 
-  const darkMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = isDarkTheme();
 
   const map = new mapboxgl.Map({
     container: mapEl,
-    style: darkMedia.matches ? MAP_STYLE_DARK : MAP_STYLE_LIGHT,
+    style: isDark ? MAP_STYLE_DARK : MAP_STYLE_LIGHT,
     center: DEV_MODE ? ROUTE_COORDS[0] : [37.6173, 55.7558],
     zoom: MAP_ZOOM,
     attributionControl: false,
     interactive: DEV_MODE,
   });
 
-  darkMedia.addEventListener('change', function (e) {
-    const dark = e.matches;
-
-    if (dark) {
-      map.setStyle(MAP_STYLE_DARK);
-    } else {
-      map.setStyle(MAP_STYLE_LIGHT);
-    }
-  });
-
   map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+
+  document.body.addEventListener(EVENT_NAME, function (e) {
+    map.setStyle(e.detail.isDark ? MAP_STYLE_DARK : MAP_STYLE_LIGHT);
+  }, false);
 
   map.on('load', () => {
     if (DEV_MODE_WHOLE_ROUTE) {
@@ -460,24 +455,32 @@ function initWestCoastMap() {
       ],
     };
 
-    map.addSource('route', {
-      type: 'geojson',
-      data: routeGeojson,
-    });
+    function addRouteLayer(data, dark) {
+      map.addSource('route', {
+        type: 'geojson',
+        data,
+      });
 
-    map.addLayer({
-      id: 'route-animated',
-      type: 'line',
-      source: 'route',
-      layout: {
-        'line-cap': 'round',
-        'line-join': 'round',
-      },
-      paint: {
-        'line-color': darkMedia.matches ? ROUTE_COLOR_DARK : ROUTE_COLOR_LIGHT,
-        'line-width': 6,
-        'line-opacity': 1,
-      },
+      map.addLayer({
+        id: 'route-animated',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round',
+        },
+        paint: {
+          'line-color': dark ? ROUTE_COLOR_DARK : ROUTE_COLOR_LIGHT,
+          'line-width': 6,
+          'line-opacity': 1,
+        },
+      });
+    }
+
+    addRouteLayer(routeGeojson, isDark);
+
+    map.on('style.load', function () {
+      addRouteLayer(routeGeojson, isDarkTheme());
     });
 
     const routeHeadEl = document.createElement('div');

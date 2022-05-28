@@ -35,8 +35,14 @@
     {{{content}}}
 
     <div class='flex fixed bottom-4 right-4 z-10'>
-      <div class='bg-zinc-50 dark:bg-zinc-900 rounded-xl opacity-50 hover:opacity-80 cursor-pointer px-2 py-1 js-locale'>
-        <i class='fas fa-globe' aria-hidden='true'></i>
+      <div id="theme-toggle" class='btn-toggle mr-4'>
+        <div id="theme-auto" class="block"><i class="fas fa-adjust" aria-hidden='true'></i></div>
+        <div id="theme-light" class="hidden"><i class="fas fa-sun" aria-hidden='true'></i></div>
+        <div id="theme-dark" class="hidden"><i class="fas fa-moon" aria-hidden='true'></i></div>
+      </div>
+
+      <div class='btn-toggle js-locale'>
+        <i class='fas fa-globe mr-2' aria-hidden='true'></i>
         {{{locale 'localeToggle'}}}
       </div>
     </div>
