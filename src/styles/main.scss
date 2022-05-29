@@ -51,6 +51,6 @@
 
 @layer components {
   .btn-toggle {
-    @apply bg-zinc-50 dark:bg-zinc-900 backdrop-saturate-150 backdrop-blur-lg rounded-xl bg-opacity-40 hover:bg-opacity-80 cursor-pointer px-2 py-1 flex justify-center items-center;
+    @apply bg-zinc-50 bg-opacity-40 hover:bg-opacity-80 dark:bg-zinc-900 dark:bg-opacity-40 dark:hover:bg-opacity-80 backdrop-saturate-150 backdrop-blur-lg rounded-xl cursor-pointer px-2 py-1 flex justify-center items-center;
   }
 }
